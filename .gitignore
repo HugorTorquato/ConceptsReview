@@ -33,3 +33,8 @@
 
 # Do not uload any .pdf file
 *.pdf
+
+# Files to ignore
+/Sorting/TranspositionSorts/.vs/*
+/Sorting/TranspositionSorts/Debug/*
+/Sorting/TranspositionSorts/Release/*
