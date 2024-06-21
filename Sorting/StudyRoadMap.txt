@@ -22,29 +22,29 @@
 	Code implementation
 3. Intermediate Sorting Algorithms
 	Objective: Understand and implement more efficient sorting algorithms.
-	Merge Sort
-	Divide and conquer approach
-	Explanation and pseudocode
-	Time complexity analysis
-	Space complexity
+		Merge Sort
+		Divide and conquer approach
+		Explanation and pseudocode
+		Time complexity analysis
+		Space complexity
 	Code implementation
-	Quick Sort
-	Explanation and pseudocode
-	Time complexity analysis (best, average, and worst case)
-	Space complexity
+		Quick Sort
+		Explanation and pseudocode
+		Time complexity analysis (best, average, and worst case)
+		Space complexity
 	Code implementation
-	Heap Sort
-	Introduction to heaps
-	Explanation and pseudocode
-	Time complexity analysis
-	Space complexity
+		Heap Sort
+		Introduction to heaps
+		Explanation and pseudocode
+		Time complexity analysis
+		Space complexity
 	Code implementation
 4. Advanced Sorting Algorithms
 	Objective: Learn advanced sorting algorithms and their use cases.
-	Counting Sort
-	Explanation and pseudocode
-	Time complexity analysis
-	Space complexity
+		Counting Sort
+		Explanation and pseudocode
+		Time complexity analysis
+		Space complexity
 	Code implementation
 	Use cases
 	Radix Sort
@@ -65,7 +65,7 @@
 	Space Complexity: Memory usage comparison
 	Stability: Which algorithms are stable and why it matters
 	Adaptive Algorithms: Algorithms that adapt based on the input data
-	6. Practical Applications and Optimization
+6. Practical Applications and Optimization
 	Objective: Apply sorting algorithms to real-world problems and optimize them.
 	Hybrid Sorting Algorithms
 	Introduction to Timsort (used in Python’s sort)
