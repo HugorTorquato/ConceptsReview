@@ -46,19 +46,19 @@
 		Time complexity analysis
 		Space complexity
 	Code implementation
-	Use cases
-	Radix Sort
-	Explanation and pseudocode
-	Time complexity analysis
-	Space complexity
+		Use cases
+		Radix Sort
+		Explanation and pseudocode
+		Time complexity analysis
+		Space complexity
 	Code implementation
-	Use cases
-	Bucket Sort
-	Explanation and pseudocode
-	Time complexity analysis
-	Space complexity
+		Use cases
+		Bucket Sort
+		Explanation and pseudocode
+		Time complexity analysis
+		Space complexity
 	Code implementation
-	Use cases
+		Use cases
 5. Comparative Analysis
 	Objective: Compare different sorting algorithms based on various criteria.
 	Time Complexity: Best, average, and worst case for each algorithm

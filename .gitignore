@@ -38,3 +38,6 @@
 /Sorting/TranspositionSorts/.vs/*
 /Sorting/TranspositionSorts/Debug/*
 /Sorting/TranspositionSorts/Release/*
+/Sorting/TranspositionSorts/packages/*
+/Sorting/TranspositionSorts/Tests/SortingTests/Debug/*
+/Sorting/TranspositionSorts/Tests/SortingTests/Release/*

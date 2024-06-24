@@ -15,16 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TranspositionSorts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sortings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sortings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="SortingsTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
