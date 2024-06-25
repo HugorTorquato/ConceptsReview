@@ -1,6 +1,5 @@
 #pragma once
 
-
 class Sortings
 {
 public:
@@ -10,6 +9,8 @@ public:
 
 	static void displayColletion(const int collection[], int size);
 	static int compareNumbers(const int num1, const int num2);
+	static void swapValuesPointer(int* listToSwap, const int position1, const int position2);
+	static void swapValuesReference(int (&listToSwap)[4], const int position1, const int position2);
 
 	static void doBubbleSort(int* defaultCollection, const int size);
 };
