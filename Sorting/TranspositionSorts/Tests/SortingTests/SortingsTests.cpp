@@ -1,20 +1,21 @@
 #include "gtest/gtest.h"
+#include <random>
 #include "../../Sortings.h"
 
-TEST(FirstTests, compareNumberWithFirstGreater) {
+TEST(BubbleSortTests, compareNumberWithFirstGreater) {
     int num1 = 2;
     int num2 = 1;
 
    EXPECT_EQ(Sortings::compareNumbers(num1, num2), 1);
 }
 
-TEST(FirstTests, compareNumberWithSecondGreater) {
+TEST(BubbleSortTests, compareNumberWithSecondGreater) {
     int num1 = 1;
     int num2 = 2;
 
     EXPECT_EQ(Sortings::compareNumbers(num1, num2), -1);
 }
-TEST(FirstTests, compareEqualNumber) {
+TEST(BubbleSortTests, compareEqualNumber) {
     int num1 = 2;
     int num2 = 2;
 
@@ -22,7 +23,7 @@ TEST(FirstTests, compareEqualNumber) {
 }
 
 
-TEST(FirstTests, swapTwoNumberOnIntegerListPointer) {
+TEST(BubbleSortTests, swapTwoNumberOnIntegerListPointer) {
 
     int integerListToSwap[] = { 0, 1, 3, 2 };
     int integerListToAssert[] = { 0, 1, 2, 3 };
@@ -38,7 +39,7 @@ TEST(FirstTests, swapTwoNumberOnIntegerListPointer) {
     }
 }
 
-TEST(FirstTests, swapTwoNumberOnIntegerListReference) {
+TEST(BubbleSortTests, swapTwoNumberOnIntegerListReference) {
 
     int integerListToSwap[] = { 0, 1, 3, 2 };
     int integerListToAssert[] = { 0, 1, 2, 3 };
@@ -54,7 +55,7 @@ TEST(FirstTests, swapTwoNumberOnIntegerListReference) {
     }
 }
 
-TEST(FirstTests, bubbleSort) {
+TEST(BubbleSortTests, bubbleSort) {
     int integerListToSort[] = { 0, 1, 3, 2 };
     int integerListToAssert[] = { 0, 1, 2, 3 };
 
@@ -69,28 +70,18 @@ TEST(FirstTests, bubbleSort) {
     }
 }
 
-TEST(FirstTests, bubbleSortWithBigAray) {
-    int integerListToSort[] = { 92, 10, 36, 49, 8, 64, 31, 28, 76, 59,
-                                38, 50, 66, 19, 74, 15, 83, 57, 65, 42,
-                                12, 41, 29, 22, 6, 48, 60, 75, 89, 82,
-                                4, 67, 81, 40, 37, 91, 24, 17, 25, 72,
-                                34, 54, 98, 2, 56, 11, 43, 61, 47, 53,
-                                27, 46, 18, 68, 95, 85, 93, 16, 3, 9,
-                                71, 1, 73, 94, 52, 99, 13, 20, 35, 23,
-                                86, 26, 84, 5, 30, 58, 63, 79, 14, 69,
-                                90, 0, 97, 62, 45, 88, 21, 70, 78, 87,
-                                51, 33, 7, 80, 55, 96, 32, 39, 77, 44 };
+TEST(BubbleSortTests, bubbleSortWithBigAray) {
 
-    int integerListToAssert[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                                  10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                  20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-                                  30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-                                  40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-                                  50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
-                                  60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
-                                  70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
-                                  80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
-                                  90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
+    const int sizeOftheArray = 100;
+    int integerListToSort[sizeOftheArray];
+    int integerListToAssert[sizeOftheArray];
+
+    for (int i = 0; i < sizeOftheArray; i++) {
+        integerListToSort[i] = i;
+        integerListToAssert[i] = i;
+    }
+
+    std::random_shuffle(integerListToSort, integerListToSort + sizeOftheArray);
 
     int size = std::size(integerListToSort);
 
@@ -100,13 +91,149 @@ TEST(FirstTests, bubbleSortWithBigAray) {
 
     for (int i = 0; i < size; i++)
     {
-        //EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
+        EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
     }
 }
 
+TEST(BubbleSortTests, bubbleSortWithBigArayAndBreak) {
+
+    const int sizeOftheArray = 100;
+    int integerListToSort[sizeOftheArray];
+    int integerListToAssert[sizeOftheArray];
+
+    for (int i = 0; i < sizeOftheArray; i++) {
+        integerListToSort[i] = i;
+        integerListToAssert[i] = i;
+    }
+
+    std::random_shuffle(integerListToSort, integerListToSort + sizeOftheArray);
+
+    int size = std::size(integerListToSort);
+
+    EXPECT_EQ(std::size(integerListToSort), std::size(integerListToAssert));
+
+    Sortings::doBubbleSortWithBreak(integerListToSort, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
+    }
+}
+
+/*---------------------------------------------------------------------------------------------- */
+
+TEST(QuickSortTests, IdentifyPivotInArrayLastElement) {
+
+    int integerListToSwap[] = { 0, 1, 3, 2 };
+    int size = std::size(integerListToSwap);
+
+    int pivotIndex = Sortings::identifyPivotLastElement(size);
+
+    EXPECT_EQ(pivotIndex, 3);
+}
+
+TEST(QuickSortTests, IdentifyPivotInArrayRandomElement) {
+
+    int integerListToSwap[] = { 0, 1, 3, 2 };
+    int size = std::size(integerListToSwap);
+
+    int pivotIndex = Sortings::identifyPivotRandom(size);
+
+    EXPECT_TRUE(pivotIndex < size);
+}
+
+TEST(QuickSortTests, quickSortWithPivotAsLasElementOneIteraton) {
+
+    int integerListToSort[] = { 0, 3, 2 };
+    int integerListToAssert[] = { 0, 2, 3 };
+    int size = std::size(integerListToSort);
+
+    Sortings::doQuickSort(integerListToSort, 0, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
+    }
+}
+
+TEST(QuickSortTests, quickSortWithPivotAsLasElementTwoIterations) {
+
+    int integerListToSort[] = { 0, 2, 3, 1 };
+    int integerListToAssert[] = { 0, 1, 2, 3 };
+    int size = std::size(integerListToSort);
+
+    Sortings::doQuickSort(integerListToSort, 0, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
+    }
+}
+
+TEST(QuickSortTests, quickSortWithPivotAsLasElementTwoIterations2) {
+
+    int integerListToSort[] = { 4, 0, 2, 3, 1, 44, 5 };
+    int integerListToAssert[] = { 0, 1, 2, 3, 4, 5, 44 };
+    int size = std::size(integerListToSort);
+
+    Sortings::doQuickSort(integerListToSort, 0, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
+    }
+}
+
+TEST(QuickSortTests, quickSortWithBigAray) {
+
+    const int sizeOftheArray = 100;
+    int integerListToSort[sizeOftheArray];
+    int integerListToAssert[sizeOftheArray];
+
+    for (int i = 0; i < sizeOftheArray; i++) {
+        integerListToSort[i] = i;
+        integerListToAssert[i] = i;
+    }
+
+    std::random_shuffle(integerListToSort, integerListToSort + sizeOftheArray);
 
 
+    int size = std::size(integerListToSort);
 
+    EXPECT_EQ(std::size(integerListToSort), std::size(integerListToAssert));
+
+    Sortings::doQuickSort(integerListToSort, 0, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
+    }
+}
+
+TEST(QuickSortTests, quickSortWithBigArayAndRandomPivot) {
+
+    const int sizeOftheArray = 100;
+    int integerListToSort[sizeOftheArray];
+    int integerListToAssert[sizeOftheArray];
+
+    for (int i = 0; i < sizeOftheArray; i++) {
+        integerListToSort[i] = i;
+        integerListToAssert[i] = i;
+    }
+
+    std::random_shuffle(integerListToSort, integerListToSort + sizeOftheArray);
+
+    int size = std::size(integerListToSort);
+
+    EXPECT_EQ(std::size(integerListToSort), std::size(integerListToAssert));
+
+    Sortings::doQuickSortRandomPivot(integerListToSort, 0, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
+    }
+}
 
 
 int main(int argc, char** argv) {
