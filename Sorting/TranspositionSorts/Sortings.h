@@ -27,6 +27,8 @@ public:
 	static void doQuickSortRandomPivot(int* defaultCollection, int pivot, const int size);
 
 
-
+	static int identifyMaxValueInArray(int* defaultCollection, const int size);
+	static int* populateCountArray(int* defaultCollection, const int size, const int maxValueInArray);
+	static int* doCountSort(int* defaultCollection, const int size);
 };
 

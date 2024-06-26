@@ -79,6 +79,8 @@ void Sortings::doBubbleSortWithBreak(int* defaultCollection, const int size)
 	}
 }
 
+/*---------------------------------------------------------------------------------------------- */
+
 int Sortings::identifyPivotLastElement(const int size)
 {
 	return size - 1;
@@ -181,3 +183,77 @@ void Sortings::doQuickSortRandomPivot(int* defaultCollection, int low, const int
 
 	}
 }
+
+/*---------------------------------------------------------------------------------------------- */
+
+int Sortings::identifyMaxValueInArray(int* defaultCollection, const int size)
+{
+	int maxValue = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		if (defaultCollection[i] > maxValue)
+		{
+			maxValue = defaultCollection[i];
+		}
+	}
+
+	return maxValue;
+}
+
+int* Sortings::populateCountArray(int* defaultCollection, const int size, const int maxValueInArray) {
+
+	int* countArray = new int[maxValueInArray] {0};
+
+	for (int i = size - 1; i >= 0; i--) {
+		countArray[defaultCollection[i]]++;
+	}
+
+	for (size_t i = 1; i < maxValueInArray; i++)
+	{
+		countArray[i] += countArray[i - 1];
+	}
+
+	return countArray;
+}
+
+int* Sortings::doCountSort(int* defaultCollection, const int size)
+{
+	// Identify the max integer number in the array
+	const int maxValueInArray = Sortings::identifyMaxValueInArray(defaultCollection, size) + 1;
+
+	// Create the countArray and fill it with how many times each number ocurred
+	int* countArray = Sortings::populateCountArray(defaultCollection, size, maxValueInArray);
+	printArray(countArray, maxValueInArray);
+
+	// Start to populate the output array
+	int* outputArray = new int[size] {0};
+
+	for (int i = size - 1; i >= 0; i--)
+	{
+		outputArray[countArray[defaultCollection[i]] - 1] = defaultCollection[i];
+		countArray[defaultCollection[i]]--;
+	}
+	printArray(outputArray, size);
+
+	return outputArray;
+}
+
+/*---------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

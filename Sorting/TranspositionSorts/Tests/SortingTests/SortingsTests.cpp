@@ -236,6 +236,80 @@ TEST(QuickSortTests, quickSortWithBigArayAndRandomPivot) {
 }
 
 
+/*---------------------------------------------------------------------------------------------- */
+
+TEST(CountiSortTests, identifyMaxValueInArray) {
+
+    int integerListToAssert[] = { 0, 1, 2, 3 };
+
+    int size = std::size(integerListToAssert);
+    
+    int maxValueInArray = Sortings::identifyMaxValueInArray(integerListToAssert, size);
+
+    EXPECT_EQ(maxValueInArray, 3);
+}
+
+TEST(CountiSortTests, createAnArrayWithSizeEqualToMaxValue) {
+
+    int integerListToSort[] = { 0, 1, 2, 2, 3 };
+    int integerListToAssert[] = { 1, 2, 4, 5 };
+
+    int sizeSort = std::size(integerListToSort);
+
+    const int maxValueInArray = Sortings::identifyMaxValueInArray(integerListToSort, sizeSort) + 1;
+
+    int* countArray = Sortings::populateCountArray(integerListToSort, sizeSort, maxValueInArray);
+
+    for (int i = 0; i < maxValueInArray; i++)
+    {
+        EXPECT_EQ(countArray[i], integerListToAssert[i]);
+    }
+}
+
+TEST(CountiSortTests, countSortWithSmallArray) {
+
+    int integerListToSort[] = { 0, 2, 3, 1, 2 };
+    int integerListToAssert[] = { 0, 1, 2, 2, 3 };
+
+    int size = std::size(integerListToAssert);
+
+    int* outputSort = Sortings::doCountSort(integerListToSort, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(outputSort[i], integerListToAssert[i]);
+    }
+}
+
+TEST(CountiSortTests, countSortWithBigArray) {
+
+    const int sizeOftheArray = 100;
+    int integerListToSort[sizeOftheArray];
+    int integerListToAssert[sizeOftheArray];
+
+    for (int i = 0; i < sizeOftheArray; i++) {
+        integerListToSort[i] = i;
+        integerListToAssert[i] = i;
+    }
+
+    std::random_shuffle(integerListToSort, integerListToSort + sizeOftheArray);
+
+    int size = std::size(integerListToAssert);
+
+    int* outputSort = Sortings::doCountSort(integerListToSort, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(outputSort[i], integerListToAssert[i]);
+    }
+}
+
+/*---------------------------------------------------------------------------------------------- */
+
+
+
+
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
