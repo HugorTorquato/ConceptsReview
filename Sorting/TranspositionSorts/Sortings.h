@@ -29,6 +29,14 @@ public:
 
 	static int identifyMaxValueInArray(int* defaultCollection, const int size);
 	static int* populateCountArray(int* defaultCollection, const int size, const int maxValueInArray);
+	static int* populateCountArray2(int* defaultCollection, const int size, const int maxValueInArray, const int exp);
 	static int* doCountSort(int* defaultCollection, const int size);
+	static int* doCountSort2(int* defaultCollection, const int size, const int exp);
+
+
+	static int identifyNumberOfDigits(const int number);
+	static int returnDigitAsSignificance(const int number, const int digit);
+	static void doRadixSort(int* defaultCollection, const int size);
+	static void doRadixSort2(int* defaultCollection, const int size);
 };
 

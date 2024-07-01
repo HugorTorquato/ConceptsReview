@@ -281,6 +281,21 @@ TEST(CountiSortTests, countSortWithSmallArray) {
     }
 }
 
+TEST(CountiSortTests, countSortWithSmallArrayAndBigNumbers) {
+
+    int integerListToSort[] = { 170, 45, 75, 90, 802, 24, 2, 66 };
+    int integerListToAssert[] = { 2, 24, 45, 66, 75, 90, 170, 802};
+
+    int size = std::size(integerListToAssert);
+
+    int* outputSort = Sortings::doCountSort(integerListToSort, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(outputSort[i], integerListToAssert[i]);
+    }
+}
+
 TEST(CountiSortTests, countSortWithBigArray) {
 
     const int sizeOftheArray = 100;
@@ -305,6 +320,42 @@ TEST(CountiSortTests, countSortWithBigArray) {
 }
 
 /*---------------------------------------------------------------------------------------------- */
+
+
+TEST(RadixSortTests, identifyNumberOfDigitsFromMaxValue) {
+    int integerListToSort[] = { 170, 45, 75, 90, 802, 24, 2, 66 };
+    int sizeSort = std::size(integerListToSort);
+
+    const int maxValueInArray = Sortings::identifyMaxValueInArray(integerListToSort, sizeSort) + 1;
+
+
+    int maxNumberOfDigits = Sortings::identifyNumberOfDigits(maxValueInArray);
+
+    EXPECT_EQ(maxNumberOfDigits, 3);
+}
+
+TEST(RadixSortTests, retrieveDigitFromNumber) {
+
+    int numberToSearate = 802;
+
+    EXPECT_EQ(Sortings::returnDigitAsSignificance(numberToSearate, 0), 8);
+    EXPECT_EQ(Sortings::returnDigitAsSignificance(numberToSearate, 1), 0);
+    EXPECT_EQ(Sortings::returnDigitAsSignificance(numberToSearate, 2), 2);
+}
+
+TEST(RadixSortTests, radixSortWithSmallArray) {
+    int integerListToSort[] = { 170, 45, 75, 90, 802, 24, 2, 66 };
+    int integerListToAssert[] = { 2, 24, 45, 66, 75, 90, 170, 802 };
+
+    int sizeSort = std::size(integerListToSort);
+
+    Sortings::doRadixSort2(integerListToSort, sizeSort);
+
+    for (int i = 0; i < sizeSort; i++)
+    {
+        EXPECT_EQ(integerListToSort[i], integerListToAssert[i]);
+    }
+}
 
 
 

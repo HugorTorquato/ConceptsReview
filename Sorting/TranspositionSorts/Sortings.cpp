@@ -1,5 +1,6 @@
 #include "Sortings.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -242,12 +243,114 @@ int* Sortings::doCountSort(int* defaultCollection, const int size)
 /*---------------------------------------------------------------------------------------------- */
 
 
+int Sortings::identifyNumberOfDigits(const int number) {
+
+	string numberAsString = to_string(number);
+
+	//cout << number << " " << numberAsString << endl;
+
+	return std::size(numberAsString);
+}
+
+int Sortings::returnDigitAsSignificance(const int number, const int digit) {
+
+	string strNumber = to_string(number);
+
+	cout << "std number " << std::size(strNumber) << endl;
+	if (digit < 0 || digit >= std::size(strNumber)) {
+		return 0;
+	}
+	
+	// Work with ASNCII values - '0' to put (48) in same order 
+	return static_cast<int>(strNumber[digit]) - static_cast<int>('0');
+
+}
+
+void Sortings::doRadixSort(int* defaultCollection, const int size) {
+
+	const int maxValueInArray = Sortings::identifyMaxValueInArray(defaultCollection, size);
+
+	int maxNumberOfDigits = Sortings::identifyNumberOfDigits(maxValueInArray);
+
+	int* innerrray = new int[size] {0};
+
+	//for (int digit = maxNumberOfDigits -1; digit >= 0; digit--)
+	for (int digit = 0; digit < maxNumberOfDigits; digit++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			// adicionar o digit em um array interno
+			// Fazer o sort no array principal com base nos indices do inner array
+			// refazer o processo até chegar no máx
+
+			//if (Sortings::identifyNumberOfDigits(defaultCollection[j]) <= digit) {
+			
+				innerrray[j] = Sortings::returnDigitAsSignificance(defaultCollection[j], digit);
+				cout << defaultCollection[j] << " " << digit << " " << innerrray[j] << endl;
+			//}
+		}
+
+		printArray(innerrray, size);
+
+	}
+	                     
+
+}
+
+int* Sortings::populateCountArray2(int* defaultCollection, const int size, const int maxValueInArray, const int exp) {
+
+	int* countArray = new int[maxValueInArray] {0};
+
+	for (int i = 0; i < size; i++) {
+		countArray[(defaultCollection[i] / exp ) % 10]++;
+	}
+
+	for (size_t i = 1; i < maxValueInArray; i++)
+	{
+		countArray[i] += countArray[i - 1];
+	}
+
+	return countArray;
+}
+
+int* Sortings::doCountSort2(int* defaultCollection, const int size, const int exp)
+{
+	// Identify the max integer number in the array
+	const int maxValueInArray = 10;// Sortings::identifyMaxValueInArray(defaultCollection, size) + 1;
+
+	// Create the countArray and fill it with how many times each number ocurred
+	int* countArray = Sortings::populateCountArray2(defaultCollection, size, maxValueInArray, exp);
+	printArray(countArray, maxValueInArray);
+
+	// Start to populate the output array
+	int* outputArray = new int[size] {0};
+
+	for (int i = size - 1; i >= 0; i--)
+	{
+		outputArray[countArray[(defaultCollection[i] / exp) % 10] - 1] = defaultCollection[i];
+		countArray[(defaultCollection[i] / exp) % 10]--;
+	}
+	printArray(outputArray, size);
+
+	for (int i = 0; i < size; i++) {
+		defaultCollection[i] = outputArray[i];
+	}
+
+	return outputArray;
+}
+
+void Sortings::doRadixSort2(int* defaultCollection, const int size) {
+
+	const int maxValueInArray = Sortings::identifyMaxValueInArray(defaultCollection, size);
 
 
+	for (int exp = 1; maxValueInArray / exp > 0; exp *= 10) {
+		// Ok... select the decimal value to evaluate
 
+		doCountSort2(defaultCollection, size, exp);
+	}
 
-
-
+}
 
 
 
