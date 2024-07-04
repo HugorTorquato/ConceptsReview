@@ -34,6 +34,9 @@
 # Do not uload any .pdf file
 *.pdf
 
+# Log Files
+*.log
+
 # Files to ignore
 /Sorting/TranspositionSorts/.vs/*
 /Sorting/TranspositionSorts/Debug/*
@@ -41,3 +44,10 @@
 /Sorting/TranspositionSorts/packages/*
 /Sorting/TranspositionSorts/Tests/SortingTests/Debug/*
 /Sorting/TranspositionSorts/Tests/SortingTests/Release/*
+
+/*/.vs/*
+/*/Debug/
+/*/Release/
+/*/*/Debug/
+/*/*/Release/
+/*/packages/
