@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "HashTableFreeFunctions.h"
+#include "HashTableFunctions.h"
 
 using namespace std;
 

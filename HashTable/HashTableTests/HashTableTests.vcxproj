@@ -155,12 +155,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FreeFunctionWrapper.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="MockWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FreeFunctionTests.cpp" />
     <ClCompile Include="FreeFunctionWrapper.cpp" />
+    <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HashTable\HashTable.vcxproj">
+      <Project>{63a57482-be4a-444e-b3eb-338a68611a90}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,9 +21,15 @@
     <ClCompile Include="HashTableFreeFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HashTableFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashTableFreeFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTableFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
