@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="FreeFunctionTests.cpp" />
     <ClCompile Include="FreeFunctionWrapper.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

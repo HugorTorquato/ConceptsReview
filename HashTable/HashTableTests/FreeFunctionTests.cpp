@@ -25,13 +25,3 @@ TEST(FreeFunctiontTests, TestFreeFunctionWithWrapper) {
 
     EXPECT_EQ(mockWrapper.FreeFunction(10), 30);
 }
-
-
-
-
-
-
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
