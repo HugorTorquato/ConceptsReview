@@ -27,6 +27,9 @@
     <ClCompile Include="MockFreeFunctionWrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MockFreeFunctionUsingFunctionPointers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockFreeFunctionWrapper.h">

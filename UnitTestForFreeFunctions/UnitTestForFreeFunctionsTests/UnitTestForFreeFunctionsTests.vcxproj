@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="FreeFunctionTests.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MockFreeFunctionUsingFunctionPointers.cpp" />
     <ClCompile Include="MockFreeFunctionWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -28,9 +28,7 @@ TEST(UsingWrappersToMockFreeFunctions, applyMockToAddFreeFunction) {
 	EXPECT_CALL(mockWrapper, add(2, 2))
 		.WillOnce(Return(5));
 
-	FreeFunctionWrapperImpl wrapper;
-
-	EXPECT_EQ(wrapper.add(2, 2), 5);
+	EXPECT_EQ(mockWrapper.add(2, 2), 5);
 }
 
 TEST(UsingWrappersToMockFreeFunctions, testFreeFunctionInvokingAnotherFreeFunctionWithoutMock) {
@@ -45,3 +43,15 @@ TEST(UsingWrappersToMockFreeFunctions, testFreeFunctionInvokingAnotherFreeFuncti
 	// is never called and the end result is 4
 	EXPECT_EQ(mockWrapper.addTwoPlusTwo(), 5);
 }
+
+
+
+
+
+
+
+
+
+
+
+
