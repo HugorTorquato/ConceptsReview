@@ -140,9 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FreeFunction.cpp" />
+    <ClCompile Include="FreeFunctionWraper.cpp" />
+    <ClCompile Include="FreeFunctionWrapperImpl2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FreeFunction.h" />
+    <ClInclude Include="FreeFunctionWraper.h" />
+    <ClInclude Include="FreeFunctionWrapperImpl2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
