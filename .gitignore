@@ -51,3 +51,8 @@
 /*/*/Debug/
 /*/*/Release/
 /*/packages/
+
+/Graphs/Graphs/packages/*
+/Graphs/Graphs/Debug\*
+/Graphs/Graphs/.vs/*
+
