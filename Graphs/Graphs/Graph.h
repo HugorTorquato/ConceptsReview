@@ -5,6 +5,13 @@
 #include <stack>
 #include <queue>
 
+
+struct NodesDist {
+	int node;
+	int dist;
+	int previousNode;
+};
+
 class Graph
 {
 public:
@@ -24,6 +31,8 @@ public:
 	bool BFSorderHasConnection(const int startingNode, const int endingNode);
 
 	bool DFSorderHasConnection(const int startingNode, const int endingNode);
+
+	std::vector<int> BFSDistaceBetween2Nodes(const int startingNode, const int endingNode);
 
 private:
 	int graphSize;

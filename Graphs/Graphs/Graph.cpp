@@ -163,6 +163,80 @@ bool Graph::DFSorderHasConnection(const int startingNode, const int endingNode)
 
 
 
+
+
+
+
+std::vector<int> Graph::BFSDistaceBetween2Nodes(const int startingNode, const int endingNode)
+{
+	int currentNode = startingNode;
+
+	std::vector<int> output;
+	std::vector<NodesDist> DistTable; //node, dist, previous node
+	int dist = 0;
+
+	std::queue<int> bfsqueued;
+
+	if (startingNode == endingNode)
+	{
+		//Shortest path
+		output.push_back(startingNode);
+		return output;
+	}
+
+	bfsqueued.push(startingNode);
+
+	DistTable.push_back(NodesDist{currentNode, 0, startingNode });
+	
+	while (!bfsqueued.empty()) {
+		// Define the starting node as the current node
+
+		currentNode = bfsqueued.front();
+
+		bfsqueued.pop();
+
+		//Populate the queue with the new neighbors
+		for (const int& neighbors : adjList[currentNode]) {
+
+			bfsqueued.push(neighbors);
+
+			//Salve the visited node in the output vector
+			DistTable.push_back(NodesDist{ 
+									neighbors, 
+									DistTable[currentNode].dist + 1, 
+									currentNode }
+			);
+		}
+	}
+
+	int previous_position = endingNode;
+	while (previous_position != startingNode)
+	{
+		output.push_back(previous_position);
+		previous_position = DistTable[previous_position].previousNode;
+	}
+
+	output.push_back(startingNode);
+	reverse(output.begin(), output.end());
+
+	return output;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Helpers */
 bool Graph::hasEdge(const int from, const int to)
 {
