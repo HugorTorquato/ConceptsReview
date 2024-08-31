@@ -115,8 +115,6 @@ bool Graph::BFSorderHasConnection(const int startingNode, const int endingNode)
 		for (const int& neighbors : adjList[currentNode]) {
 			bfsqueued.push(neighbors);
 		}
-
-
 	}
 
 
