@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.10.2)
+
+project(TRIM)
+
+add_executable(trim main.cpp)
+
+install(TARGETS trim DESTINATION "C:\\Projetos\\ConceptsReview\\Cmake\\Trim")
