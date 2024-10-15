@@ -1,10 +1,13 @@
 #include <iostream>
 #include "Adder/adder.h"
 #include "glfw/glfw3.h"
+#include "OLASConfig.h"
 
-int main() {
+int main(int argc, char* argv[]) {
     std::cout << "Hey Budy " << std::endl;
     std::cout << "2 + 3 = " << mearlymath::add(2, 3) << std::endl;
+
+    std::cout << argv[0] << " Version: " << OLAS_VERSION_MAJOR << "." << OLAS_VERSION_MINOR << std::endl;
 
     GLFWwindow* window;
 

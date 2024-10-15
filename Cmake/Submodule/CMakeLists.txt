@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.30)
 
-project(OLAS)
+project(OLAS VERSION 1.2)
+
+configure_file(OLASConfig.h.in OLASConfig.h)
 
 add_executable(${PROJECT_NAME} main.cpp)
+
+# include the output binary code as a include directory because we will put the verson in there. So it needs to know where to look
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 
 
 ####### DOWNLOAD ALL SUBMODULES
