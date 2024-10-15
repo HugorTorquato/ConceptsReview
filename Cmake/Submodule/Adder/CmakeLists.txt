@@ -1,1 +1,4 @@
 add_library(Adder adder.cpp adder.h)
+
+install(TARGET adder DESTINATION lib)
+install(FILES adder.h DESTINATION INCLUDE)
