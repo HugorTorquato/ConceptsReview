@@ -1,1 +1,1 @@
- cmake -D GLFW_BUILD_DOCS=OFF -S . -B out/build -G "Unix Makefiles"
+ cmake -D USE_ADDER=OFF -S . -B out/build -G "Unix Makefiles"
