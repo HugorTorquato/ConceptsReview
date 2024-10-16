@@ -7,3 +7,5 @@ project ("Ctests")
 
 # Include sub-projects.
 add_subdirectory ("Ctests")
+add_subdirectory ("testing")
+
