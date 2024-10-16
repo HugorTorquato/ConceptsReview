@@ -1,1 +1,0 @@
-cd .\out\build\UnitTests && ctest
