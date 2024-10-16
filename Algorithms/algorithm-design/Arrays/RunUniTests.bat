@@ -1,1 +1,1 @@
-cd .\out\build\UnitTests && ctest -VV
+cd .\out\build\UnitTests && ctest

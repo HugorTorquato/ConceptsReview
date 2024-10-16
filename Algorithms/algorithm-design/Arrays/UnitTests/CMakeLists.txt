@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
-# Declare a dependency on GoogleTest.
+# Declare a dependency on GoogleTest. This is a standard definition to start
+# projects running unit tests with gtests
 
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 20)
@@ -16,16 +17,25 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 
+# Enables the test
 enable_testing()
 
 add_executable(
   hello_test
   hello_test.cpp
 )
+
 target_link_libraries(
   hello_test
   GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(hello_test)
+gtest_discover_tests(
+    hello_test
+)
+
+target_sources(hello_test PUBLIC
+    # Add new files with unit tests definitions here
+    ArraySandBoxTests.cpp 
+)
