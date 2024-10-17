@@ -31,11 +31,13 @@ add_executable(UnitTests
 target_link_libraries( UnitTests PRIVATE
     GTest::GTest
     ArrayLib
+    VectorLib
 )
 
 target_sources(UnitTests PUBLIC
     # Add new files with unit tests definitions here
     ArrayTests.cpp 
+    VectorTests.cpp 
 )
 
 include(GoogleTest)
