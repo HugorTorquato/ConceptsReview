@@ -1,1 +1,1 @@
-cd .\out\build\tests && ctest
+cd .\out\build\tests && ctest --verbose

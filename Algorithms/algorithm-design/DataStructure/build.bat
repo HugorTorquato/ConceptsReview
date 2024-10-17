@@ -1,1 +1,1 @@
-cd .\out\build\ && MSBuild DataStructure.sln
+cd .\out\build\ && MSBuild Arrays.sln
