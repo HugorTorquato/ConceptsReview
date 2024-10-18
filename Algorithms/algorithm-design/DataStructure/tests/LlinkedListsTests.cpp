@@ -73,6 +73,18 @@ TEST(LinkedListsTests, createNewNodeAndPlaceThisValueAtTheSecondNode){
     EXPECT_EQ(llc.retrieveNodeBasedOnGivenPosition(2)->data, 10);
 }
 
+TEST(LinkedListsTests, asserLinkedListValues_WithSizeAs3){
+    LinkedListsClass llc;
+
+    std::vector<int> expectLLValues = {10, 20, 30};
+
+    llc.inculdeNewNodeAtTheEndOfTheList(10);
+    llc.inculdeNewNodeAtTheEndOfTheList(20);
+    llc.inculdeNewNodeAtTheEndOfTheList(30);
+
+    EXPECT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
+}
+
 TEST(LinkedListsTests, createFiveNewNodesAndAssertTheValues){
 
     LinkedListsClass llc;
@@ -85,10 +97,9 @@ TEST(LinkedListsTests, createFiveNewNodesAndAssertTheValues){
 
     ASSERT_EQ(llc.retrieveNodeBasedOnGivenPosition(1)->data, 10);
     ASSERT_EQ(llc.retrieveNodeBasedOnGivenPosition(2)->data, 20);
-    //ASSERT_EQ(llc.retrieveNodeBasedOnGivenPosition(3)->data, 30);
-    //ASSERT_EQ(llc.retrieveNodeBasedOnGivenPosition(4)->data, 40);
-    //ASSERT_EQ(llc.retrieveNodeBasedOnGivenPosition(5)->data, 50);
+    ASSERT_EQ(llc.retrieveNodeBasedOnGivenPosition(3)->data, 30);
+    ASSERT_EQ(llc.retrieveNodeBasedOnGivenPosition(4)->data, 40);
+    ASSERT_EQ(llc.retrieveNodeBasedOnGivenPosition(5)->data, 50);
 }
-
 
 

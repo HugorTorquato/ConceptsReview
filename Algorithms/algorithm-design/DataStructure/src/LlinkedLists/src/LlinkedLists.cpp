@@ -12,6 +12,20 @@ Node* LinkedListsClass::retrieveHeadNode(){
     return head;
 }
 
+std::vector<int> LinkedListsClass::retrieveLLValuesAsIntegerVactor(){
+
+    std::vector<int> llValues;
+
+    Node* current = retrieveHeadNode();
+
+    while (current != nullptr) {
+        llValues.push_back(current->data);
+        current = current->next;
+    }
+
+    return llValues;
+}
+
 bool isHeadEmpty(const Node* node){
     return node->data == 0 && node->next == nullptr;
 }
@@ -34,18 +48,15 @@ bool isPositionWithinLinkedListLength(Node* head, const int &position){
 
 Node* LinkedListsClass::retrieveNodeBasedOnGivenPosition(const int position){
 
-    int currentPosition = 0;
+    int currentPosition = 1;
     Node* node = retrieveHeadNode();
 
     if(isHeadEmpty(node) || isPositionWithinLinkedListLength(node, position)){
         return nullptr;
     }
 
-    while(node != nullptr && currentPosition < position) {
-
-        if(node->next != nullptr){
-            node = node->next;  
-        }
+    while(node->next != nullptr && currentPosition < position){
+        node = node->next;
         currentPosition++;
     }
 
@@ -56,8 +67,13 @@ void includeNodeAtHeader(Node* &head, const int data){
     head->data = data;
 }
 
-void includeNodeAtTheEnd(Node* &head, const int data){
+void includeNodeAtTheEnd(Node* head, const int data){
     Node* nodeToInclude = new Node();
+
+    // Get to the latest node before include the new node
+    while (head->next != nullptr) {
+        head = head->next;
+    }
 
     nodeToInclude->data = data;
 
