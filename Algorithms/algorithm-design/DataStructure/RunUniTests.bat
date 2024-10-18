@@ -1,1 +1,1 @@
-cd .\out\build\tests && ctest --verbose
+cd .\out\build\tests && ctest --verbose --output-on-failure
