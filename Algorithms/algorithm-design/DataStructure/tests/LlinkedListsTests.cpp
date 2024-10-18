@@ -139,3 +139,56 @@ TEST(LinkedListsTests, asserLinkedListValues_AddingNewNodeAtTheBeggining){
 
     EXPECT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
 }
+
+TEST(LinkedListsTests, createNewNodeAndPlaceItAtTheMiddleOfTheList_EmptyList){
+
+    LinkedListsClass llc;
+
+    llc.inculdeNewNodeAtTheMiddleOfTheList(1, 1);
+    Node* _node = llc.retrieveHeadNode();
+
+    EXPECT_EQ(_node->data, 1);
+}
+
+TEST(LinkedListsTests, createNewNodeAndPlaceItAtTheMiddleOfTheList_ListWithTwoNodes){
+
+    LinkedListsClass llc;
+
+    llc.inculdeNewNodeAtTheEndOfTheList(10);
+    llc.inculdeNewNodeAtTheEndOfTheList(30);
+
+    llc.inculdeNewNodeAtTheMiddleOfTheList(20, 1);
+
+    Node* _node = llc.retrieveHeadNode();
+
+    EXPECT_EQ(_node->data, 10);
+}
+
+TEST(LinkedListsTests, createNewNodeAndPlaceItAtTheMiddleOfTheList__OutsideTheListSize){
+
+    LinkedListsClass llc;
+    std::vector<int> expectLLValues = {10, 30};
+
+    llc.inculdeNewNodeAtTheEndOfTheList(10);
+    llc.inculdeNewNodeAtTheEndOfTheList(30);
+
+    llc.inculdeNewNodeAtTheMiddleOfTheList(20, 5);
+
+    EXPECT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
+}
+
+TEST(LinkedListsTests, createNewNodeAndPlaceItAtTheMiddleOfTheList_ListWithTwoNodes_LastPosition){
+
+    LinkedListsClass llc;
+    std::vector<int> expectLLValues = {10, 20, 30};
+
+    llc.inculdeNewNodeAtTheEndOfTheList(10);
+    llc.inculdeNewNodeAtTheEndOfTheList(30);
+
+    llc.inculdeNewNodeAtTheMiddleOfTheList(20, 1);
+
+    EXPECT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
+}
+
+
+//If position out of the range, do nothing

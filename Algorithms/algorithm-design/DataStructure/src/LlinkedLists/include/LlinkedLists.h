@@ -18,6 +18,7 @@ class LinkedListsClass {
         Node* retrieveNodeBasedOnGivenPosition(const int position);
         void inculdeNewNodeAtTheEndOfTheList(const int data);
         void inculdeNewNodeAtTheBegginningOfTheList(const int data);
+        void inculdeNewNodeAtTheMiddleOfTheList(const int data, const int position);
 
     private:
         Node* head;

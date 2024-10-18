@@ -64,3 +64,12 @@ void LinkedListsClass::inculdeNewNodeAtTheBegginningOfTheList(const int data){
         includeNodeAtTheBeggining(head, data);
     }
 }
+
+void LinkedListsClass::inculdeNewNodeAtTheMiddleOfTheList(const int data, const int position){
+
+    if(isHeadEmpty(head)){
+        includeNodeAtHeader(head, data);
+    } else {
+        includeNodeAtTheMiddle(head, data, position);
+    }
+}

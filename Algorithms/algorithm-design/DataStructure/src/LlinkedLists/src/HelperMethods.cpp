@@ -47,3 +47,27 @@ void includeNodeAtTheBeggining(Node* &head, const int data){
     //Important to change the head of the List, otherwise the changes won't affect it
     head = nodeToInclude;
 }
+
+void includeNodeAtTheMiddle(Node* &head, const int data, const int possition){
+
+    Node* nodeToInclude = new Node();
+
+    int currentPosition = 1;
+    Node* currentNode = head;
+
+    while(currentNode->next != nullptr && currentPosition < possition){
+        currentNode = currentNode->next;
+        currentPosition++;
+
+        if(currentNode->next == nullptr){
+            return;
+        }
+    }
+
+    // nodeToInclude receives the data to the next Node on the list
+    nodeToInclude->data = data;
+    nodeToInclude->next = currentNode->next;
+
+    //currentNode receives the data to the new node included
+    currentNode->next = nodeToInclude;
+}
