@@ -48,25 +48,27 @@ void includeNodeAtTheBeggining(Node* &head, const int data){
     head = nodeToInclude;
 }
 
-void includeNodeAtTheMiddle(Node* &head, const int data, const int possition){
+void includeNodeAtTheMiddle(Node* &head, const int data, const int position){
 
     Node* nodeToInclude = new Node();
 
     int currentPosition = 1;
     Node* currentNode = head;
 
-    while(currentNode->next != nullptr && currentPosition < possition){
+    if(isPositionWithinLinkedListLength(head, position)){
+        return;
+    }
+
+    while(currentNode->next != nullptr && currentPosition < position){
         currentNode = currentNode->next;
         currentPosition++;
-
-        if(currentNode->next == nullptr){
-            return;
-        }
     }
 
     // nodeToInclude receives the data to the next Node on the list
     nodeToInclude->data = data;
-    nodeToInclude->next = currentNode->next;
+    if(currentNode->next != nullptr){
+        nodeToInclude->next = currentNode->next;
+    }
 
     //currentNode receives the data to the new node included
     currentNode->next = nodeToInclude;

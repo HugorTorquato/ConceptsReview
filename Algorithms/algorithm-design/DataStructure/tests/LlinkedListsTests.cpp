@@ -180,12 +180,12 @@ TEST(LinkedListsTests, createNewNodeAndPlaceItAtTheMiddleOfTheList__OutsideTheLi
 TEST(LinkedListsTests, createNewNodeAndPlaceItAtTheMiddleOfTheList_ListWithTwoNodes_LastPosition){
 
     LinkedListsClass llc;
-    std::vector<int> expectLLValues = {10, 20, 30};
+    std::vector<int> expectLLValues = {10, 30, 20};
 
     llc.inculdeNewNodeAtTheEndOfTheList(10);
     llc.inculdeNewNodeAtTheEndOfTheList(30);
 
-    llc.inculdeNewNodeAtTheMiddleOfTheList(20, 1);
+    llc.inculdeNewNodeAtTheMiddleOfTheList(20, 2);
 
     EXPECT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
 }
