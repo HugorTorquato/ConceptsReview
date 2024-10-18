@@ -3,11 +3,9 @@
 #include <iostream>
 #include <vector>
 
-struct Node
-{
-    int data;
-    Node* next;
-};
+#include "NodeStructure.h"
+
+
 
 class LinkedListsClass {
 
@@ -19,6 +17,7 @@ class LinkedListsClass {
         std::vector<int> retrieveLLValuesAsIntegerVactor();
         Node* retrieveNodeBasedOnGivenPosition(const int position);
         void inculdeNewNodeAtTheEndOfTheList(const int data);
+        void inculdeNewNodeAtTheBegginningOfTheList(const int data);
 
     private:
         Node* head;

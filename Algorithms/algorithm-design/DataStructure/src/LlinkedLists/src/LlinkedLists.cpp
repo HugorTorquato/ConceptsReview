@@ -55,3 +55,12 @@ void LinkedListsClass::inculdeNewNodeAtTheEndOfTheList(const int data){
         includeNodeAtTheEnd(head, data);
     }
 }
+
+void LinkedListsClass::inculdeNewNodeAtTheBegginningOfTheList(const int data){
+
+    if(isHeadEmpty(head)){
+        includeNodeAtHeader(head, data);
+    } else {
+        includeNodeAtTheBeggining(head, data);
+    }
+}

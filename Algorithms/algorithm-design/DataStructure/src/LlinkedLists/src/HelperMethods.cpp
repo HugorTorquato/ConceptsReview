@@ -1,4 +1,4 @@
-
+#include "NodeStructure.h"
 
 bool isHeadEmpty(const Node* node){
     return node->data == 0 && node->next == nullptr;
@@ -35,4 +35,15 @@ void includeNodeAtTheEnd(Node* head, const int data){
     nodeToInclude->data = data;
 
     head->next = nodeToInclude;
+}
+
+void includeNodeAtTheBeggining(Node* &head, const int data){
+
+    Node* nodeToInclude = new Node();
+
+    nodeToInclude->data = data;
+    nodeToInclude->next = head;
+
+    //Important to change the head of the List, otherwise the changes won't affect it
+    head = nodeToInclude;
 }
