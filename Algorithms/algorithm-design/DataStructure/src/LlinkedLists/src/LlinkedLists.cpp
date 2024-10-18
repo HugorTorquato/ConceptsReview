@@ -1,4 +1,5 @@
 #include "LlinkedLists.h"
+#include "HelperMethods.cpp"
 
 int LinkedListsClass::return1ToTest(){
     return 1;
@@ -26,26 +27,6 @@ std::vector<int> LinkedListsClass::retrieveLLValuesAsIntegerVactor(){
     return llValues;
 }
 
-bool isHeadEmpty(const Node* node){
-    return node->data == 0 && node->next == nullptr;
-}
-
-int getLinkedListLength(Node* head) {
-    int length = 0;
-    Node* current = head;
-
-    while (current != nullptr) {
-        length++;
-        current = current->next;
-    }
-
-    return length;
-}
-
-bool isPositionWithinLinkedListLength(Node* head, const int &position){
-    return position > getLinkedListLength(head);
-}
-
 Node* LinkedListsClass::retrieveNodeBasedOnGivenPosition(const int position){
 
     int currentPosition = 1;
@@ -63,23 +44,6 @@ Node* LinkedListsClass::retrieveNodeBasedOnGivenPosition(const int position){
     return node;
 }
 
-void includeNodeAtHeader(Node* &head, const int data){
-    head->data = data;
-}
-
-void includeNodeAtTheEnd(Node* head, const int data){
-    Node* nodeToInclude = new Node();
-
-    // Get to the latest node before include the new node
-    while (head->next != nullptr) {
-        head = head->next;
-    }
-
-    nodeToInclude->data = data;
-
-    head->next = nodeToInclude;
-}
-
 void LinkedListsClass::inculdeNewNodeAtTheEndOfTheList(const int data){
     // Criar nova structure
     // Se não tiver valor no header adiciona ali mesmo
@@ -90,6 +54,4 @@ void LinkedListsClass::inculdeNewNodeAtTheEndOfTheList(const int data){
     } else {
         includeNodeAtTheEnd(head, data);
     }
-
-
 }
