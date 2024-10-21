@@ -28,3 +28,8 @@ void HashTablesClass::removeElementBasedOnKey(const std::string &key){
 }
 
 // --------------------------------------------------------
+
+HashTableImpClass::HashTableImpClass(){
+
+}
+
