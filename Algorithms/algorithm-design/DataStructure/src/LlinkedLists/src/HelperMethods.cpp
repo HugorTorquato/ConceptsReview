@@ -26,6 +26,7 @@ void includeNodeAtHeader(Node* &head, const int data){
 
 void includeNodeAtTheEnd(Node* head, const int data){
     Node* nodeToInclude = new Node();
+    Node* headNode = head;
 
     // Get to the latest node before include the new node
     while (head->next != nullptr) {
@@ -35,6 +36,8 @@ void includeNodeAtTheEnd(Node* head, const int data){
     nodeToInclude->data = data;
 
     head->next = nodeToInclude;
+
+    head = headNode;
 }
 
 void includeNodeAtTheBeggining(Node* &head, const int data){
@@ -50,6 +53,7 @@ void includeNodeAtTheBeggining(Node* &head, const int data){
 
 void includeNodeAtTheMiddle(Node* &head, const int data, const int position){
 
+    Node* headNode = head;
     Node* nodeToInclude = new Node();
 
     int currentPosition = 1;
@@ -72,4 +76,24 @@ void includeNodeAtTheMiddle(Node* &head, const int data, const int position){
 
     //currentNode receives the data to the new node included
     currentNode->next = nodeToInclude;
+
+    head = headNode;
+}
+
+void remveNodeFromTheEndOfTheList(Node* &current){
+    Node* previousNode;
+    Node* headNode = current;
+
+    while(current->next != nullptr){
+        previousNode = current;
+        current = current->next;
+    }
+
+    // At this point we already have both previous and current node
+    // Need to remove the pointer from the next node and the current node point it to nullptr
+
+    current = previousNode;
+    current->next = nullptr;
+
+    current = headNode;
 }

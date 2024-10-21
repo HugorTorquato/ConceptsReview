@@ -19,6 +19,7 @@ class LinkedListsClass {
         void inculdeNewNodeAtTheEndOfTheList(const int data);
         void inculdeNewNodeAtTheBegginningOfTheList(const int data);
         void inculdeNewNodeAtTheMiddleOfTheList(const int data, const int position);
+        void removeNodeFromEndOfTheLinkedList(int position = 0);
 
     private:
         Node* head;

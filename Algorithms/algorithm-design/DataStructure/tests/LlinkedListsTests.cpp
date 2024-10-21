@@ -190,5 +190,60 @@ TEST(LinkedListsTests, createNewNodeAndPlaceItAtTheMiddleOfTheList_ListWithTwoNo
     EXPECT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
 }
 
+TEST(LinkedListsTests, removeNodeFromBegginingOfTheList){
 
-//If position out of the range, do nothing
+    LinkedListsClass llc;
+
+    llc.inculdeNewNodeAtTheEndOfTheList(10);
+
+    EXPECT_EQ(llc.retrieveHeadNode()->data, 10);
+
+}
+
+
+TEST(LinkedListsTests, removeNodeFromEndOfTheList){
+
+    LinkedListsClass llc;
+    std::vector<int> expectLLValues = {10, 30, 20};
+
+    llc.inculdeNewNodeAtTheEndOfTheList(10);
+    llc.inculdeNewNodeAtTheEndOfTheList(30);
+
+    llc.inculdeNewNodeAtTheMiddleOfTheList(20, 2);
+
+    ASSERT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
+
+    llc.removeNodeFromEndOfTheLinkedList();
+    expectLLValues.pop_back();
+
+    ASSERT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
+
+}
+
+TEST(LinkedListsTests, removeNodeFromIndexOutsideOfTheEmptyList){
+
+    LinkedListsClass llc;
+    std::vector<int> expectLLValues = {0};
+
+    llc.removeNodeFromEndOfTheLinkedList();
+
+    ASSERT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
+
+}
+
+TEST(LinkedListsTests, removeNodeFromIndexOutsideOfTheList){
+
+    LinkedListsClass llc;
+    std::vector<int> expectLLValues = {10, 20, 30};
+
+    const int position = 5;
+
+    llc.inculdeNewNodeAtTheEndOfTheList(10);
+    llc.inculdeNewNodeAtTheEndOfTheList(20);
+    llc.inculdeNewNodeAtTheEndOfTheList(30);
+
+    llc.removeNodeFromEndOfTheLinkedList(position);
+
+    ASSERT_EQ(llc.retrieveLLValuesAsIntegerVactor(), expectLLValues);
+
+}

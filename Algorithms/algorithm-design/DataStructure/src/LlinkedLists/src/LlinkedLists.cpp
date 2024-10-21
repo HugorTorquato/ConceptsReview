@@ -73,3 +73,12 @@ void LinkedListsClass::inculdeNewNodeAtTheMiddleOfTheList(const int data, const 
         includeNodeAtTheMiddle(head, data, position);
     }
 }
+
+void LinkedListsClass::removeNodeFromEndOfTheLinkedList(int position){
+
+    if(isHeadEmpty(head) || isPositionWithinLinkedListLength(head, position)){
+        return;
+    }
+
+    remveNodeFromTheEndOfTheList(head);
+}
