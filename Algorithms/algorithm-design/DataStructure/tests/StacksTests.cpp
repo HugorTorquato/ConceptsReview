@@ -15,3 +15,46 @@ TEST(StacksTests, simpleMethodReturning1){
 }
 
 // --------------------------------------------------------
+
+TEST(StacksTests, validateEmptyStackCreation){
+
+    StackClass SC;
+
+    EXPECT_TRUE(SC.getStack().empty());
+}
+
+TEST(StacksTests, addElementInAnEmptyStack){
+
+    StackClass SC;
+    const int elementToPush = 10;
+
+    SC.pushElementToTheStack(elementToPush);
+
+    
+
+    ASSERT_EQ(SC.getStack().top(), elementToPush);
+
+}
+
+TEST(StacksTests, removeElementOfAStackWithOneElement){
+
+    StackClass SC;
+    const int elementToPush = 10;
+
+    SC.pushElementToTheStack(elementToPush);
+
+    ASSERT_FALSE(SC.getStack().empty());
+
+    SC.popElementOfTheStack();
+    
+    ASSERT_TRUE(SC.getStack().empty());
+}
+
+TEST(StacksTests, removeElementOfAnEmptyStack){
+
+    StackClass SC;
+
+    SC.popElementOfTheStack();
+    
+    ASSERT_TRUE(SC.getStack().empty());
+}
