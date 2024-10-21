@@ -33,6 +33,7 @@ target_link_libraries( UnitTests PRIVATE
     ArrayLib
     VectorLib
     LlinkedListsLib
+    StacksLib
 )
 
 target_sources(UnitTests PUBLIC
@@ -40,6 +41,7 @@ target_sources(UnitTests PUBLIC
     ArrayTests.cpp 
     VectorTests.cpp 
     LlinkedListsTests.cpp 
+    StacksTests.cpp 
 )
 
 include(GoogleTest)
