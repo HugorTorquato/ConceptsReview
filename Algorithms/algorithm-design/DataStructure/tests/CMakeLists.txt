@@ -35,6 +35,7 @@ target_link_libraries( UnitTests PRIVATE
     LlinkedListsLib
     StacksLib
     QueuesLib
+    HashTablesLib
 )
 
 target_sources(UnitTests PUBLIC
@@ -44,6 +45,7 @@ target_sources(UnitTests PUBLIC
     LlinkedListsTests.cpp 
     StacksTests.cpp 
     QueuesTests.cpp 
+    HashTablesTests.cpp 
 )
 
 include(GoogleTest)
