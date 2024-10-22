@@ -21,15 +21,15 @@ int BTreeVertice::getValue(){
     return value;
 }
 
-BTreeVertice* BTreeVertice::getRoot(){
+std::shared_ptr<BTreeVertice> BTreeVertice::getRoot(){
     return root;
 }
 
-BTreeVertice* BTreeVertice::getRightChild(){
+std::shared_ptr<BTreeVertice> BTreeVertice::getRightChild(){
     return rightChild;
 }
 
-BTreeVertice* BTreeVertice::getLeftChild(){
+std::shared_ptr<BTreeVertice> BTreeVertice::getLeftChild(){
     return leftChild;
 }
 
@@ -37,15 +37,15 @@ void BTreeVertice::setValue(const int &_value){
     value = _value;
 }
 
-void BTreeVertice::setRoot(BTreeVertice* _root){
+void BTreeVertice::setRoot(std::shared_ptr<BTreeVertice> _root){
     root = _root;
 }
 
-void BTreeVertice::setRightChild(BTreeVertice* _rightChield){
+void BTreeVertice::setRightChild(std::shared_ptr<BTreeVertice> _rightChield){
     rightChild = _rightChield;
 }
 
-void BTreeVertice::setLeftChild(BTreeVertice* _leftChield){
+void BTreeVertice::setLeftChild(std::shared_ptr<BTreeVertice> _leftChield){
     leftChild = _leftChield;
 }
 
@@ -60,8 +60,16 @@ void BTreesClass::includeVerticeInBTree(const std::string &key, const int &value
     } else {
         //If No , Include vertice
 
-        //Declare a new vertice
-        BTreeVertice* vertice = new BTreeVertice();
+        /*
+        //Declare a new vertice -- NEED TO FREE THIS MEMORY
+        std::shared_ptr<BTreeVertice> vertice = new BTreeVertice();
+        */
+       
+        // If it does not exist, create a new BTreeVertice and manage it with shared_ptr
+        std::shared_ptr<BTreeVertice> vertice = std::make_shared<BTreeVertice>();
+
+
+
         //Populate the values for the new vertice
         vertice->setValue(value);
         //Include the new vertice in the map
@@ -70,7 +78,7 @@ void BTreesClass::includeVerticeInBTree(const std::string &key, const int &value
     }
 }
 
-BTreeVertice* BTreesClass::getBTreeVerticeFromKey(const std::string &key){
+std::shared_ptr<BTreeVertice> BTreesClass::getBTreeVerticeFromKey(const std::string &key){
     if(BTree.find(key) != BTree.end()){
         return BTree[key]; 
     }

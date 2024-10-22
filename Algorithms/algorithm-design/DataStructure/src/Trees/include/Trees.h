@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <memory>
 
 class BTreeVertice {
     public:
@@ -9,22 +10,22 @@ class BTreeVertice {
         BTreeVertice();
 
         int getValue();
-        BTreeVertice* getRoot();
-        BTreeVertice* getRightChild();
-        BTreeVertice* getLeftChild();
+        std::shared_ptr<BTreeVertice> getRoot();
+        std::shared_ptr<BTreeVertice> getRightChild();
+        std::shared_ptr<BTreeVertice> getLeftChild();
 
         void setValue(const int &_value);
-        void setRoot(BTreeVertice* _root);
-        void setRightChild(BTreeVertice* _rightChild);
-        void setLeftChild(BTreeVertice* _leftChild);
+        void setRoot(std::shared_ptr<BTreeVertice> _root);
+        void setRightChild(std::shared_ptr<BTreeVertice> _rightChild);
+        void setLeftChild(std::shared_ptr<BTreeVertice> _leftChild);
 
 
     private:
 
         int value;
-        BTreeVertice* root;
-        BTreeVertice* rightChild;
-        BTreeVertice* leftChild;
+        std::shared_ptr<BTreeVertice> root;
+        std::shared_ptr<BTreeVertice> rightChild;
+        std::shared_ptr<BTreeVertice> leftChild;
 };
 
 class BTreesClass {
@@ -34,9 +35,9 @@ class BTreesClass {
         int return1ToTest();
 
         void includeVerticeInBTree(const std::string &key, const int &value, const std::string &root = "");
-        BTreeVertice* getBTreeVerticeFromKey(const std::string &key);
+        std::shared_ptr<BTreeVertice> getBTreeVerticeFromKey(const std::string &key);
 
     private:
-        std::unordered_map<std::string, BTreeVertice*> BTree;
+        std::unordered_map<std::string, std::shared_ptr<BTreeVertice>> BTree;
 
 };

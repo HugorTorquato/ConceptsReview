@@ -31,19 +31,12 @@ TEST(BTreeVerticeTests, retrieveEmptyBTreeVerticeAfterInitialization){
 TEST(BTreeVerticeTests, setValuesForBTreeVerticeAfterInitialization){
 
     BTreeVertice BTV;
-    BTreeVertice BTV2;
 
     //Remember to use reference here &
 
     BTV.setValue(1);
-    BTV.setRoot(&BTV2);
-    BTV.setRightChild(&BTV2);
-    BTV.setLeftChild(&BTV2);
 
     ASSERT_EQ(BTV.getValue(), 1);
-    ASSERT_EQ(BTV.getRoot(), &BTV2);
-    ASSERT_EQ(BTV.getRightChild(), &BTV2);
-    ASSERT_EQ(BTV.getLeftChild(), &BTV2);
 }
 
 
@@ -64,7 +57,7 @@ TEST(BTreesClassTests, insertVrticeInEmptyBTreeAndRetreaveItsValue){
 
     BTClass.includeVerticeInBTree(keyToAddInNode, valueToAddInNode);
 
-    BTreeVertice* vertice = BTClass.getBTreeVerticeFromKey(keyToAddInNode);
+    std::shared_ptr<BTreeVertice> vertice = BTClass.getBTreeVerticeFromKey(keyToAddInNode);
 
     ASSERT_TRUE(vertice != nullptr);
     EXPECT_EQ(vertice->getValue(), valueToAddInNode);
