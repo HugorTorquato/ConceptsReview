@@ -51,9 +51,6 @@ TEST(BTreesClassTests, insertVrticeInEmptyBTreeAndRetreaveItsValue){
 
     const int valueToAddInNode = 1;
     const std::string keyToAddInNode = "A";
-    
-    // Vou ter de pedir os dados de root, e 
-    // root is an optional value here
 
     BTClass.includeVerticeInBTree(keyToAddInNode, valueToAddInNode);
 
@@ -63,6 +60,25 @@ TEST(BTreesClassTests, insertVrticeInEmptyBTreeAndRetreaveItsValue){
     EXPECT_EQ(vertice->getValue(), valueToAddInNode);
 
 }
+
+TEST(BTreesClassTests, updateValueInVrticeInEmptyBTreeAndRetreaveItsValue){
+    BTreesClass BTClass;
+
+    const int valueToAddInNode = 1;
+    const int valueToAddInNode2 = 3;
+    const std::string keyToAddInNode = "A";
+
+    BTClass.includeVerticeInBTree(keyToAddInNode, valueToAddInNode);
+    BTClass.includeVerticeInBTree(keyToAddInNode, valueToAddInNode2);
+
+    std::shared_ptr<BTreeVertice> vertice = BTClass.getBTreeVerticeFromKey(keyToAddInNode);
+
+    ASSERT_TRUE(vertice != nullptr);
+    EXPECT_EQ(vertice->getValue(), valueToAddInNode2);
+
+}
+
+
 
 
 

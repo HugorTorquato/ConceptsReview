@@ -1,4 +1,5 @@
 #include "Trees.h"
+#include "HelperMethods.cpp"
 
 BTreesClass::BTreesClass(){
 
@@ -51,7 +52,7 @@ void BTreeVertice::setLeftChild(std::shared_ptr<BTreeVertice> _leftChield){
 
 // --------------------------------------------------------
 
-void BTreesClass::includeVerticeInBTree(const std::string &key, const int &value, const std::string &root){
+void BTreesClass::includeVerticeInBTree(const std::string &key, const int &value, const std::string &rootKey){
     //Verify if this key already exists in the map
     if(BTree.find(key) != BTree.end()){
         //If Yes, Update Value
@@ -59,28 +60,13 @@ void BTreesClass::includeVerticeInBTree(const std::string &key, const int &value
         
     } else {
         //If No , Include vertice
-
-        /*
-        //Declare a new vertice -- NEED TO FREE THIS MEMORY
-        std::shared_ptr<BTreeVertice> vertice = new BTreeVertice();
-        */
-       
-        // If it does not exist, create a new BTreeVertice and manage it with shared_ptr
-        std::shared_ptr<BTreeVertice> vertice = std::make_shared<BTreeVertice>();
-
-
-
-        //Populate the values for the new vertice
-        vertice->setValue(value);
-        //Include the new vertice in the map
-        BTree[key] = vertice;
-
+        includeVertice(value, BTree, key, rootKey);
     }
 }
 
 std::shared_ptr<BTreeVertice> BTreesClass::getBTreeVerticeFromKey(const std::string &key){
-    if(BTree.find(key) != BTree.end()){
-        return BTree[key]; 
+    if(BTree.find(key) == BTree.end()){
+        return nullptr;
     }
-    return nullptr;
+    return BTree[key]; 
 }

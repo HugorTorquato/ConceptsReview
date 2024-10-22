@@ -34,10 +34,11 @@ class BTreesClass {
         BTreesClass();
         int return1ToTest();
 
-        void includeVerticeInBTree(const std::string &key, const int &value, const std::string &root = "");
+        void includeVerticeInBTree(const std::string &key, const int &value, const std::string &rootKey = "");
         std::shared_ptr<BTreeVertice> getBTreeVerticeFromKey(const std::string &key);
 
     private:
+        std::shared_ptr<BTreeVertice> rootVertice;
         std::unordered_map<std::string, std::shared_ptr<BTreeVertice>> BTree;
 
 };
