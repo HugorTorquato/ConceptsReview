@@ -39,7 +39,7 @@ class HashTableImpClass {
 
     private:
 
-        int hashFunction()
+        int hashFunction();
 
         int size;
         std::vector< std::list< std::pair< std::string, int > > > hashTableImp;
