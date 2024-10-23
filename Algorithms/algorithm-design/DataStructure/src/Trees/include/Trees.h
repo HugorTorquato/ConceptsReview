@@ -3,11 +3,13 @@
 #include <unordered_map>
 #include <string>
 #include <memory>
+#include <queue>
 
 class BTreeVertice {
     public:
 
         BTreeVertice();
+        BTreeVertice(int _value);
 
         int getValue();
         std::shared_ptr<BTreeVertice> getRoot();
@@ -37,8 +39,15 @@ class BTreesClass {
         void includeVerticeInBTree(const std::string &key, const int &value, const std::string &rootKey = "");
         std::shared_ptr<BTreeVertice> getBTreeVerticeFromKey(const std::string &key);
 
+        std::shared_ptr<BTreeVertice> getRootVertice();
+        int getNumberOfNodes();
+
+        void includeVerticeAtTree(const std::shared_ptr<BTreeVertice> BTV);
+
     private:
         std::shared_ptr<BTreeVertice> rootVertice;
+
+        // This map can increase memory usage ( bad )
         std::unordered_map<std::string, std::shared_ptr<BTreeVertice>> BTree;
 
 };

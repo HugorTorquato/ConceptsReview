@@ -78,7 +78,68 @@ TEST(BTreesClassTests, updateValueInVrticeInEmptyBTreeAndRetreaveItsValue){
 
 }
 
+// Find a way to populate the rightChild and leftChild
 
+
+        //I can populate it with the Vertice itself and not parameter by parameter
+
+TEST(BTreesClassTests, initializeVerticeUsingConstructor) {
+    //BTreeVertice* BTC = new BTreeVertice(5);
+    std::shared_ptr<BTreeVertice> BTC = std::make_shared<BTreeVertice>(5);
+    ASSERT_TRUE(BTC->getValue() == 5);
+}
+
+TEST(BTreesClassTests, includeVerticeInEmptuTree_AllocateAtRootPosition) {
+
+    const int rootDataToStore = 5;
+
+    //BTreeVertice* BTC = new BTreeVertice(5);
+    std::shared_ptr<BTreeVertice> BTV = std::make_shared<BTreeVertice>(rootDataToStore);
+    BTreesClass BTC; 
+
+    ASSERT_TRUE(BTV->getValue() == rootDataToStore);
+    ASSERT_TRUE(BTV->getRightChild() == nullptr);
+    ASSERT_TRUE(BTV->getLeftChild() == nullptr);
+    
+    BTC.includeVerticeAtTree(BTV);
+    
+    ASSERT_TRUE(BTC.getNumberOfNodes() == 1);
+    EXPECT_EQ(BTC.getRootVertice()->getValue(), rootDataToStore);    
+    EXPECT_EQ(BTC.getRootVertice()->getLeftChild(), nullptr);    
+    EXPECT_EQ(BTC.getRootVertice()->getRightChild(), nullptr);    
+}
+
+
+TEST(BTreesClassTests, introduceTheBTreeVerticeAsParameters_3NewVertices) {
+
+    std::shared_ptr<BTreeVertice> BTV1 = std::make_shared<BTreeVertice>(10);
+    std::shared_ptr<BTreeVertice> BTV2 = std::make_shared<BTreeVertice>(11);
+    std::shared_ptr<BTreeVertice> BTV3 = std::make_shared<BTreeVertice>(12);
+
+    BTreesClass BTC;
+    
+    //If i want to specify the tree.... not right now
+    //BTV1->setLeftChild(BTV3);
+    //BTV1->setRightChild(BTV2);
+
+    /*
+        BTC1
+        /  \
+    BTC3   BTC2
+    */
+
+
+    BTC.includeVerticeAtTree(BTV1);
+    BTC.includeVerticeAtTree(BTV2);
+    BTC.includeVerticeAtTree(BTV3);
+
+    EXPECT_EQ(BTC.getRootVertice()->getValue(), BTV1->getValue());  
+    EXPECT_EQ(BTC.getNumberOfNodes(), 3);
+    EXPECT_EQ(BTC.getRootVertice()->getLeftChild()->getValue(),  BTV2->getValue());  
+    EXPECT_EQ(BTC.getRootVertice()->getRightChild()->getValue(), BTV3->getValue());  
+
+
+}
 
 
 
