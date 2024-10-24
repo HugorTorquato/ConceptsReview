@@ -97,3 +97,35 @@ void BTreesClass::includeVerticeAtTree(const std::shared_ptr<BTreeVertice> BTV){
 
     includeElementInTheTreeLeftToRight(BTV, rootVertice);
 }
+
+// Faz o delete com base no valor do vertice... hummm
+
+void BTreesClass::deleteVerticeAtTree(const int value){
+
+    // If empty, return
+    if(rootVertice == nullptr){
+        return;
+    }
+
+    // If rootNode to be deleted, return
+    if(rootVertice->getValue() == value){
+        rootVertice = nullptr;
+        return;
+    }
+
+    std::queue<std::shared_ptr<BTreeVertice>> treeQueue;
+    treeQueue.push(rootVertice);
+
+    while (!treeQueue.empty())
+    {
+        std::shared_ptr<BTreeVertice> verticeToEvaluate = treeQueue.front();
+        treeQueue.pop();
+
+        if(verticeToEvaluate->getValue() == value){
+            verticeToEvaluate = nullptr;
+        }
+    }
+    
+
+
+}

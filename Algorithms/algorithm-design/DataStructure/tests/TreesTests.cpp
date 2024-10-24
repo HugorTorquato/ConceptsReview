@@ -177,8 +177,36 @@ TEST(BTreesClassTests, introduceTheBTreeVerticeAsParameters_4NewVertices) {
     EXPECT_EQ(rootVertice->getLeftChild()->getLeftChild()->getValue(),  BTV4->getValue());  
 }
 
+TEST(BTreesClassTests, deleteNodeFromEmptyTree) {
+    BTreesClass BTC; 
 
+    const int verticeValueToDelete = 1;
 
+    BTC.deleteVerticeAtTree(verticeValueToDelete);
+
+    ASSERT_TRUE(BTC.getNumberOfNodes() == 0);
+}
+
+TEST(BTreesClassTests, deleteOnlyNodeFromATreeBasedOnItsValue) {
+
+    const int rootDataToStore = 5;
+
+    //BTreeVertice* BTC = new BTreeVertice(5);
+    std::shared_ptr<BTreeVertice> BTV = std::make_shared<BTreeVertice>(rootDataToStore);
+    BTreesClass BTC; 
+
+    ASSERT_TRUE(BTV->getValue() == rootDataToStore);
+    
+    BTC.includeVerticeAtTree(BTV);
+    
+    ASSERT_TRUE(BTC.getNumberOfNodes() == 1);
+    ASSERT_EQ(BTC.getRootVertice()->getValue(), rootDataToStore);  
+
+    BTC.deleteVerticeAtTree(rootDataToStore);
+    
+    ASSERT_TRUE(BTC.getNumberOfNodes() == 0);
+    ASSERT_EQ(BTC.getRootVertice(), nullptr);  
+}
 
 
 // ----- Representation of a N-ary Tree

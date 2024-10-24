@@ -79,6 +79,10 @@ int retrieveNumberOfNodesInTree(
 ){
     int count = 0;
 
+    if(rootVertice == nullptr){
+        return count;
+    }
+
     std::queue<std::shared_ptr<BTreeVertice>> treeQueue;
     treeQueue.push(rootVertice);
 
