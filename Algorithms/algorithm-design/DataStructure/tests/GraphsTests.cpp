@@ -117,7 +117,61 @@ TEST(GraphsTests, includeNodeInGraphWithEdge_2Nodes){
         /
       (4)
     */
+}
 
+TEST(GraphsTests, applyBFSToAnEmptyGraph_ReturnEmptyVector){
+    GraphsClass GC;
+
+    ASSERT_TRUE(GC.BFS_Search().empty());
+}
+
+TEST(GraphsTests, applyBFSToGraph_1NodeAnd0Edges){
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>();
+    const vector<int> expectedEdgesFromNode1 = {2};
+    const vector<int> expectedBFSResultIDs = {1};
+
+    NodeObj_1->includeEdge(2);
+
+    GC.includeNode(NodeObj_1);
+
+    vector<std::shared_ptr<Node>> BFS_result = GC.BFS_Search();
+
+    ASSERT_TRUE(GC.BFS_Search().empty());
+
+    int count;
+    for(std::shared_ptr<Node> node : BFS_result){
+        ASSERT_TRUE(node->getId() == expectedBFSResultIDs[count]);
+        ASSERT_TRUE(node->parent == nullptr);
+        count++;
+    } 
+}
+
+TEST(GraphsTests, applyBFSToGraph_2NodeAnd3Edges){
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>();
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>();
+
+    const vector<int> expectedEdgesFromNodeObj_1 = {2, 3};
+    const vector<int> expectedEdgesFromNodeObj_2 = {4};
+
+    const vector<int> expectedBFSResultIDs = {1, 2};
+
+    NodeObj_1->includeEdge(2);
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+
+    vector<std::shared_ptr<Node>> BFS_result = GC.BFS_Search();
+
+    ASSERT_TRUE(GC.BFS_Search().empty());
+
+    int count;
+    for(std::shared_ptr<Node> node : BFS_result){
+        ASSERT_TRUE(node->getId() == expectedBFSResultIDs.at(count));
+        ASSERT_TRUE(node->parent == nullptr); // Não deveria ser true para segundo node
+        count++;
+    } 
 }
 
 // include 3 elements and edges between them

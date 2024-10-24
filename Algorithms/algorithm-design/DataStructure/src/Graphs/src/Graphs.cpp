@@ -53,6 +53,47 @@ void GraphsClass::includeNode(shared_ptr<Node> nodeToInclude){
     includeNodeInGraph(nodeToInclude, graphDefinition);
 }
 
+vector<shared_ptr<Node>> GraphsClass::BFS_Search(){
+
+    vector<shared_ptr<Node>> BFS_result;
+    
+    if(graphDefinition.empty()){
+        return BFS_result;
+    }
+
+    queue<shared_ptr<Node>> BFS_queue;
+    vector< pair<shared_ptr<Node>, vector<int>> > graphToApplyBFS = graphDefinition;
+
+    initializeSourceNode(graphToApplyBFS, BFS_queue);
+
+    while (!BFS_queue.empty())
+    {
+        shared_ptr<Node> nodeToEvaluate = BFS_queue.front();
+        BFS_queue.pop();
+
+        vector<int> childNodes = nodeToEvaluate->getEdges();
+
+        for(int it : childNodes){
+
+            shared_ptr<Node> node = retrieveNodePonterFromGraph(it, graphToApplyBFS);
+            if(node->color == color::white){
+                node->color = color::gray;
+                node->distance = nodeToEvaluate->distance + 1;
+                node->parent = nodeToEvaluate;
+                BFS_queue.push(node);
+            }
+        }
+        nodeToEvaluate->color = color::black;
+        BFS_result.push_back(nodeToEvaluate);
+    }
+
+    return BFS_result;
+}
+
+
+
+
+
 void GraphsClass::includeEdgeFromTo(const int &fromNode, const int &toNode){
 
     if(graphDefinition.empty()){
