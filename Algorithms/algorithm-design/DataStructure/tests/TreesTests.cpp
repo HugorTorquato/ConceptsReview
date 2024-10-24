@@ -208,6 +208,64 @@ TEST(BTreesClassTests, deleteOnlyNodeFromATreeBasedOnItsValue) {
     ASSERT_EQ(BTC.getRootVertice(), nullptr);  
 }
 
+TEST(BTreesClassTests, deleteNodeFromATreeBasedOnItsValue) {
+
+    std::shared_ptr<BTreeVertice> BTV1 = std::make_shared<BTreeVertice>(10);
+    std::shared_ptr<BTreeVertice> BTV2 = std::make_shared<BTreeVertice>(11);
+    std::shared_ptr<BTreeVertice> BTV3 = std::make_shared<BTreeVertice>(12);
+
+    BTreesClass BTC;
+
+    /*
+        BTC1
+        /  \
+    BTC3   BTC2
+    */
+
+    BTC.includeVerticeAtTree(BTV1);
+    BTC.includeVerticeAtTree(BTV2);
+    BTC.includeVerticeAtTree(BTV3);
+
+    ASSERT_TRUE(BTC.getNumberOfNodes(), 3);
+
+    BTC.deleteVerticeAtTree(12);
+
+    ASSERT_TRUE(BTC.getNumberOfNodes(), 2); 
+    EXPECT_EQ(BTC.getRootVertice()->getLeftChild()->getValue(),  BTV2->getValue());  
+    EXPECT_EQ(BTC.getRootVertice()->getRightChild(), nullptr);  
+}
+
+
+TEST(BTreesClassTests, retrieveInorderTransversal) {
+    std::shared_ptr<BTreeVertice> BTV1 = std::make_shared<BTreeVertice>(10);
+    std::shared_ptr<BTreeVertice> BTV2 = std::make_shared<BTreeVertice>(11);
+    std::shared_ptr<BTreeVertice> BTV3 = std::make_shared<BTreeVertice>(12);
+    std::shared_ptr<BTreeVertice> BTV4 = std::make_shared<BTreeVertice>(13);
+
+    BTreesClass BTC;
+    
+    //If i want to specify the tree.... not right now
+    //BTV1->setLeftChild(BTV3);
+    //BTV1->setRightChild(BTV2);
+
+    /*
+            BTC1
+            /  \
+        BTC3   BTC2
+        /
+    BTC4
+    */
+
+
+    BTC.includeVerticeAtTree(BTV1);
+    BTC.includeVerticeAtTree(BTV2);
+    BTC.includeVerticeAtTree(BTV3);
+    BTC.includeVerticeAtTree(BTV4);
+
+    ASSERT_TRUE(BTC.getNumberOfNodes() == 4);
+}
+
+
 
 // ----- Representation of a N-ary Tree
 /*

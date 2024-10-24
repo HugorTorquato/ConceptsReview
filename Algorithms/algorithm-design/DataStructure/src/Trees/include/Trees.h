@@ -43,6 +43,7 @@ class BTreesClass {
         int getNumberOfNodes();
 
         void includeVerticeAtTree(const std::shared_ptr<BTreeVertice> BTV);
+        std::queue<int> retrieveVerticesDataInorderTransversal();
         void deleteVerticeAtTree(const int value);
 
     private:

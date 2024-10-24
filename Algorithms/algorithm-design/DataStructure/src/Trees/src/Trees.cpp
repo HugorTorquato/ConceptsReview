@@ -98,6 +98,19 @@ void BTreesClass::includeVerticeAtTree(const std::shared_ptr<BTreeVertice> BTV){
     includeElementInTheTreeLeftToRight(BTV, rootVertice);
 }
 
+std::queue<int> BTreesClass::retrieveVerticesDataInorderTransversal(){
+
+    std::queue<int> inordertTransversalData;
+
+    if(rootVertice != nullptr){
+        
+    }
+
+    return inordertTransversalData;
+}
+
+
+
 // Faz o delete com base no valor do vertice... hummm
 
 void BTreesClass::deleteVerticeAtTree(const int value){
@@ -124,6 +137,9 @@ void BTreesClass::deleteVerticeAtTree(const int value){
         if(verticeToEvaluate->getValue() == value){
             verticeToEvaluate = nullptr;
         }
+
+        // Achar o pai e apontar ele para os filhos desse vertice (se tiver)
+        // achar os filhos e
     }
     
 
