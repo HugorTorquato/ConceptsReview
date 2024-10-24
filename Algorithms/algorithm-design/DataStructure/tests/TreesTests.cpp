@@ -138,8 +138,46 @@ TEST(BTreesClassTests, introduceTheBTreeVerticeAsParameters_3NewVertices) {
     EXPECT_EQ(BTC.getRootVertice()->getLeftChild()->getValue(),  BTV2->getValue());  
     EXPECT_EQ(BTC.getRootVertice()->getRightChild()->getValue(), BTV3->getValue());  
 
-
 }
+
+TEST(BTreesClassTests, introduceTheBTreeVerticeAsParameters_4NewVertices) {
+
+    std::shared_ptr<BTreeVertice> BTV1 = std::make_shared<BTreeVertice>(10);
+    std::shared_ptr<BTreeVertice> BTV2 = std::make_shared<BTreeVertice>(11);
+    std::shared_ptr<BTreeVertice> BTV3 = std::make_shared<BTreeVertice>(12);
+    std::shared_ptr<BTreeVertice> BTV4 = std::make_shared<BTreeVertice>(13);
+
+    BTreesClass BTC;
+    
+    //If i want to specify the tree.... not right now
+    //BTV1->setLeftChild(BTV3);
+    //BTV1->setRightChild(BTV2);
+
+    /*
+            BTC1
+            /  \
+        BTC3   BTC2
+        /
+    BTC4
+    */
+
+
+    BTC.includeVerticeAtTree(BTV1);
+    BTC.includeVerticeAtTree(BTV2);
+    BTC.includeVerticeAtTree(BTV3);
+    BTC.includeVerticeAtTree(BTV4);
+
+    EXPECT_EQ(BTC.getRootVertice()->getValue(), BTV1->getValue());  
+    EXPECT_EQ(BTC.getNumberOfNodes(), 4);
+
+    std::shared_ptr<BTreeVertice> rootVertice = BTC.getRootVertice();
+
+    EXPECT_EQ(rootVertice->getLeftChild()->getValue(),  BTV2->getValue());  
+    EXPECT_EQ(rootVertice->getRightChild()->getValue(), BTV3->getValue());  
+    EXPECT_EQ(rootVertice->getLeftChild()->getLeftChild()->getValue(),  BTV4->getValue());  
+}
+
+
 
 
 
