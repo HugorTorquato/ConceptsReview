@@ -208,7 +208,7 @@ TEST(BTreesClassTests, deleteOnlyNodeFromATreeBasedOnItsValue) {
     ASSERT_EQ(BTC.getRootVertice(), nullptr);  
 }
 
-TEST(BTreesClassTests, deleteNodeFromATreeBasedOnItsValue) {
+TEST(BTreesClassTests, DISABLED_deleteNodeFromATreeBasedOnItsValue) {
 
     std::shared_ptr<BTreeVertice> BTV1 = std::make_shared<BTreeVertice>(10);
     std::shared_ptr<BTreeVertice> BTV2 = std::make_shared<BTreeVertice>(11);

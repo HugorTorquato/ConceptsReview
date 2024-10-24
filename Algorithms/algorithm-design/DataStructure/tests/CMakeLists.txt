@@ -37,6 +37,7 @@ target_link_libraries( UnitTests PRIVATE
     QueuesLib
     HashTablesLib
     TreesLib
+    GraphsLib
 )
 
 target_sources(UnitTests PUBLIC
@@ -48,6 +49,7 @@ target_sources(UnitTests PUBLIC
     QueuesTests.cpp 
     HashTablesTests.cpp 
     TreesTests.cpp 
+    GraphsTests.cpp 
 )
 
 include(GoogleTest)
