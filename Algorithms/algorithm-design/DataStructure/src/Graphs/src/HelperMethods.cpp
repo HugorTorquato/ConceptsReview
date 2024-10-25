@@ -19,6 +19,14 @@ void initializeSourceNode(
     vector< pair<shared_ptr<Node>, vector<int>> > &graphToApplyBFS,
     queue<shared_ptr<Node>> &BFS_queue
 ){
+
+    graphToApplyBFS.at(0).first->color= color::gray;
+    graphToApplyBFS.at(0).first->distance= 0;
+    graphToApplyBFS.at(0).first->parent= nullptr;
+
+    BFS_queue.push(graphToApplyBFS.at(0).first);
+
+    /*
     for (
         vector< pair<shared_ptr<Node>, vector<int>> >::iterator it=graphToApplyBFS.begin();
         it != graphToApplyBFS.end(); ++it
@@ -33,6 +41,7 @@ void initializeSourceNode(
             return;
         }
     }
+    */
 }
 
 shared_ptr<Node> retrieveNodePonterFromGraph(

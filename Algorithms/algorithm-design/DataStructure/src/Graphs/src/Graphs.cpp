@@ -73,10 +73,10 @@ vector<shared_ptr<Node>> GraphsClass::BFS_Search(){
 
         vector<int> childNodes = nodeToEvaluate->getEdges();
 
+        //for(vector<int>::iterator it=childNodes.begin(); it != childNodes.end(); ++it){
         for(int it : childNodes){
-
             shared_ptr<Node> node = retrieveNodePonterFromGraph(it, graphToApplyBFS);
-            if(node->color == color::white){
+            if(node && node->color == color::white){
                 node->color = color::gray;
                 node->distance = nodeToEvaluate->distance + 1;
                 node->parent = nodeToEvaluate;
