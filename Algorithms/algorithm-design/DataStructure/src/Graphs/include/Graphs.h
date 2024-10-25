@@ -3,6 +3,7 @@
 #include <Vector>
 #include <memory>
 #include <queue>
+#include <iostream>
 
 using namespace std;
 
@@ -50,6 +51,6 @@ class GraphsClass {
     private:
         vector< pair<shared_ptr<Node>, vector<int>> > graphDefinition;
 
-        int sizeOfTheGraph;
+        int sizeOfTheGraph = 0;
 
 };

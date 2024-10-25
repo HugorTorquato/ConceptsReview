@@ -158,7 +158,41 @@ TEST(GraphsTests, applyBFSToGraph_2NodeAnd3Edges){
 
     vector<std::shared_ptr<Node>> BFS_result = GC.BFS_Search();
 
+    int count = 0;
+
     ASSERT_FALSE(BFS_result.empty());
+    ASSERT_EQ(BFS_result.size(), expectedBFSResultIDs.size());
+    for(auto it : BFS_result){
+        EXPECT_EQ(it->getId(), expectedBFSResultIDs[count]);
+        count++;
+    }
+}
+
+TEST(GraphsTests, applyBFSToGraph_2NodeAnd3Edges){
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>();
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>();
+
+    const vector<int> expectedBFSResultIDs = {1, 2};
+
+    NodeObj_1->includeEdge(2);
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 2);
+
+    vector<std::shared_ptr<Node>> BFS_result = GC.BFS_Search();
+
+    int count = 0;
+
+    ASSERT_FALSE(BFS_result.empty());
+    ASSERT_EQ(BFS_result.size(), expectedBFSResultIDs.size());
+    for(auto it : BFS_result){
+        EXPECT_EQ(it->getId(), expectedBFSResultIDs[count]);
+        count++;
+    }
 }
 
 

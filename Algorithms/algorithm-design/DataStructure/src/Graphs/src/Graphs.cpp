@@ -48,7 +48,9 @@ void GraphsClass::includeNode(shared_ptr<Node> nodeToInclude){
 
     // When including a new node, add the id as the length of the graph + 1;
     //TODO: Add a try here to rollback the counter if include feils
-    nodeToInclude->setId(sizeOfTheGraph++);
+    nodeToInclude->setId(++sizeOfTheGraph);
+
+    cout<< "[GraphsClass::includeNode] nodeToEvaluate id: " << nodeToInclude->getId() << endl;
 
     includeNodeInGraph(nodeToInclude, graphDefinition);
 }
@@ -56,13 +58,12 @@ void GraphsClass::includeNode(shared_ptr<Node> nodeToInclude){
 vector<shared_ptr<Node>> GraphsClass::BFS_Search(){
 
     vector<shared_ptr<Node>> BFS_result;
+    queue<shared_ptr<Node>> BFS_queue;
+    vector< pair<shared_ptr<Node>, vector<int>> > graphToApplyBFS = graphDefinition;
     
     if(graphDefinition.empty()){
         return BFS_result;
     }
-
-    queue<shared_ptr<Node>> BFS_queue;
-    vector< pair<shared_ptr<Node>, vector<int>> > graphToApplyBFS = graphDefinition;
 
     initializeSourceNode(graphToApplyBFS, BFS_queue);
 
@@ -71,10 +72,13 @@ vector<shared_ptr<Node>> GraphsClass::BFS_Search(){
         shared_ptr<Node> nodeToEvaluate = BFS_queue.front();
         BFS_queue.pop();
 
+        cout<< "[GraphsClass::BFS_Search] nodeToEvaluate ID: " << nodeToEvaluate->getId() << endl;
+
         vector<int> childNodes = nodeToEvaluate->getEdges();
 
         //for(vector<int>::iterator it=childNodes.begin(); it != childNodes.end(); ++it){
         for(int it : childNodes){
+            cout<< "[GraphsClass::BFS_Search] Node ID: " << it << endl;
             shared_ptr<Node> node = retrieveNodePonterFromGraph(it, graphToApplyBFS);
             if(node && node->color == color::white){
                 node->color = color::gray;
