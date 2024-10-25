@@ -15,33 +15,26 @@ void includeNodeInGraph(
     graphDefinition.push_back(nodePairToInclude);
 }
 
-void initializeSourceNode(
+void initializeSourceNodeBFS(
     vector< pair<shared_ptr<Node>, vector<int>> > &graphToApplyBFS,
     queue<shared_ptr<Node>> &BFS_queue
 ){
-
     graphToApplyBFS.at(0).first->color= color::gray;
     graphToApplyBFS.at(0).first->distance= 0;
     graphToApplyBFS.at(0).first->parent= nullptr;
 
     BFS_queue.push(graphToApplyBFS.at(0).first);
+}
 
-    /*
-    for (
-        vector< pair<shared_ptr<Node>, vector<int>> >::iterator it=graphToApplyBFS.begin();
-        it != graphToApplyBFS.end(); ++it
-    )
-    {
-        if(it->first->getId() == 1){
-            it->first->color = color::gray;
-            it->first->distance = 0;
-            it->first->parent = nullptr;
+void initializeSourceNodeDFS(
+    vector< pair<shared_ptr<Node>, vector<int>> > &graphToApplyBFS,
+    stack<shared_ptr<Node>> &BFS_queue
+){
+    graphToApplyBFS.at(0).first->color= color::gray;
+    graphToApplyBFS.at(0).first->distance= 0;
+    graphToApplyBFS.at(0).first->parent= nullptr;
 
-            BFS_queue.push(it->first);
-            return;
-        }
-    }
-    */
+    BFS_queue.push(graphToApplyBFS.at(0).first);
 }
 
 shared_ptr<Node> retrieveNodePonterFromGraph(

@@ -3,6 +3,7 @@
 #include <Vector>
 #include <memory>
 #include <queue>
+#include <stack>
 #include <iostream>
 
 using namespace std;
@@ -47,6 +48,7 @@ class GraphsClass {
         void includeEdgeFromTo(const int &fromNode, const int &toNode);
 
         vector<shared_ptr<Node>> BFS_Search();
+        vector<shared_ptr<Node>> DFS_Search();
 
     private:
         vector< pair<shared_ptr<Node>, vector<int>> > graphDefinition;
