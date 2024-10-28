@@ -33,6 +33,11 @@ void Node::includeEdge(const int &_edge){
     edgesIds.push_back(_edge);
 }
 
+void Node::includeWeightedEdge(const int& _edge, const int& _weight){
+    weightedEdges[_edge] = _weight;
+    includeEdge(_edge);
+}
+
 vector<int> Node::getEdges(){
     return edgesIds;
 }
@@ -152,3 +157,52 @@ vector<shared_ptr<Node>> GraphsClass::DFS_Search(){
 }
 
 
+
+vector<shared_ptr<Node>> GraphsClass::Dijkstra_ShortestPath(){
+
+    vector<shared_ptr<Node>> _result;
+    queue<shared_ptr<Node>> _queue;
+
+    initializeSingleSource(graphDefinition, _queue);
+
+    while (!_queue.empty())
+    {
+        shared_ptr<Node> nodeUnderValidation = _queue.front();
+        _queue.pop();
+
+        //Avaliar a distancia com base no que foi a entrada do edge
+        cout << "[GraphsClass::Dijkstra_ShortestPath] Node : " << nodeUnderValidation->getId()<< endl;
+
+        for(auto node : nodeUnderValidation->getEdges()){
+            cout << "       Edge To : " << node << " Weight : " << nodeUnderValidation->weightedEdges[node] << endl; 
+        }
+
+        // Implement the relax
+
+
+
+
+
+
+
+
+    }
+    
+
+
+
+
+
+    // Output
+
+    for(auto node : graphDefinition){
+        cout << "[GraphsClass::Dijkstra_ShortestPath] Node Distance - Initialization - : " << node.first->distance << endl;
+        _result.push_back(node.first);
+    }
+
+    //Return Initialized distances if no path
+    return _result;
+
+
+
+}

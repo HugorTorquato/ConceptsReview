@@ -53,3 +53,22 @@ shared_ptr<Node> retrieveNodePonterFromGraph(
 
     return nullptr;
 }
+
+void initializeSingleSource(
+    vector< pair<shared_ptr<Node>, vector<int>> >& graphDefinition,
+    queue<shared_ptr<Node>>& _queue
+){
+    for(
+        vector< pair<shared_ptr<Node>, vector<int>> >::iterator it=graphDefinition.begin();
+        it != graphDefinition.end(); ++it
+    ){
+        if(it->first->getId() != 1){
+            it->first->distance = infInt;
+        } else {
+            it->first->distance = 0;
+        }
+
+        it->first->parent = nullptr;
+        _queue.push(it->first);
+    }
+}

@@ -292,6 +292,101 @@ TEST(GraphsTests, applyDFSToGraph_11NodeAnd14Edges){
     }
 }
 
+TEST(GraphsTests, Dijkstra_ShortestPath_ReturnInitializedDistancesIfNoEdges){
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>();
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>();
+
+    const vector<int> expectedDistanceResults = {0, infInt};
+
+
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 2);
+
+    vector<std::shared_ptr<Node>> _result = GC.Dijkstra_ShortestPath();
+
+    int count = 0;
+
+    ASSERT_FALSE(_result.empty());
+    ASSERT_EQ(_result.size(), expectedDistanceResults.size());
+    for(auto it : _result){
+        EXPECT_EQ(it->distance, expectedDistanceResults[count]);
+        count++;
+    }
+}
+
+TEST(GraphsTests, Dijkstra_ShortestPath_IncludeWeightedEdgeUsingHasMap){
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>();
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>();
+
+    const vector<int> expectedDistanceResults = {0, infInt};
+    const int weightForEdgeFromNode1ToNode2 = 10;
+
+    NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 2);
+
+    vector<std::shared_ptr<Node>> _result = GC.Dijkstra_ShortestPath();
+
+    int count = 0;
+
+    ASSERT_FALSE(_result.empty());
+    ASSERT_EQ(_result.size(), expectedDistanceResults.size());
+    for(auto it : _result){
+        EXPECT_EQ(it->distance, expectedDistanceResults[count]);
+        count++;
+    }
+
+    EXPECT_EQ(_result.at(0)->weightedEdges[2], weightForEdgeFromNode1ToNode2);
+}
+
+TEST(GraphsTests, Dijkstra_ShortestPath_){
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>();
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>();
+    shared_ptr<Node> NodeObj_3 = make_shared<Node>();
+
+    const vector<int> expectedDistanceResults = {0, infInt, infInt};
+    const int weightForEdgeFromNode1ToNode2 = 10;
+    const int weightForEdgeFromNode1ToNode3 = 20;
+
+    NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
+    NodeObj_1->includeWeightedEdge(3, weightForEdgeFromNode1ToNode3);
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+    GC.includeNode(NodeObj_3);
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 3);
+
+    vector<std::shared_ptr<Node>> _result = GC.Dijkstra_ShortestPath();
+
+    int count = 0;
+
+    ASSERT_FALSE(_result.empty());
+    ASSERT_EQ(_result.size(), expectedDistanceResults.size());
+    for(auto it : _result){
+        EXPECT_EQ(it->distance, expectedDistanceResults[count]);
+        count++;
+    }
+
+    EXPECT_EQ(_result.at(0)->weightedEdges[2], weightForEdgeFromNode1ToNode2);
+}
+
+
+
+
+
 // include 3 elements and edges between them
 
 // 
