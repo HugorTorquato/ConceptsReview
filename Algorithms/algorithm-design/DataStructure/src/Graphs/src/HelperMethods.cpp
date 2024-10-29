@@ -56,7 +56,7 @@ shared_ptr<Node> retrieveNodePonterFromGraph(
 
 void initializeSingleSource(
     vector< pair<shared_ptr<Node>, vector<int>> >& graphDefinition,
-    queue<shared_ptr<Node>>& _queue
+    vector<shared_ptr<Node>>& _unvisitedNodes
 ){
     for(
         vector< pair<shared_ptr<Node>, vector<int>> >::iterator it=graphDefinition.begin();
@@ -69,6 +69,49 @@ void initializeSingleSource(
         }
 
         it->first->parent = nullptr;
-        _queue.push(it->first);
+        _unvisitedNodes.push_back(it->first);
+        cout << "[initializeSingleSource] Node included in _unvisitedNodes vector : " << it->first->getId() << endl;
     }
+}
+
+void relaxNodeData(
+    shared_ptr<Node>& nodeUnderEvaluation,
+    shared_ptr<Node>& adjNodeFromEvaluated
+){
+    const int CurrentNodeDistancePlusWeight = 
+        nodeUnderEvaluation->distance + nodeUnderEvaluation->weightedEdges[adjNodeFromEvaluated->getId()];
+
+    if(nodeUnderEvaluation != nullptr && adjNodeFromEvaluated->distance > CurrentNodeDistancePlusWeight){
+        cout << "[relaxNodeData] Update Distance from : " << adjNodeFromEvaluated->distance << " To " << CurrentNodeDistancePlusWeight << endl;
+        adjNodeFromEvaluated->distance = CurrentNodeDistancePlusWeight;
+        adjNodeFromEvaluated->parent = nodeUnderEvaluation;
+    }
+}
+
+shared_ptr<Node> returnNodeWithSmallestValidWeight(
+   const vector<shared_ptr<Node>>& _unvisitedNodes
+){
+    int minimum = infInt;
+    shared_ptr<Node> nodeToReturn;
+
+    for(auto node : _unvisitedNodes){
+        if(node->color == white && node->distance <= minimum){
+            cout << "[returnNodeWithSmallestValidWeight] Evaluating Node : " << node->getId() << endl;
+            minimum = node->distance;
+            nodeToReturn = node;
+        }
+    }
+
+    return nodeToReturn;
+}
+
+bool hasNodeToVisit(const vector<shared_ptr<Node>>& _unvisitedNodes){
+
+    for(auto node : _unvisitedNodes){
+        if(node->color == white){
+            return true;
+        }
+    }
+
+    return false;
 }

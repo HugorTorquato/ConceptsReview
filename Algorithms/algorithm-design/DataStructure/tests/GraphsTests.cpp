@@ -324,8 +324,9 @@ TEST(GraphsTests, Dijkstra_ShortestPath_IncludeWeightedEdgeUsingHasMap){
     shared_ptr<Node> NodeObj_1 = make_shared<Node>();
     shared_ptr<Node> NodeObj_2 = make_shared<Node>();
 
-    const vector<int> expectedDistanceResults = {0, infInt};
+    
     const int weightForEdgeFromNode1ToNode2 = 10;
+    const vector<int> expectedDistanceResults = {0, weightForEdgeFromNode1ToNode2};
 
     NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
 
@@ -355,9 +356,14 @@ TEST(GraphsTests, Dijkstra_ShortestPath_){
     shared_ptr<Node> NodeObj_2 = make_shared<Node>();
     shared_ptr<Node> NodeObj_3 = make_shared<Node>();
 
-    const vector<int> expectedDistanceResults = {0, infInt, infInt};
+    
     const int weightForEdgeFromNode1ToNode2 = 10;
     const int weightForEdgeFromNode1ToNode3 = 20;
+    const vector<int> expectedDistanceResults = {
+        0, 
+        weightForEdgeFromNode1ToNode2, 
+        weightForEdgeFromNode1ToNode3
+    };
 
     NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
     NodeObj_1->includeWeightedEdge(3, weightForEdgeFromNode1ToNode3);

@@ -161,29 +161,41 @@ vector<shared_ptr<Node>> GraphsClass::DFS_Search(){
 vector<shared_ptr<Node>> GraphsClass::Dijkstra_ShortestPath(){
 
     vector<shared_ptr<Node>> _result;
-    queue<shared_ptr<Node>> _queue;
+    vector<shared_ptr<Node>> _unvisitedNodes;
+    vector< pair<shared_ptr<Node>, vector<int>> > graphToApplyDijkstra = graphDefinition;
 
-    initializeSingleSource(graphDefinition, _queue);
+    initializeSingleSource(graphToApplyDijkstra, _unvisitedNodes);
 
-    while (!_queue.empty())
+
+
+
+
+    while (hasNodeToVisit(_unvisitedNodes))
     {
-        shared_ptr<Node> nodeUnderValidation = _queue.front();
-        _queue.pop();
+        //Miminum distance
+
+        // 1- Escolher node com menor distancia
+
+        shared_ptr<Node> nodeUnderValidation = returnNodeWithSmallestValidWeight(_unvisitedNodes);
+        nodeUnderValidation->color = gray;
+        _result.push_back(nodeUnderValidation);
+
 
         //Avaliar a distancia com base no que foi a entrada do edge
         cout << "[GraphsClass::Dijkstra_ShortestPath] Node : " << nodeUnderValidation->getId()<< endl;
 
-        for(auto node : nodeUnderValidation->getEdges()){
+        for(int node : nodeUnderValidation->getEdges()){
             cout << "       Edge To : " << node << " Weight : " << nodeUnderValidation->weightedEdges[node] << endl; 
-        }
+        
+            shared_ptr<Node> adjNodeFromEvaluated = retrieveNodePonterFromGraph(node, graphToApplyDijkstra);
 
-        // Implement the relax
+            cout<< "[GraphsClass::Dijkstra_ShortestPath] Adj node ID: " << adjNodeFromEvaluated->getId() << endl;
 
+            relaxNodeData(nodeUnderValidation, adjNodeFromEvaluated);
 
-
-
-
-
+            cout<< "[GraphsClass::Dijkstra_ShortestPath] parent ID: " << adjNodeFromEvaluated->parent->getId() << endl;
+        
+        }  
 
 
     }
@@ -195,10 +207,10 @@ vector<shared_ptr<Node>> GraphsClass::Dijkstra_ShortestPath(){
 
     // Output
 
-    for(auto node : graphDefinition){
-        cout << "[GraphsClass::Dijkstra_ShortestPath] Node Distance - Initialization - : " << node.first->distance << endl;
-        _result.push_back(node.first);
-    }
+    //for(auto node : graphToApplyDijkstra){
+    //    cout << "[GraphsClass::Dijkstra_ShortestPath] Node Distance - Initialization - : " << node.first->distance << endl;
+    //    _result.push_back(node.first);
+    //}
 
     //Return Initialized distances if no path
     return _result;
