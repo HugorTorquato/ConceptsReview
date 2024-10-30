@@ -17,6 +17,7 @@ enum color {
     black
 };
 
+
 class Node {
 
     public:
@@ -48,6 +49,17 @@ class Node {
         
 };
 
+class Edge{
+    public:
+        shared_ptr<Node> source_U;
+        shared_ptr<Node> destination_V;
+        int weight;
+
+        Edge(shared_ptr<Node> u, shared_ptr<Node> v, int w) 
+            : source_U(u), destination_V(v), weight(w) {}
+};
+
+
 class GraphsClass {
     public:
 
@@ -63,6 +75,7 @@ class GraphsClass {
 
 
         vector<shared_ptr<Node>> Dijkstra_ShortestPath();
+        vector<shared_ptr<Node>> Bellman_Ford_ShortestPath();
 
     private:
         vector< pair<shared_ptr<Node>, vector<int>> > graphDefinition;

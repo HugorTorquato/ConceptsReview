@@ -55,6 +55,23 @@ shared_ptr<Node> retrieveNodePonterFromGraph(
 }
 
 void initializeSingleSource(
+    vector< pair<shared_ptr<Node>, vector<int>> >& graphDefinition
+){
+    for(
+        vector< pair<shared_ptr<Node>, vector<int>> >::iterator it=graphDefinition.begin();
+        it != graphDefinition.end(); ++it
+    ){
+        if(it->first->getId() != 1){
+            it->first->distance = infInt;
+        } else {
+            it->first->distance = 0;
+        }
+
+        it->first->parent = nullptr;
+    }
+}
+
+void initializeSingleSource(
     vector< pair<shared_ptr<Node>, vector<int>> >& graphDefinition,
     vector<shared_ptr<Node>>& _unvisitedNodes
 ){
@@ -124,4 +141,43 @@ void printResultVectorID(const vector<shared_ptr<Node>>& _result){
     }
 
     cout << "}" << endl;
+}
+
+void printResultVectorDistance(const vector<shared_ptr<Node>>& _result){
+    cout << " result vector = { ";
+
+    for(auto x : _result){
+        cout << x->distance << " ";
+    }
+
+    cout << "}" << endl;
+}
+
+void peformRelaxingInAllEdgesCheck(const vector<shared_ptr<Edge>>& _edgesToVerify, vector<shared_ptr<Node>>& _result){
+
+    for(auto edge : _edgesToVerify){
+        cout << "[peformRelaxingInAllEdgesCheck] edge->source_U ID: " << edge->source_U->getId() << " edge->destination_V ID: " << edge->destination_V->getId() << endl;
+        cout << "[peformRelaxingInAllEdgesCheck] edge->destination_V->distance : " << edge->destination_V->distance << " edge->source_U->distance + edge->weight : " << edge->source_U->distance + edge->weight << endl;
+        
+        if( (edge->destination_V->distance) > (edge->source_U->distance + edge->weight) ){
+                _result.clear();
+            }
+    }
+}
+
+void peformRelaxingInAllEdges(const vector<shared_ptr<Edge>>& _edgesToVerify, vector<shared_ptr<Node>>& _result){
+
+    for(auto edge : _edgesToVerify){
+        cout << "[peformRelaxingInAllEdges] edge->source_U ID: " << edge->source_U->getId() << " edge->destination_V ID: " << edge->destination_V->getId() << endl;
+        cout << "[peformRelaxingInAllEdges] edge->destination_V->distance : " << edge->destination_V->distance << " edge->source_U->distance + edge->weight : " << edge->source_U->distance + edge->weight << endl;
+        
+        const int CurrentNodeDistancePlusWeight = 
+            edge->source_U->distance + edge->source_U->weightedEdges[edge->destination_V->getId()];
+
+        if(edge->source_U != nullptr && edge->destination_V->distance > CurrentNodeDistancePlusWeight){
+            cout << "[relaxNodeData] Update Distance from : " << edge->destination_V->distance << " To " << CurrentNodeDistancePlusWeight << endl;
+            edge->destination_V->distance = CurrentNodeDistancePlusWeight;
+            edge->destination_V->parent = edge->source_U;
+        }
+    }
 }

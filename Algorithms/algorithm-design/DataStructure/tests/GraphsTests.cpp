@@ -299,8 +299,6 @@ TEST(GraphsTests, Dijkstra_ShortestPath_ReturnInitializedDistancesIfNoEdges){
 
     const vector<int> expectedDistanceResults = {0, infInt};
 
-
-
     GC.includeNode(NodeObj_1);
     GC.includeNode(NodeObj_2);
 
@@ -389,7 +387,7 @@ TEST(GraphsTests, Dijkstra_ShortestPath_3Nodes){
     EXPECT_EQ(_result.at(0)->weightedEdges[2], weightForEdgeFromNode1ToNode2);
 }
 
-TEST(GraphsTests, Dijkstra_ShortestPath_){
+TEST(GraphsTests, Dijkstra_ShortestPath_Example_5_nodes){
     GraphsClass GC;
     shared_ptr<Node> NodeObj_1 = make_shared<Node>(); // A
     shared_ptr<Node> NodeObj_2 = make_shared<Node>(); // B
@@ -429,11 +427,212 @@ TEST(GraphsTests, Dijkstra_ShortestPath_){
     vector<std::shared_ptr<Node>> _result = GC.Dijkstra_ShortestPath();
     ASSERT_FALSE(_result.empty());
 
-    vector<int> expetedResultVectorIDsAscOrder = {1, 3, 5, 2, 4};
+    const vector<int> expetedResultVectorIDsAscOrder = {1, 3, 5, 2, 4};
 
     int count = 0;
     for(auto res : _result){
         EXPECT_EQ(res->getId(), expetedResultVectorIDsAscOrder[count]);
+        count++;
+    }
+}
+
+TEST(GraphsTests, Bellman_Ford_ShortestPath_PassingEmptyGraph){
+
+    GraphsClass GC;
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 0);
+
+    vector<std::shared_ptr<Node>> _result = GC.Bellman_Ford_ShortestPath();
+    ASSERT_TRUE(_result.empty());
+}
+
+TEST(GraphsTests, Bellman_Ford_ShortestPath_1EmptyNode){
+
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>(); // A
+
+    GC.includeNode(NodeObj_1);
+
+    const vector<int> expetedResultVectorIDsAscOrder = {1};
+    const vector<int> expetedResultDistances = {0};
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 1);
+
+    vector<std::shared_ptr<Node>> _result = GC.Bellman_Ford_ShortestPath();
+    ASSERT_FALSE(_result.empty());
+
+    int count = 0;
+    for(auto res : _result){
+        EXPECT_EQ(res->getId(), expetedResultVectorIDsAscOrder[count]);
+        EXPECT_EQ(res->distance, expetedResultDistances[count]);
+        count++;
+    }
+}
+
+TEST(GraphsTests, Bellman_Ford_ShortestPath_2Nodes_1Edge){
+
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>(); // A
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>(); // B
+
+    const int weightForEdgeFromNode1ToNode2 = 1; // A->B
+
+    NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+
+    const vector<int> expetedResultVectorIDsAscOrder = {1, 2};
+    const vector<int> expetedResultDistances = {0, 1};
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 2);
+
+    vector<std::shared_ptr<Node>> _result = GC.Bellman_Ford_ShortestPath();
+    ASSERT_FALSE(_result.empty());
+
+    int count = 0;
+    for(auto res : _result){
+        EXPECT_EQ(res->getId(), expetedResultVectorIDsAscOrder[count]);
+        EXPECT_EQ(res->distance, expetedResultDistances[count]);
+        count++;
+    }
+}
+
+
+TEST(GraphsTests, Bellman_Ford_ShortestPath_NegativeCycle){
+
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>(); // A
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>(); // B
+    shared_ptr<Node> NodeObj_3 = make_shared<Node>(); // C
+    shared_ptr<Node> NodeObj_4 = make_shared<Node>(); // D
+    shared_ptr<Node> NodeObj_5 = make_shared<Node>(); // E
+    shared_ptr<Node> NodeObj_6 = make_shared<Node>(); // F
+
+    const int weightForEdgeFromNode1ToNode2 = 5;  // A->B
+    const int weightForEdgeFromNode2ToNode3 = 1;  // B->C
+    const int weightForEdgeFromNode2ToNode4 = 2;  // B->D
+    const int weightForEdgeFromNode3ToNode5 = 1;  // C->E
+    const int weightForEdgeFromNode4ToNode6 = 2;  // D->F
+    const int weightForEdgeFromNode5ToNode4 = -1; // E->D
+    const int weightForEdgeFromNode6ToNode5 = -3; // F->E
+
+    NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
+    NodeObj_2->includeWeightedEdge(3, weightForEdgeFromNode2ToNode3);
+    NodeObj_2->includeWeightedEdge(4, weightForEdgeFromNode2ToNode4);
+    NodeObj_3->includeWeightedEdge(5, weightForEdgeFromNode3ToNode5);
+    NodeObj_4->includeWeightedEdge(6, weightForEdgeFromNode4ToNode6);
+    NodeObj_5->includeWeightedEdge(4, weightForEdgeFromNode5ToNode4);
+    NodeObj_6->includeWeightedEdge(5, weightForEdgeFromNode6ToNode5);
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+    GC.includeNode(NodeObj_3);
+    GC.includeNode(NodeObj_4);
+    GC.includeNode(NodeObj_5);
+    GC.includeNode(NodeObj_6);
+
+    const vector<int> expetedResultVectorIDsAscOrder = {1, 2, 3, 4, 5, 6};
+    const vector<int> expetedResultDistances = {0, 0, 0, 0, 0, 0};
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 6);
+
+    vector<std::shared_ptr<Node>> _result = GC.Bellman_Ford_ShortestPath();
+    ASSERT_TRUE(_result.empty());
+}
+
+TEST(GraphsTests, Bellman_Ford_ShortestPath_AnotherNegativeExample){
+
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>(); // A
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>(); // B
+    shared_ptr<Node> NodeObj_3 = make_shared<Node>(); // C
+    shared_ptr<Node> NodeObj_4 = make_shared<Node>(); // D
+    shared_ptr<Node> NodeObj_5 = make_shared<Node>(); // E
+
+    const int weightForEdgeFromNode1ToNode2 = 2;  // A->B
+    const int weightForEdgeFromNode2ToNode3 = 2;  // B->C
+    const int weightForEdgeFromNode2ToNode4 = 1;  // B->D
+    const int weightForEdgeFromNode3ToNode4 = -4; // C->D
+    const int weightForEdgeFromNode4ToNode2 = 1;  // D->B
+    const int weightForEdgeFromNode4ToNode5 = 3;  // D->E
+
+    NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
+    NodeObj_2->includeWeightedEdge(3, weightForEdgeFromNode2ToNode3);
+    NodeObj_2->includeWeightedEdge(4, weightForEdgeFromNode2ToNode4);
+    NodeObj_3->includeWeightedEdge(4, weightForEdgeFromNode3ToNode4);
+    NodeObj_4->includeWeightedEdge(2, weightForEdgeFromNode4ToNode2);
+    NodeObj_5->includeWeightedEdge(5, weightForEdgeFromNode4ToNode5);
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+    GC.includeNode(NodeObj_3);
+    GC.includeNode(NodeObj_4);
+    GC.includeNode(NodeObj_5);
+
+    const vector<int> expetedResultVectorIDsAscOrder = {1, 2, 3, 4, 5};
+    const vector<int> expetedResultDistances = {0, 3, 2, 1, 6};
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 5);
+
+    vector<std::shared_ptr<Node>> _result = GC.Bellman_Ford_ShortestPath();
+    ASSERT_TRUE(_result.empty());
+}
+
+TEST(GraphsTests, Bellman_Ford_ShortestPath_WorkingExample){
+
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>(); // A
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>(); // B
+    shared_ptr<Node> NodeObj_3 = make_shared<Node>(); // C
+    shared_ptr<Node> NodeObj_4 = make_shared<Node>(); // D
+    shared_ptr<Node> NodeObj_5 = make_shared<Node>(); // E
+
+    const int weightForEdgeFromNode1ToNode2 = 4;  // A->B
+    const int weightForEdgeFromNode1ToNode3 = 2;  // A->C
+    const int weightForEdgeFromNode2ToNode3 = 3;  // B->C
+    const int weightForEdgeFromNode2ToNode4 = 2;  // B->D
+    const int weightForEdgeFromNode2ToNode5 = 3;  // B->E
+    const int weightForEdgeFromNode3ToNode2 = 1;  // C->B
+    const int weightForEdgeFromNode3ToNode4 = 4;  // C->D
+    const int weightForEdgeFromNode3ToNode5 = 5;  // C->E
+    const int weightForEdgeFromNode5ToNode4 = -5; // E->D
+
+    NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
+    NodeObj_1->includeWeightedEdge(3, weightForEdgeFromNode1ToNode3);
+    NodeObj_2->includeWeightedEdge(3, weightForEdgeFromNode2ToNode3);
+    NodeObj_2->includeWeightedEdge(4, weightForEdgeFromNode2ToNode4);
+    NodeObj_2->includeWeightedEdge(5, weightForEdgeFromNode2ToNode5);
+    NodeObj_3->includeWeightedEdge(2, weightForEdgeFromNode3ToNode2);
+    NodeObj_3->includeWeightedEdge(4, weightForEdgeFromNode3ToNode4);
+    NodeObj_3->includeWeightedEdge(5, weightForEdgeFromNode3ToNode5);
+    NodeObj_5->includeWeightedEdge(4, weightForEdgeFromNode5ToNode4);
+
+
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+    GC.includeNode(NodeObj_3);
+    GC.includeNode(NodeObj_4);
+    GC.includeNode(NodeObj_5);
+
+    const vector<int> expetedResultVectorIDsAscOrder = {1, 2, 3, 4, 5};
+    const vector<int> expetedResultDistances = {0, 3, 2, 1, 6};
+
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 5);
+
+    vector<std::shared_ptr<Node>> _result = GC.Bellman_Ford_ShortestPath();
+    ASSERT_FALSE(_result.empty());
+
+    int count = 0;
+    for(auto res : _result){
+        EXPECT_EQ(res->getId(), expetedResultVectorIDsAscOrder[count]);
+        EXPECT_EQ(res->distance, expetedResultDistances[count]);
         count++;
     }
 }

@@ -166,10 +166,6 @@ vector<shared_ptr<Node>> GraphsClass::Dijkstra_ShortestPath(){
 
     initializeSingleSource(graphToApplyDijkstra, _unvisitedNodes);
 
-
-
-
-
     while (hasNodeToVisit(_unvisitedNodes))
     {
         shared_ptr<Node> nodeUnderValidation = returnNodeWithSmallestValidWeight(_unvisitedNodes);
@@ -193,6 +189,56 @@ vector<shared_ptr<Node>> GraphsClass::Dijkstra_ShortestPath(){
         
         }  
     }
+
+    return _result;
+}
+
+vector<shared_ptr<Node>> GraphsClass::Bellman_Ford_ShortestPath(){
+
+    vector<shared_ptr<Node>> _result;
+    vector< pair<shared_ptr<Node>, vector<int>> > graphToApplyBellman = graphDefinition;
+
+    vector<shared_ptr<Edge>> _edgesToVerify;
+
+
+
+    initializeSingleSource(graphToApplyBellman);
+
+    //Loop trought all vertices
+    for(pair<shared_ptr<Node>, vector<int>> vertice : graphToApplyBellman){
+        //Loop trought all adj nodes
+        cout << "Vertice, ID, under evaluation : " << vertice.first->getId() << endl;
+
+        for(int edge : vertice.first->getEdges()){
+            // Get the adj node
+            // compare with the current node
+
+            shared_ptr<Node> adjNodeFromEvaluated = retrieveNodePonterFromGraph(edge, graphToApplyBellman);
+            cout << "Adj vertice, ID, under evaluation : " << adjNodeFromEvaluated->getId() << endl;
+
+            // Compare the node under evaluation ( vertice ->first ), with the adj one
+            // if weight values are smaller, update it
+            //relaxNodeData(vertice.first, adjNodeFromEvaluated);
+
+            //Create another vector to store the edges. It'll be used in the end to loop and relax them
+            _edgesToVerify.push_back(
+                make_shared<Edge>(
+                    vertice.first,
+                    adjNodeFromEvaluated,
+                    vertice.first->weightedEdges[adjNodeFromEvaluated->getId()]
+                )
+            );
+
+        }
+
+        peformRelaxingInAllEdges(_edgesToVerify, _result);
+
+        _result.push_back(vertice.first);
+        printResultVectorID(_result);
+        printResultVectorDistance(_result);
+    }
+
+    peformRelaxingInAllEdgesCheck(_edgesToVerify, _result);
 
     return _result;
 }
