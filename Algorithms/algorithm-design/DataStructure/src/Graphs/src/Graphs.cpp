@@ -180,6 +180,12 @@ vector<shared_ptr<Node>> GraphsClass::Dijkstra_ShortestPath(){
         nodeUnderValidation->color = gray;
         _result.push_back(nodeUnderValidation);
 
+        cout << " result vector = { ";
+        for(auto x : _result){
+            cout << x->getId();
+        }
+        cout << " }" << endl;
+
 
         //Avaliar a distancia com base no que foi a entrada do edge
         cout << "[GraphsClass::Dijkstra_ShortestPath] Node : " << nodeUnderValidation->getId()<< endl;

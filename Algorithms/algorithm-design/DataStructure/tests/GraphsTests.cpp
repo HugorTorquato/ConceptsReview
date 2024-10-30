@@ -350,7 +350,7 @@ TEST(GraphsTests, Dijkstra_ShortestPath_IncludeWeightedEdgeUsingHasMap){
     EXPECT_EQ(_result.at(0)->weightedEdges[2], weightForEdgeFromNode1ToNode2);
 }
 
-TEST(GraphsTests, Dijkstra_ShortestPath_){
+TEST(GraphsTests, Dijkstra_ShortestPath_3Nodes){
     GraphsClass GC;
     shared_ptr<Node> NodeObj_1 = make_shared<Node>();
     shared_ptr<Node> NodeObj_2 = make_shared<Node>();
@@ -389,10 +389,53 @@ TEST(GraphsTests, Dijkstra_ShortestPath_){
     EXPECT_EQ(_result.at(0)->weightedEdges[2], weightForEdgeFromNode1ToNode2);
 }
 
+TEST(GraphsTests, Dijkstra_ShortestPath_){
+    GraphsClass GC;
+    shared_ptr<Node> NodeObj_1 = make_shared<Node>(); // A
+    shared_ptr<Node> NodeObj_2 = make_shared<Node>(); // B
+    shared_ptr<Node> NodeObj_3 = make_shared<Node>(); // C
+    shared_ptr<Node> NodeObj_4 = make_shared<Node>(); // D
+    shared_ptr<Node> NodeObj_5 = make_shared<Node>(); // E
 
+    const int weightForEdgeFromNode1ToNode2 = 10; // A->B
+    const int weightForEdgeFromNode1ToNode3 = 3;  // A->C
+    const int weightForEdgeFromNode2ToNode3 = 1;  // B->C
+    const int weightForEdgeFromNode2ToNode4 = 2;  // B->D
+    const int weightForEdgeFromNode3ToNode2 = 4;  // C->B
+    const int weightForEdgeFromNode3ToNode4 = 8;  // C->D
+    const int weightForEdgeFromNode3ToNode5 = 2;  // C->E
+    const int weightForEdgeFromNode4ToNode5 = 7;  // D->E
+    const int weightForEdgeFromNode5ToNode4 = 9;  // E->D
 
+    NodeObj_1->includeWeightedEdge(2, weightForEdgeFromNode1ToNode2);
+    NodeObj_1->includeWeightedEdge(3, weightForEdgeFromNode1ToNode3);
+    NodeObj_2->includeWeightedEdge(3, weightForEdgeFromNode2ToNode3);
+    NodeObj_2->includeWeightedEdge(4, weightForEdgeFromNode2ToNode4);
+    NodeObj_3->includeWeightedEdge(2, weightForEdgeFromNode3ToNode2);
+    NodeObj_3->includeWeightedEdge(4, weightForEdgeFromNode3ToNode4);
+    NodeObj_3->includeWeightedEdge(5, weightForEdgeFromNode3ToNode5);
+    NodeObj_4->includeWeightedEdge(5, weightForEdgeFromNode4ToNode5);
+    NodeObj_5->includeWeightedEdge(4, weightForEdgeFromNode5ToNode4);
 
+    GC.includeNode(NodeObj_1);
+    GC.includeNode(NodeObj_2);
+    GC.includeNode(NodeObj_3);
+    GC.includeNode(NodeObj_4);
+    GC.includeNode(NodeObj_5);
 
-// include 3 elements and edges between them
+    std::vector<std::pair<std::shared_ptr<Node>, std::vector<int>>> graph = GC.getGraphAsVector();
+    ASSERT_EQ(graph.size(), 5);
 
-// 
+    vector<std::shared_ptr<Node>> _result = GC.Dijkstra_ShortestPath();
+    ASSERT_FALSE(_result.empty());
+
+    vector<int> expetedResultVectorIDsAscOrder = {1, 3, 5, 2, 4};
+
+    int count = 0;
+    for(auto res : _result){
+        EXPECT_EQ(res->getId(), expetedResultVectorIDsAscOrder[count]);
+        count++;
+    }
+}
+
+//
