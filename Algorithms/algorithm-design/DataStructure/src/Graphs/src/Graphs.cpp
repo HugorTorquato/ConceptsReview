@@ -172,22 +172,12 @@ vector<shared_ptr<Node>> GraphsClass::Dijkstra_ShortestPath(){
 
     while (hasNodeToVisit(_unvisitedNodes))
     {
-        //Miminum distance
-
-        // 1- Escolher node com menor distancia
-
         shared_ptr<Node> nodeUnderValidation = returnNodeWithSmallestValidWeight(_unvisitedNodes);
         nodeUnderValidation->color = gray;
         _result.push_back(nodeUnderValidation);
 
-        cout << " result vector = { ";
-        for(auto x : _result){
-            cout << x->getId();
-        }
-        cout << " }" << endl;
+        printResultVectorID(_result);
 
-
-        //Avaliar a distancia com base no que foi a entrada do edge
         cout << "[GraphsClass::Dijkstra_ShortestPath] Node : " << nodeUnderValidation->getId()<< endl;
 
         for(int node : nodeUnderValidation->getEdges()){
@@ -202,25 +192,7 @@ vector<shared_ptr<Node>> GraphsClass::Dijkstra_ShortestPath(){
             cout<< "[GraphsClass::Dijkstra_ShortestPath] parent ID: " << adjNodeFromEvaluated->parent->getId() << endl;
         
         }  
-
-
     }
-    
 
-
-
-
-
-    // Output
-
-    //for(auto node : graphToApplyDijkstra){
-    //    cout << "[GraphsClass::Dijkstra_ShortestPath] Node Distance - Initialization - : " << node.first->distance << endl;
-    //    _result.push_back(node.first);
-    //}
-
-    //Return Initialized distances if no path
     return _result;
-
-
-
 }

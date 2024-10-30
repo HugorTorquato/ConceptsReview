@@ -115,3 +115,13 @@ bool hasNodeToVisit(const vector<shared_ptr<Node>>& _unvisitedNodes){
 
     return false;
 }
+
+void printResultVectorID(const vector<shared_ptr<Node>>& _result){
+    cout << " result vector = { ";
+
+    for(auto x : _result){
+        cout << x->getId() << " ";
+    }
+
+    cout << "}" << endl;
+}
