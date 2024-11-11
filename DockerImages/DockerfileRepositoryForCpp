@@ -17,7 +17,6 @@ RUN apt-get update && \
 ENV CC=gcc
 ENV CXX=g++
 
-
 WORKDIR /src
 COPY ./src /src
 
