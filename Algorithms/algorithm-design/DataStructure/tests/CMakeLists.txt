@@ -38,6 +38,7 @@ target_link_libraries( UnitTests PRIVATE
     HashTablesLib
     TreesLib
     GraphsLib
+    LambdaAndSTDFunctionsLib
 )
 
 target_sources(UnitTests PUBLIC
@@ -50,6 +51,7 @@ target_sources(UnitTests PUBLIC
     HashTablesTests.cpp 
     TreesTests.cpp 
     GraphsTests.cpp 
+    LambdaAndSTDFunctionsTests.cpp 
 )
 
 include(GoogleTest)
