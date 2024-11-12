@@ -18,11 +18,11 @@ RUN apt-get update && \
 WORKDIR /usr/src/gtest
 
 # Clone Google Test repository and build
-RUN git clone --branch release-1.11.0 https://github.com/google/googletest.git .
-RUN cmake -B build
-RUN cmake --build build
-RUN cp -r build/lib/* /usr/local/lib
-RUN cp -r googletest/include/gtest /usr/local/include
+RUN git clone --branch release-1.11.0 https://github.com/google/googletest.git .  && \
+    cmake -B build  && \
+    cmake --build build  && \
+    cp -r build/lib/* /usr/local/lib  && \
+    cp -r googletest/include/gtest /usr/local/include
 
 # Clean up unnecessary files after build to save space
 RUN rm -rf /usr/src/gtest
