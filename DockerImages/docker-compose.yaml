@@ -1,0 +1,9 @@
+services:
+  generate_pdf_from_xml:
+    container_name: Software Design 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/src
+    restart: always
