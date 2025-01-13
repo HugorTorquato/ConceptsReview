@@ -57,3 +57,5 @@
 /Graphs/Graphs/.vs/*
 
 /Cmake/lib/*
+
+Cmake/lib/externa/vcpkg
