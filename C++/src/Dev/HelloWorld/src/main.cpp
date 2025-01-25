@@ -1,7 +1,11 @@
 #include <iostream>
+#include "Log.cpp"
+
+// Just the declaration.... Need to add to the linker
+// void Logr(const char* message);
 
 int main()
 {
-    std::cout << "Hello World!" << std::endl;
+    Log("Hello World!");
     std::cin.get();
 }
