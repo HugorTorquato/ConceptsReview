@@ -61,4 +61,4 @@ Software Design/src/build/*
 
 Software Design C++/Cmake/lib/externa/vcpkg
 
-C++/src/Dev/HelloWorld/out/build/*
+/C++/src/Dev/HelloWorld/out/build/*
