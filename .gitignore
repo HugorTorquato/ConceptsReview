@@ -45,6 +45,9 @@
 /Sorting/TranspositionSorts/Tests/SortingTests/Debug/*
 /Sorting/TranspositionSorts/Tests/SortingTests/Release/*
 
+/C++/src/Dev/HelloWorld/out/build/*
+/C++/src/Dev/HelloWorld/CMakeFiles/*
+
 /*/.vs/*
 /*/Debug/
 /*/Release/
@@ -58,7 +61,3 @@
 Software Design/src/build/*
 
 /Cmake/lib/*
-
-Software Design C++/Cmake/lib/externa/vcpkg
-
-/C++/src/Dev/HelloWorld/out/build/*
