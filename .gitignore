@@ -45,8 +45,6 @@
 /Sorting/TranspositionSorts/Tests/SortingTests/Debug/*
 /Sorting/TranspositionSorts/Tests/SortingTests/Release/*
 
-/C++/src/Dev/HelloWorld/out/build/*
-/C++/src/Dev/HelloWorld/CMakeFiles/*
 
 /*/.vs/*
 /*/Debug/
