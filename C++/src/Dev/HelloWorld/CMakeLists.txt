@@ -18,6 +18,9 @@ if(NOT source_files)
     message(FATAL_ERROR "No source files found in ${source_dir}")
 endif()
 
+include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${CMAKE_SOURCE_DIR}/src/Headers)
+
 # Define the executable
 add_executable(HelloWorld ${source_files})
 

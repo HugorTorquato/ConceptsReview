@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Log.h"
-#include "Math.cpp"
+#include "Math.h"
 
 // Just the declaration.... Need to add to the linker
 // void Log(const char* message);
