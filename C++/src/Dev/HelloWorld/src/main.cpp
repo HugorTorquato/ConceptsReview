@@ -1,9 +1,15 @@
 #include <iostream>
 #include "Log.h"
-#include "Math.h"
+#include <Math.h>
 
 // Just the declaration.... Need to add to the linker
 // void Log(const char* message);
+
+
+void MultipllyAndLog(const int a, const int b){
+    int result = Multplly(a, b);
+    std::cout << result << std::endl ;
+}
 
 int main()
 {
@@ -30,6 +36,20 @@ int main()
 
     // Logr((int)varable);
 
-    std::cout << Multplly( 5, 8) << std::endl ;
+    // int result = Multplly(2, 3);
+    // std::cout << result << std::endl ;
+    MultipllyAndLog(2, 3);
+
+    
+    // int result2 = Multplly(2, 3);
+    // std::cout << result << std::endl ;
+    MultipllyAndLog(4, 5);
+
+    
+    // int result3 = Multplly(2, 3);
+    // std::cout << result << std::endl ;
+    MultipllyAndLog(6, 7);
+
+
     std::cin.get();
 }
