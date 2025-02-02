@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Log.h"
+// #include "Log.h" // Without this definition the compiler desn't know we have the Logr and InitLog functions
 #include <Math.h>
 
 // Just the declaration.... Need to add to the linker
@@ -13,6 +14,8 @@ void MultipllyAndLog(const int a, const int b){
 
 int main()
 {
+    InitLog();
+    
     Logr("Hello World!");
     
     int varable = 8;
