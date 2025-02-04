@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstring>
+
 #include "Log.h"
 // #include "Log.h" // Without this definition the compiler desn't know we have the Logr and InitLog functions
 #include <Math.h>
@@ -14,8 +16,31 @@ void MultipllyAndLog(const int a, const int b){
 
 int main()
 {
+
+    int x = 5;
+    bool omparisonResoult = x == 5;
+    // if (x == 5) 
+    if (omparisonResoult) 
+    {
+        std::cout << " x is 5" << std::endl;
+    }
+
+    const char* ptr = "Hello";
+    if(!ptr)
+        Logr(ptr);
+    // else if(ptr == "Hello") // In C++, string literals are stored as arrays of characters, and their type decays into const char*. Comparing a pointer (like ptr) to a string literal using == checks if both pointers point to the same memory address, not if their contents are the same. This leads to unspecified behavior
+    else if(strcmp(ptr, "Hello"))
+        Logr("Ptr is Hellow"); // Only check this condition if the first one fails
+    else   
+        Logr("Ptr is Null");
+
+
+    // This can be simpified ( and the compiler does it )
+    // transfor it all into a const value
+
+
     InitLog();
-    
+
     Logr("Hello World!");
     
     int varable = 8;
