@@ -17,6 +17,40 @@ void MultipllyAndLog(const int a, const int b){
 int main()
 {
 
+    Logr("Hey");
+    Logr("Hey");
+    Logr("Hey");
+    Logr("Hey");
+    Logr("Hey");
+
+    Logr("");
+
+    for (int i = 0; i < 5; i++ ){
+        Logr("Hey");
+    }
+
+    Logr("");
+
+    int j = 0;
+    bool condition = true;
+    for ( ; condition ; ){
+        Logr("Hey");
+        j++;
+        if (j >= 5)
+            condition = false;
+        
+    }
+
+    Logr("");
+
+    int i = 0;
+    while(i < 5){
+        Logr("Hey");
+        i++;
+    }
+
+    Logr("");
+
     int x = 5;
     bool omparisonResoult = x == 5;
     // if (x == 5) 
