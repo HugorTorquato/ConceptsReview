@@ -26,6 +26,15 @@ int main()
     Logr("");
 
     for (int i = 0; i < 5; i++ ){
+        if(i == 1)
+            continue; // display  4 Heys now
+
+        if(i == 2)
+            return 0; // Should end the program with 1 Hey ( end the int function and don' execute nothing more)
+        
+        if(i == 3)
+            break; // stop the loop at iteration 3, display only 2 Heys
+
         Logr("Hey");
     }
 
