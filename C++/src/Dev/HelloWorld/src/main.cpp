@@ -14,6 +14,18 @@ void MultipllyAndLog(const int a, const int b){
     std::cout << result << std::endl ;
 }
 
+// void Increment(int value) // copy the value to a new one
+void Increment(int* value) // pass the variable by value and we affect the one received as paramenter
+{
+    (*value)++; // want to increment the value so need to dereference
+    // otherwise it would increase the pointer
+}
+
+void Increment2(int& value) // pass the variable by value and we affect the one received as paramenter
+{
+    value++; // samething as before but easier
+}
+
 int main()
 {
 
@@ -22,7 +34,56 @@ int main()
     *ptr2 = 10;
     std::cout<< var << std::endl;
     std::cout<< *ptr2 << std::endl;
+
+    // allocates 8 bytes of memory and return the pointer for the first one
+    char* buffer = new char[8]; 
+    // the a block of memory with a value.. Fill Buffer with zeros for 8 bytes
+    memset(buffer, 0, 8);
+    //pointer to a pointer that points to a
+    char** ptr3 = &buffer;
+    std::cout<< ptr3 << std::endl;
+    std::cout<< &ptr3 << std::endl;
+    std::cout<< &ptr3 << std::endl;
+    // need to delete the allocated memory
+    delete[] buffer;
     
+    // References
+    std::cout<< "" << std::endl;
+
+    int a17 = 5;
+    int aa17 = 6;
+    int* b17 = &a17;
+
+    int& ref17 = a17;
+    // int& ref17_2 = aa17; can't do -> endded up with a17 = 6 ( value of aa17 ) 
+    //( works if it's  pointer)
+
+    int* ref17_3 = &a17;
+    *ref17_3 = 2; //set a17 to 2
+    ref17_3 = &aa17;
+    *ref17_3 = 3; //set aa17 to 3
+
+    std::cout<< a17 << std::endl;
+    std::cout<< aa17 << std::endl;
+
+
+
+    // int& ref17_2 ; requires an initializaztion
+
+
+    a17 = 10;
+    Increment(&a17);
+    Increment2(a17);
+
+    std::cout<< a17 << std::endl;
+    std::cout<< &b17 << std::endl;
+    std::cout<< ref17 << std::endl;
+
+
+
+
+    std::cout<< "" << std::endl;
+
 
  
 
