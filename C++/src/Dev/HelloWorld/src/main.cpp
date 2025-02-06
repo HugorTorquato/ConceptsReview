@@ -17,6 +17,18 @@ void MultipllyAndLog(const int a, const int b){
 int main()
 {
 
+    int var = 8;
+    int* ptr2 = &var;
+    *ptr2 = 10;
+    std::cout<< var << std::endl;
+    std::cout<< *ptr2 << std::endl;
+    
+
+ 
+
+
+
+
     Logr("Hey");
     Logr("Hey");
     Logr("Hey");
