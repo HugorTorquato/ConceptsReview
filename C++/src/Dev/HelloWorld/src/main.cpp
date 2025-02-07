@@ -26,27 +26,38 @@ void Increment2(int& value) // pass the variable by value and we affect the one 
     value++; // samething as before but easier
 }
 
+// structure to represent a data structure
+struct PlayerData
+{
+    int x, y;
+};
+
+// #define struct class // wont work kkk everything will be public still
+// class Player
 class Player
 {
     public:
-        int x, y;
+        PlayerData playerData;
         int speed;
 
     void Move(int xa, int ya)
     {
         // NO need to pass by value because we are going to chenge te object
         // IT ALREADY HAVE ACCESS TO THE CURRENT OBJECT
-        player.x += xa;
-        player.y += ya;
+        playerData.x += xa;
+        playerData.y += ya;
     }
-}
+};
 
+// Example without class, need to pass the object
 void Move( Player& player, int xa, int ya)
 {
     // need to pass by value because we are going to chenge te object
-    x += xa;
-    y += ya;
+    player.playerData.x += xa;
+    player.playerData.y += ya;
 }
+
+
 
 int main()
 {
@@ -55,14 +66,14 @@ int main()
 
     // int Player1X = 2; Player2X = 3; // not susteinable to do it
     Player player; 
-    player.x = 5;
-    std::cout<< player.x << std::endl; // 5
+    player.playerData.x = 5;
+    std::cout<< player.playerData.x << std::endl; // 5
 
     Move(player, 1, 1);
-    std::cout<< player.x << std::endl;// 6
+    std::cout<< player.playerData.x << std::endl;// 6
 
     player.Move(1, 1);
-    std::cout<< player.x << std::endl;// 7
+    std::cout<< player.playerData.x << std::endl;// 7
 
 
     std::cout<< "" << std::endl;
