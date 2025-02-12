@@ -66,8 +66,64 @@ void function(){
     
 }
 
+struct Entity22
+{
+    int x22, y22;
+
+    void Print(){
+        std::cout << "Entity 22 x22 " << x22 << " Y22 " << y22 << std::endl;
+    }
+};
+
+struct StaticEntity22
+{
+    // static int x22, y22;
+    int x22, y22;
+
+    static void Print(){
+        std::cout << "Static Entity 22 x22 " << x22 << " Y22 " << y22 << std::endl;
+    }
+};
+
+// When making this variables static, we need ot initialize 
+// them without any instantiation
+int StaticEntity22::x22;
+int StaticEntity22::y22;
+
 int main()
 {
+
+    // No need this definition anymore... can access the variables using the class
+    StaticEntity22 se22; 
+    se22.x22 = 2;
+    se22.y22 = 3;
+    se22.Print();
+
+    // StaticEntity22 se22_2 = {5, 8}; // This would fail for static classes
+    StaticEntity22 se22_2; // This would fail for static classes
+    // se22_2.x22 = 5;
+    // se22_2.y22 = 8;
+    se22_2.Print(); // result should be the same as the other instantiation
+
+    // we can access them by the class and not by the instance
+    // And it'll change its value
+    StaticEntity22::x22 = 5;
+    StaticEntity22::y22 = 8;
+    StaticEntity22::Print(); // 5, 8
+
+    // Not static struct parameters
+    Entity22 e22;
+
+    e22.x22 = 2;
+    e22.y22 = 3;
+    e22.Print();
+
+    Entity22 e22_2 = { 5, 8 };
+
+    e22_2.Print();
+
+
+    std::cout<< "" << std::endl;
 
     // extern int s_Variable21 = 5; 
     // when declare as static, it'll be visible only for that file
