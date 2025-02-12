@@ -62,6 +62,15 @@ void Move( Player& player, int xa, int ya)
 int main()
 {
 
+
+    Log log;
+
+    log.SetLevel(log.LogLevelWarning);
+    log.warn("Hello!");
+    log.info("Hello!");
+    log.error("Hello!");
+
+
     std::cout<< "" << std::endl;
 
     // int Player1X = 2; Player2X = 3; // not susteinable to do it
