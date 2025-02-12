@@ -114,8 +114,77 @@ enum Example23_2 : unsigned char // 8 bit variables
     A2, B2, C2
 };
 
+class Entity24
+{
+    public:
+        float X, Y;
+
+    // // Default constructore that does nothing.... Defined by default
+    // Has to manua
+    // Entity24() 
+    // {}
+
+    Entity24() 
+    {
+        X = 0;
+        Y = 0;
+    }
+
+    // We can write as much constructors as we want, but with different parameters to have diferent signatures
+    Entity24(int x, int y) 
+    {
+        X = x;
+        Y = y;
+    }
+
+    void Init()
+    {
+        X = 0;
+        Y = 0;
+    }
+
+    void Print(){
+        std::cout << "Entity 24 x24 " << X << " Y24 " << Y << std::endl;
+    }
+};
+
+class LogWithoutConstructor
+{
+    // Remove the default onstructure of the class
+    // This way there is no way anyone instantiate this class
+    Log() = delete;
+
+    static void Write()
+    {
+
+    }
+}
+
 int main()
 {
+
+    Entity24 e24;
+
+    //When we instantiate a class without initializing the parameters, there is no actual value and they would receive garbage
+    e24.Print(); // GARBAGE
+
+    Entity24 e24_2;
+    e24_2.Init(); // eXTRA CODE AND NOT CLEAN, BUT IT WORKS AS WELL
+    e24_2.Print(); // ZERO VALUES
+
+    Entity24 e24_3;
+    e24_3.Print(); // Using the constructore, no need to call the init
+
+    Entity24 e24_4(2, 3);
+    e24_4.Print(); // Using the constructore wth parameters, output as 2 and 3
+
+    // LogWithoutConstructor e24_5; // will generate an error, deleted the constructor
+
+
+
+
+
+    std::cout<< "" << std::endl;
 
     // int value23 = B23;
     int value23 = Example23::B;
