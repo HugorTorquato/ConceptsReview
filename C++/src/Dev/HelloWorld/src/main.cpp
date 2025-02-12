@@ -57,18 +57,33 @@ void Move( Player& player, int xa, int ya)
     player.playerData.y += ya;
 }
 
+// This variable is only linked internallly inside this transaction unit
+// when is time to link this, it'll not look outside the unit to look for this variable
 
+// static int s2_Variable21 = 6;
+
+void function(){
+    
+}
 
 int main()
 {
 
+    // extern int s_Variable21 = 5; 
+    // when declare as static, it'll be visible only for that file
+    // 5 if here is int and Static.cpp s static
+    // if set as external it'll link outside of this files
+    // std::cout<< s_Variable21 << std::endl; 
+    // std::cout<< s2_Variable21 << std::endl;
 
-    Log log;
+    std::cout<< "" << std::endl;
+    
+    Log log20;
 
-    log.SetLevel(log.LogLevelWarning);
-    log.warn("Hello!");
-    log.info("Hello!");
-    log.error("Hello!");
+    log20.SetLevel(log20.LogLevelWarning);
+    log20.warn("Hello!");
+    log20.info("Hello!");
+    log20.error("Hello!");
 
 
     std::cout<< "" << std::endl;
