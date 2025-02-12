@@ -126,6 +126,7 @@ class Entity24
 
     Entity24() 
     {
+        std::cout << "Created Entity!" << std::endl;
         X = 0;
         Y = 0;
     }
@@ -133,8 +134,15 @@ class Entity24
     // We can write as much constructors as we want, but with different parameters to have diferent signatures
     Entity24(int x, int y) 
     {
+        std::cout << "Created Entity!" << std::endl;
         X = x;
         Y = y;
+    }
+
+    ~Entity24() 
+    {
+        // Appears the message in the end of the program
+        std::cout << "Destroyed Entity!" << std::endl;
     }
 
     void Init()
@@ -152,17 +160,28 @@ class LogWithoutConstructor
 {
     // Remove the default onstructure of the class
     // This way there is no way anyone instantiate this class
-    Log() = delete;
+    public:
+        LogWithoutConstructor() = delete;
 
-    static void Write()
-    {
+        static void Write()
+        {
 
-    }
+        }
+};
+
+void PrintFunction26()
+{
+    // Object will be created and deleted within this function
+    // Deleted when leaving it
+    Entity24 e24_6(10, 11);
+    e24_6.Print();
 }
 
 int main()
 {
 
+    PrintFunction26();
+    
     Entity24 e24;
 
     //When we instantiate a class without initializing the parameters, there is no actual value and they would receive garbage
