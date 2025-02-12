@@ -7,21 +7,29 @@
 void Logr(const char* message);
 void InitLog();
 
+
 // class to write message to the console and log levels
 class Log
 {
     // Separate the public members
     public:
-        const int LogLevelError = 0;
-        const int LogLevelWarning = 1;
-        const int LogLevelInfo = 2;
+        enum Level
+        {
+            LevelError, LevelWarning, LevelInfo
+        };
+
+        // const int LogLevelError = 0;
+        // const int LogLevelWarning = 1;
+        // const int LogLevelInfo = 2;
 
     private:
         // Private member variable
-        int m_LogLevel = LogLevelInfo;
+        // Restrict the code to return just the allowed values
+        Level m_LogLevel = Level::LevelInfo;
 
     public:
-        void SetLevel(int level);
+        void SetLevel(Level level);
+        // can't have a conflict name
         void error(const char* message );
         void warn(const char* message );
         void info(const char* message );

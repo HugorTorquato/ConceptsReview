@@ -14,26 +14,26 @@ void InitLog() {
 //     std::cout << message << std::endl;
 // }
 
-void Log::SetLevel(int level)
+void Log::SetLevel(Level level)
 {
 
 }
 
 void Log::error(const char* message )
 {
-    if (m_LogLevel >= LogLevelError)
+    if (m_LogLevel >= LevelError)
         std::cout << "[ERROR]: " << message << std::endl;
 }
 
 void Log::warn(const char* message )
 {
-    if (m_LogLevel >= LogLevelWarning)
+    if (m_LogLevel >= LevelWarning)
         std::cout << "[WARNING]: " << message << std::endl;
 }
 
 void Log::info(const char* message )
 {
-    if (m_LogLevel >= LogLevelInfo)
+    if (m_LogLevel >= LevelInfo)
         std::cout << "[INFO]: " << message << std::endl;
 }
 

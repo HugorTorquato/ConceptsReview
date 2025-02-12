@@ -78,7 +78,7 @@ struct Entity22
 struct StaticEntity22
 {
     // static int x22, y22;
-    int x22, y22;
+    static int x22, y22;
 
     static void Print(){
         std::cout << "Static Entity 22 x22 " << x22 << " Y22 " << y22 << std::endl;
@@ -90,8 +90,43 @@ struct StaticEntity22
 int StaticEntity22::x22;
 int StaticEntity22::y22;
 
+// MIGHT GET SOME ISSUES IF LET THE CODE LIKE THIS;
+// Because it's not a group anymore and we can change this values since it's variables
+int A23 = 0;
+int B23 = 1;
+int C23 = 2;
+
+enum Example23
+{
+    // can list the values we want to have
+
+    // iF TRY TO SET SOMETHING ELSE, WILL GET AN ERROR. because it has to be one of these 3
+    
+    // they are al integers in the end of the day and kees incrementing
+    // By default its 32 bit integers
+    A, B, C
+};
+
+// But we can change the type of the enum
+// can't change the type, just the number of bits it will store each variable
+enum Example23_2 : unsigned char // 8 bit variables
+{
+    A2, B2, C2
+};
+
 int main()
 {
+
+    // int value23 = B23;
+    int value23 = Example23::B;
+
+    // they are al integers in the end of the day
+    if(value23 == Example23::B && Example23::B == 1)
+    {
+        // DO SOMETHING
+    }
+
+    std::cout<< "" << std::endl;
 
     // No need this definition anymore... can access the variables using the class
     StaticEntity22 se22; 
@@ -136,7 +171,7 @@ int main()
     
     Log log20;
 
-    log20.SetLevel(log20.LogLevelWarning);
+    log20.SetLevel(Log::LevelError);
     log20.warn("Hello!");
     log20.info("Hello!");
     log20.error("Hello!");
