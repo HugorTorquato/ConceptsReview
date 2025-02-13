@@ -177,11 +177,64 @@ void PrintFunction26()
     e24_6.Print();
 }
 
+
+// Lets create a base class  to avoid duplications
+
+class Entity_26 // Base
+{
+    public:
+        int X, Y;
+
+        void Move(float xa, float ya)
+        {
+            X += xa;
+            Y += ya;
+        }
+
+};
+
+// Sub class of Entity_26
+class Player26 : public Entity_26
+{
+    public:
+        const char* Name;
+
+        // No need to have duplicated code since it is a sub class from
+        // form Entity_26 and this is already defined there
+        
+        // int X, Y;
+
+        // void Move(floatxa, float ya)
+        // {
+        //     X += xa;
+        //     Y += ya;
+        // }
+
+        void PrintName()
+        {
+            std::cout << "Player26 Name : " << Name << std::endl;
+        }
+};
+
+
+
+
+
+
 int main()
 {
 
+    Player26 player26;
+
+    // We can access all the declaration from the base class using the derived one
+    player26.Move(5, 5);
+    player26.Name = "Hugo";
+    player26.PrintName();
+
+    std::cout<< "" << std::endl;
+
     PrintFunction26();
-    
+
     Entity24 e24;
 
     //When we instantiate a class without initializing the parameters, there is no actual value and they would receive garbage
