@@ -216,13 +216,46 @@ class Player26 : public Entity_26
         }
 };
 
+class Entity27
+{
+    public:
+        // generate a v table for this function so if it is overriden, 
+        // we can call the proper function 
+        virtual std::string GetName() {return "Entity27"; }
+};
 
+class EntitySub27 : public Entity27
+{
+    private:
+        std::string m_Name;
+    public:
+        EntitySub27(const std::string& name)
+        : m_Name(name) {}
+
+        std::string GetName() override {return m_Name; }
+};
 
 
 
 
 int main()
 {
+    Entity27* e27 = new Entity27();
+    std::cout << e27->GetName() << std::endl;
+
+    EntitySub27* esub27 = new EntitySub27("Hugo");
+    std::cout << esub27->GetName() << std::endl;
+
+    // things starts to crac, this is actually a player but references the base class
+    // So we get the base class method output
+    Entity27* e27_2 =esub27;
+    // if not virtual function output is "entity27"
+    // if virtual function output is "hugo"
+    std::cout << e27_2->GetName() << std::endl;
+    
+
+    std::cout<< "" << std::endl;
+
 
     Player26 player26;
 
