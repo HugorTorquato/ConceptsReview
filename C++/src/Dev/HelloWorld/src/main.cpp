@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <memory>
 
 #include "Log.h"
 // #include "Log.h" // Without this definition the compiler desn't know we have the Logr and InitLog functions
@@ -230,16 +231,74 @@ class EntitySub27 : public Entity27
         std::string m_Name;
     public:
         EntitySub27(const std::string& name)
-        : m_Name(name) {}
+            : m_Name(name) {}
 
         std::string GetName() override {return m_Name; }
 };
+
+
+class Printable28
+{
+    public:
+        virtual std::string GetClassName() = 0;
+};
+
+class UsePrintable28 : public Printable28
+{
+    public:
+        std::string GetClassName() override {return "Entity"; }
+};
+
+class Entity28
+{
+    public:
+        // Defining a pure virtual function ( wit no implementation )
+        virtual std::string GetName() = 0;
+};
+
+class EntitySub28 : public Entity28
+{
+    private:
+        std::string m_Name;
+    public:
+        EntitySub28(const std::string& name)
+        : m_Name(name) {}
+
+        // If we comment this function out, will generate an error,
+        // because we don't have a base class method implemented, that is required
+        std::string GetName() override {return m_Name; }
+        
+};
+
+void Print28(Printable28* obj)
+{
+    // In this case, we need a class that ensures we have this method implemented
+    // In this case, everything that is Printable28 has a GetClassName method implemented
+    // or the object is not allowed to be instantiated and causes an compilation error
+    std::cout << obj->GetClassName() << std::endl;
+}
 
 
 
 
 int main()
 {
+
+    // Entity28* e28 = new Entity28(); // We can't instnatiate the subclass as pure virtual
+    // std::cout << e27->GetName() << std::endl;
+
+    EntitySub28* esub28 = new EntitySub28("Hugo");
+    std::cout << esub28->GetName() << std::endl;
+
+    // UsePrintable28 useP28 = new UsePrintable28();
+    // std::cout << Print28(new UsePrintable28()) << std::endl;
+
+    std::unique_ptr<Printable28> useP28 = std::make_unique<UsePrintable28>(); 
+    Print28(useP28.get()); // Pass the raw pointer to the Print28 function
+    
+
+    std::cout<< "" << std::endl;
+
     Entity27* e27 = new Entity27();
     std::cout << e27->GetName() << std::endl;
 
