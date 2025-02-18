@@ -278,6 +278,35 @@ void Print28(Printable28* obj)
     std::cout << obj->GetClassName() << std::endl;
 }
 
+class Entity29
+{   
+    // DEFAULT VISIBILITY IS PRIVATE, if structure it would be public
+    //private:
+        // only this entity class can acess this variables
+    protected:
+        int X, Y;
+
+    void Print() {};
+
+    public:
+        // Works just fine with the own class
+        Entity29() : X(0) { Print(); };
+    
+
+};
+
+class EntitySub29 : public Entity29
+{
+    // Will not work if it's a private base class
+    EntitySub29() 
+    { 
+        X = 0;
+        Y = 0;
+        Print(); 
+    }
+
+};
+
 
 
 
