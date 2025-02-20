@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <memory>
+#include <string>
 
 #include "Log.h"
 // #include "Log.h" // Without this definition the compiler desn't know we have the Logr and InitLog functions
@@ -307,11 +308,65 @@ class EntitySub29 : public Entity29
 
 };
 
+// Won't do this, because it's actually a copy of that object and give it to this function
+// Since this is a ready only function, there is no need to copy the string... just access it. And it's very slow
+// void PrintString31(std::string string)
 
+// This version says that it's a reference, so it points to the original data alerady stored in memory
+// And the constant says that it can't be modifiad within this scope, so we are good to acccess it without any danger
+void PrintString31(const std::string& string)
+{
+    std::cout << string << std::endl;
+}
 
 
 int main()
 {
+    // base form to declara a string
+    // const is to prevent the user from change it, it's a fixed alocated memory. If decides to change, needs to allocate another portion of the memory
+    // no need to delete this, because we don't use the new keyword ( rule of  tomb )
+    const char* string31 = "Hugo";
+    // need to use strcpy(), strlen() .....
+    // name[2] = "A"; // Not allowed 
+    // Represented as byters but converted to ASCII to represent letters ( there is a table for that convertion, to associate memory with letters )
+    // We don't know the size of the string. End in the nul termination pointer
+
+    char string31_2[5] = {'H', 'u', 'g', 'o', 0}; // this is an array of 6 chars
+
+
+    if(string31 && string31_2)
+    {
+        std::cout << string31 << std::endl;
+        // still represents an array, but will access dead memory because there is no null termator pointer. We need to defined it with the '\0' at the end
+        // which represents the null pointer
+        std::cout << string31_2 << std::endl; 
+    }
+
+    // How should we actually use it....
+    // It is a template specialization of the char datatype ( behind the sceenes) - but we use std::strings
+
+    // need to include <string>
+    std::string string31_3 = "Hugo"; //+ "Hugo2"; // Can't do this, because it's 2 const char* arrays and we can't modify that
+    // There are some functions defined here with the string definition
+
+    // gorup strings
+    string31_3+= " Hugo2"; // there is a overload that allow us to do that
+    // or
+    std::string string31_4 = std::string("Hugo") + " Hugo2";
+    // both peform the same results
+    PrintString31(string31_3);
+    PrintString31(string31_4);
+
+    // find text on strings
+    bool contains31 = string31_3.find("u") != std::string::npos; // check if it's equal to an iligal position
+
+    if(contains31)
+    {
+        std::cout << contains31 << std::endl;
+    }   
+
+    std::cout<< "" << std::endl;
+
     static const int exampleSieOfTheArray30 = 5;
     int exemple30[exampleSieOfTheArray30]; // Definition of an array of 5 integers // Gets destroied wen getting out of the scope
     int* ptr30 = exemple30; // creating ap ointer to the first element of the array
