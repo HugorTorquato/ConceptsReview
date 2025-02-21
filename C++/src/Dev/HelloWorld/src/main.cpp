@@ -2,6 +2,7 @@
 #include <cstring>
 #include <memory>
 #include <string>
+#include <stdlib.h>
 
 #include "Log.h"
 // #include "Log.h" // Without this definition the compiler desn't know we have the Logr and InitLog functions
@@ -322,6 +323,43 @@ void PrintString31(const std::string& string)
 
 int main()
 {
+    const char* string_32 = "Hugo"; // const char array of 5 bytes, because of the null ptr at the end \0
+    // string_32[2] = "a"; // undefined behavior -> pointer of a string literal location ( which is read only memory locations )
+
+    //#include <stdlib.h>
+
+    const char string_32_2[8] = "Hu\0go";
+
+    std::cout << strlen(string_32) << std::endl; // 4
+    std::cout << strlen(string_32_2) << std::endl; // 2
+
+    const wchar_t* string_32_3 = L"Hugo"; // might be 2 bytes per character -> 
+    const char16_t* string_32_4 = u"Hugo"; // 2 bytes per character
+    const char32_t* string_32_5 = U"Hugo"; // 4 bytes per character
+
+    if(string_32_3 || string_32_4 || string_32_5)
+        std::cout << "Hugo" << std::endl;
+
+    using namespace std::string_literals;
+
+    std::string string_32_6 = "Hugo"s + " Hello"; // With this s AND THE USING, WE CAN ADAD STRINGS
+
+    // Usefull to write paragraphs, this R before ""
+    const char* string_32_7  = R"(Line1
+    Line2
+    Line3)";
+
+    std::cout << string_32_6 << std::endl;
+    std::cout << string_32_7 << std::endl;
+
+
+
+
+
+
+    std::cout<< "" << std::endl;
+
+
     // base form to declara a string
     // const is to prevent the user from change it, it's a fixed alocated memory. If decides to change, needs to allocate another portion of the memory
     // no need to delete this, because we don't use the new keyword ( rule of  tomb )
