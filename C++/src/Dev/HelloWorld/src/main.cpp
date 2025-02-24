@@ -320,9 +320,76 @@ void PrintString31(const std::string& string)
     std::cout << string << std::endl;
 }
 
+class entity33
+{
+    private:
+        int m_X, m_Y;
+        // int *m_X, *m_Y; // To make everything as pointers in one line definition
+    public:
+        // This const defines that that this method will not modify any of the method classes m_X or m_Y
+        // I promise that this method will not modify nothing here.
+        // Makes sesne to write const with getters
+        int GetX() const
+        {
+            return m_X;
+        }
+
+
+        void SetX(const int x) 
+        {
+            m_X = x;
+        }
+};
+
+// Const reference, i don't want to copy my entity3 class, specially if something is read only
+// This entity is const, and i can modify what it's pointing twords
+
+void PrintEntity33(const entity33& e)
+{
+    // e = entity33(); // I CAN CHANGE IT   
+    // If i remove the const from GetX, this would cause an error because the method can change the object. And i promised not do do it
+    // Remember to always mark method as constant.
+    std::cout << e.GetX() << std::endl;
+}
+
 
 int main()
 {
+
+    entity33 e33;
+    e33.SetX(1);
+
+    PrintEntity33(e33);
+
+
+    int* const_pointer_33 = new int;
+    // const before or after the *
+    const int* const_pointer_33_2 = new int; // can't change the content of the pointer but i can reassign
+    int* const const_pointer_33_3 = new int; // can change the content of the pointer but i cant reassign
+    const int* const const_pointer_33_4 = new int; // can't change the content of the pointer but i cant reassign
+
+
+
+
+    int const_33 = 5; // Thid i can change
+    const int const_33_2 = 5; // Thid i can NOT change. A way that this variable is not going to be modified latter on
+
+    if(const_33 && const_33_2 && const_pointer_33_3 && const_pointer_33_4) const_33 = 2;
+    if(const_pointer_33_3) const_33 = 2;
+    if(const_pointer_33_4) const_33 = 2;
+    // const_33_2 = 2; // Not valid
+
+    *const_pointer_33 = 2;
+    // *const_pointer_33_2 = 2;
+    std::cout << *const_pointer_33_2 << std::endl; // 2
+    const_pointer_33 = (int*)&const_33; // way to break the const promise, not suppose to do often // We reassogned the content
+    const_pointer_33_2 = (int*)&const_33; // We can't change the content of that pointer, the data at that memory adress
+    std::cout << *const_pointer_33 << std::endl; // 2
+    std::cout << *const_pointer_33_2 << std::endl; // 2
+
+
+    std::cout<< "" << std::endl;
+
     const char* string_32 = "Hugo"; // const char array of 5 bytes, because of the null ptr at the end \0
     // string_32[2] = "a"; // undefined behavior -> pointer of a string literal location ( which is read only memory locations )
 
