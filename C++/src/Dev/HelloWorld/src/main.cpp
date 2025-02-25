@@ -371,9 +371,40 @@ class Entity34
         }
 };
 
+class Entity35
+{
+    private:
+
+        int m_Score; // Defined out of orther, compared to the initialization
+        std::string m_Name;
+        
+    public:
+        // same thing... 
+        // Some compilers will complain about this out of other thing
+        // Always initialize them in the same orther as we declare it
+        // Entity35() : m_Name("Unknown"), m_Score(0) {}
+        Entity35() : m_Score(0), m_Name("Unknown") {}
+        // {
+        //     m_Name = "Unknown";
+        // }
+
+        Entity35(const std::string& name) : m_Score(0), m_Name(name) {}
+        // {
+        //     m_Name = name;
+        // }
+        const std::string& GetName() const {return m_Name; }
+};
+
 
 int main()
 {
+    Entity35 e35;
+    std::cout << e35.GetName() << std::endl;
+
+    Entity35 e35_2("Hugo");
+    std::cout << e35_2.GetName() << std::endl;
+
+    std::cout<< "" << std::endl;
 
     const Entity34 e34;
 
