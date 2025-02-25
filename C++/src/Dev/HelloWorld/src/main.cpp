@@ -352,9 +352,64 @@ void PrintEntity33(const entity33& e)
     std::cout << e.GetX() << std::endl;
 }
 
+class Entity34
+{
+    private:
+        std::string m_Name;
+        mutable int m_DebugCount = 0;
+        
+
+    public:
+        // Second const -> says taht we re not allow to modify class members
+        // In some situations, we want 
+        const std::string& GetName() const
+        {
+            m_DebugCount++;
+            std::cout << m_DebugCount << std::endl;
+            // m_Name = "Hugo"; // Not allowed because of the second const
+            return m_Name;
+        }
+};
+
 
 int main()
 {
+
+    const Entity34 e34;
+
+    // Due to that second const in the method definition, we can call that function in a const object
+    // That is why we markk them s const in ths situation
+    // But in some situations we want to tuch that variable that is in that class but is not ment to be there....
+    e34.GetName();
+
+    // For example, we want to count how many times the GetName function wa called.
+    // We can't do it if this is a const method.... but we can mock that variable as mutable.
+        // Allowing constant methods to change that specific variable
+
+        // Before the mutable :  error: increment of member 'Entity34::m_DebugCount' in read-only object
+    
+    int x34 = 8;
+
+    // can pass variables by reference [&x34], by value [x34] or everything [=] or [&]
+    auto f34 = [=]() mutable
+{
+        // When passing by value, it becomes private... and w can't increment it
+        // x34++;
+
+        // We can defien the lambda as mutable, saying that the values we pass b value,
+            // we can change them
+        x34++;
+
+        std::cout << "Hello " << x34 << std::endl; // 9
+    };
+
+    std::cout << "Hello " << x34 << std::endl; // Still 8
+
+    // call the lambda
+    f34();
+
+
+    std::cout<< "" << std::endl;
 
     entity33 e33;
     e33.SetX(1);
