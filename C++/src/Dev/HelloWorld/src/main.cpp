@@ -398,9 +398,70 @@ class Entity35
 static int s_Level36 = 1;
 static int s_Speed36 = 2;
 
+class Entity37
+{
+    private:
+        std::string m_Name;
+    public:
+        Entity37() : m_Name("Unknown") {}
+        Entity37(const std::string& name) : m_Name(name) {}
+
+        const std::string& GetName() const {return m_Name; }
+};
+
+void Function()
+{
+    // When we reach the end of this function, this obect gets destroyed
+    Entity37 entity37_3 = Entity37("Hugo");
+}
+
 
 int main()
 {
+
+    // Create on the stack
+
+    // stack is usually small... if large objects are large... we need to allocate on the heap
+    // call the default constructor ( we need to have it)
+    // If we can create objects like this.... do it...
+        // It's the fastest way and also the most reliable in therms of memory management
+            // Beause it'll be dealocated in the end of the scope
+    Entity37 entity37;
+    Entity37 entity37_2("Hugo");
+
+    std::cout << entity37.GetName() << std::endl;
+    std::cout << entity37_2.GetName() << std::endl;
+
+    // We can't do that if we want to make the instance to ive outside of that particular scope
+        // Scopes an also be if statements
+    Function();
+
+    Entity37* e37;
+    {
+        Entity37 entity37_4("Hugo inside the scope");
+        e37 = &entity37_4;
+        std::cout << entity37_4.GetName() << std::endl;
+    }
+    // This entity37_4 is gone.... apears trash in the console... intresting...
+    std::cout << e37->GetName() << std::endl;
+
+    Entity37* e37_2;
+    {  
+        // Returns the location on the heap where is object is actually allocated
+        Entity37* entity37_5 = new Entity37("Hugo inside the 2 scope");
+        e37_2 = entity37_5;
+        std::cout << entity37_5->GetName() << std::endl;
+    }
+    // The same content is in the e37_2... kept for outside the scope ( when we know the locaton from the heal)
+    std::cout << e37_2->GetName() << std::endl;
+    delete e37_2;
+    std::cout << e37_2->GetName() << std::endl;
+
+
+
+
+    std::cout<< "" << std::endl;
+
     // Original if declaration - simpe conditional assigment
     if(s_Level36 > 5)
         s_Speed36 = 10;
