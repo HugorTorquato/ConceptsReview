@@ -395,9 +395,39 @@ class Entity35
         const std::string& GetName() const {return m_Name; }
 };
 
+static int s_Level36 = 1;
+static int s_Speed36 = 2;
+
 
 int main()
 {
+    // Original if declaration - simpe conditional assigment
+    if(s_Level36 > 5)
+        s_Speed36 = 10;
+    else
+        s_Speed36 = 5;
+
+    // This two statements are identical
+    // Not everyone likes it , i think this is cleaner, athough it's more code to read
+    
+    // When we nest the condition it starts to get confusion
+    s_Speed36 = s_Level36 > 5 ? s_Level36 > 10 ? 15 : 10 : 5;
+
+    std::cout << s_Speed36 << std::endl;
+
+    // No need to create a intermediary string
+    std::string rank36 = s_Level36 > 10 ? "Master" : "Beginner";
+
+    std::string rank36_2; // Create an empty string
+    // And then assign a value to it... it's tecnicly slower than the ternary
+    if(s_Level36 > 5)
+        rank36_2 =  "Master" ;
+    else
+        rank36_2 = "Beginner";
+
+
+    std::cout<< "" << std::endl;
+
     Entity35 e35;
     std::cout << e35.GetName() << std::endl;
 
@@ -423,7 +453,7 @@ int main()
 
     // can pass variables by reference [&x34], by value [x34] or everything [=] or [&]
     auto f34 = [=]() mutable
-{
+    {
         // When passing by value, it becomes private... and w can't increment it
         // x34++;
 
