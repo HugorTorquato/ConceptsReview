@@ -418,6 +418,29 @@ void Function()
 
 int main()
 {
+    int a38 = 2; // stack
+    int* b38 = new int; // 4 bytes allocated in the heap ( returns a pointer )
+    int* c38 = new int[5]; // 200 bytes allocated in the heap ( returns a pointer )
+
+    // new actualy call the malloc(50) function -> which llocate the amount of memory we need and return a pointer
+    // The only difference is that using new we call the class constructor
+    // Allocate the memory and call the constructor
+    Entity37* e37_38 = new Entity37();// pointer to a pointer of the heap memory
+
+    // It's an operator and we can overload it
+
+    if(a38) std::cout << a38 << std::endl;
+    if(b38) std::cout << b38 << std::endl;
+    if(c38) std::cout << c38 << std::endl;
+
+    // when use the new keyword, we need to delete to free the heap memory
+    // Memory is not automatcli released
+    delete b38;
+    delete[] c38;
+    delete e37_38;
+
+
+    std::cout<< "" << std::endl;
 
     // Create on the stack
 
@@ -455,7 +478,6 @@ int main()
     // The same content is in the e37_2... kept for outside the scope ( when we know the locaton from the heal)
     std::cout << e37_2->GetName() << std::endl;
     delete e37_2;
-    std::cout << e37_2->GetName() << std::endl;
 
 
 
