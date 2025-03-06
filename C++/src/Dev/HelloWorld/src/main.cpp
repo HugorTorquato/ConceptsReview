@@ -447,13 +447,63 @@ void printEntity39(Entity39 e39){
     std::cout << e39.getAge() << std::endl;
 }
 
+struct Vector2_40 {
+    float x, y;
+
+    Vector2_40(float x, float y) : x(x), y(y) {};
+
+    // marked as const because i'll not change anything here, just create a new obj
+    Vector2_40 Add(Vector2_40 vec2) const {
+        return Vector2_40(x + vec2.x, y + vec2.y);
+    }
+
+    Vector2_40 Multiply(Vector2_40 vec2) const {
+        return Vector2_40(x * vec2.x, y * vec2.y);
+    }
+
+    // Define operators as any other functions
+    Vector2_40 operator+ (Vector2_40 vec2) const {
+        return Add(vec2);
+    }
+
+    Vector2_40 operator* (Vector2_40 vec2) const {
+        return Multiply(vec2);
+    }
+};
+
+std::ostream& operator<<(std::string& stream, const Vector2_40& other){
+    stream << other.x << ", " << other.y;
+    return stream;
+}
+
 
 int main()
 {
-    // explicity constructors must be called to create an object, like Entity39_2
+    Vector2_40 position40(4.0f, 2.0f);
+    Vector2_40 speed40(4.0f, 2.0f);
+    Vector2_40 Multiply40(4.0f, 2.0f);
 
-    Entity39_2 e39_1_2 = 22; // works fine because it's the explicity
-    Entity39_2 e39_2_2("Hugo"); // Fails because it's not called as explicity
+    Vector2_40 result40 = position40.Add(speed40.Multiply(Multiply40));
+    if(result40.x) std::cout << result40.x << std::endl;
+    // THis is where it gets hard to read
+
+    // let's use overloads
+    Vector2_40 result40_2 = position40 + speed40 * Multiply40;
+    if(result40.x) std::cout << result40_2.x << std::endl;
+
+    std::cout << result40_2 << std::endl;
+
+
+
+
+    std::cout<< "" << std::endl;
+
+    // explicity constructors must be called to create an object, like Entity39_2.
+    // Must pass an valid variable type to the constructor. Otherwise it'll fail and will not try to implicity convert it
+    // Just accept that type
+
+    Entity39_2 e39_1_2(22); // works fine because it's the explicity
+    // Entity39_2 e39_2_2 = "Hugo"; // Fails because it's not called as explicity
 
     // THis is also allowed because it's a implicity convertion, since we also have a constuctor thet supports is
     // Entity39 e39_1("Hugo");
