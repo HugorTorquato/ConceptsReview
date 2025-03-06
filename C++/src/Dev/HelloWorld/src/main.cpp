@@ -415,9 +415,65 @@ void Function()
     Entity37 entity37_3 = Entity37("Hugo");
 }
 
+class Entity39
+{
+    private:
+        std::string m_Name;
+        int m_Age;
+
+    public:
+        Entity39(const std::string& name): m_Name(name), m_Age(-1) {};
+        Entity39(int age): m_Name("Unkknown"), m_Age(age) {};
+        Entity39(const std::string& name, int age): m_Name(name), m_Age(age) {};
+
+        int getAge() { return m_Age; }
+};
+
+class Entity39_2
+{
+    private:
+        std::string m_Name;
+        int m_Age;
+
+    public:
+        Entity39_2(const std::string& name): m_Name(name), m_Age(-1) {};
+        explicit Entity39_2(int age) : m_Name("Unkknown"), m_Age(age) {};
+        // Entity39_2(const std::string& name, int age): m_Name(name), m_Age(age) {};
+
+        int getAge() { return m_Age; }
+};
+
+void printEntity39(Entity39 e39){
+    std::cout << e39.getAge() << std::endl;
+}
+
 
 int main()
 {
+    // explicity constructors must be called to create an object, like Entity39_2
+
+    Entity39_2 e39_1_2 = 22; // works fine because it's the explicity
+    Entity39_2 e39_2_2("Hugo"); // Fails because it's not called as explicity
+
+    // THis is also allowed because it's a implicity convertion, since we also have a constuctor thet supports is
+    // Entity39 e39_1("Hugo");
+
+    // This case we have omre than one convertion and the compiler an't work
+    // const char* -> Std::string -> Entity39
+    // Entity39 e39_1 = "Hugo";
+    Entity39 e39_2 = 28;
+
+    printEntity39(28);
+
+    
+    // Entity39 e39_3("Hugo", 28);
+    // Entity39 e39_3 = "Hugo", 28;
+
+
+
+    std::cout<< "" << std::endl;
+
+
     int a38 = 2; // stack
     int* b38 = new int; // 4 bytes allocated in the heap ( returns a pointer )
     int* c38 = new int[5]; // 200 bytes allocated in the heap ( returns a pointer )
