@@ -513,8 +513,69 @@ class Entity41
 //     // print something
 // }
 
+class Entity42
+{
+    private:
+        int x;
+
+    public:
+        Entity42(){
+            std::cout << "Create Entity42" << std::endl;
+        }
+
+        ~Entity42(){
+            std::cout << "Delete Entity42" << std::endl;
+        }
+};
+
+int* CreateArray42()
+{
+    // Creating array like this we are not allocating it on the heap, and when we return
+    // the stack memory get's cleared when it returns to the scope. We need to allocate 
+    // on the heap t meke it live longer
+    int* array = new int[50];
+    return array;
+}
+
+void FillTheArray(int* array)
+{
+    // fill the array
+}
+
+class ScopedPointer42
+{
+    private:
+        Entity42* m_Ptr;
+    public:
+        ScopedPointer42(Entity42* e) : m_Ptr(e) {}
+        ~ScopedPointer42() {delete m_Ptr; }
+};
+
 int main()
 {
+    // Scopes -- Out of this scope e42 will be distroyed but e42_2 don't
+    {
+        Entity42 e42;
+        Entity42* e42_2 = new Entity42();
+        if(e42_2) {}
+
+        // int array[4250];
+        // int a42 = CreateArray42();
+
+        // Let's go back to the e42_2 example, we want to delete it when it get's out of scope
+        // Instead of writing new Entity42 to initialize e42_2, we can do the following
+
+        ScopedPointer42 e42_3 = new Entity42();
+
+        // In this case e42_3 gets deleted since it's a scoped class in the stack.
+        // And the destructor will delete the member variable defined with the new Entity42
+    }
+
+    
+
+    std::cout<< "" << std::endl;
+
+
     Vector2_40 position40(4.0f, 2.0f);
     Vector2_40 speed40(4.0f, 2.0f);
     Vector2_40 Multiply40(4.0f, 2.0f);
