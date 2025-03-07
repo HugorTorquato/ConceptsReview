@@ -471,11 +471,47 @@ struct Vector2_40 {
     }
 };
 
-std::ostream& operator<<(std::string& stream, const Vector2_40& other){
-    stream << other.x << ", " << other.y;
-    return stream;
-}
+// std::ostream& operator<<(std::string& stream, const Vector2_40& other){
+//     stream << other.x << ", " << other.y;
+//     return stream;
+// }
 
+class Entity41
+{
+    public:
+        int x, y;
+
+        // we could use an initialize list but lets be different
+        Entity41(int x, int y)
+        {
+            // if we call as usual we would have a problem, because the name i the same
+            // x = x;
+            // we reference the x annd y that is member of the class, we can use this.
+            // an pointer to the current instantiated object
+            // We need to derreference, that is why we use -> instead of .
+            this->x = x;
+            this->y = y;
+
+            // Pass the current instance to an static class to make it have access to it
+            // PrintEntity41(this);
+        }
+
+        int GetX() const{
+            // Whith the const definition, we can't modify anything in the class, so
+            // the this is also const
+            // this->x = 5; // Not allowed
+
+            const Entity41* e = this;
+            return e->x;
+            // The same as 
+            // return this->x;
+        }
+};
+
+// void PrintEntity41(Entity41* p)
+// {
+//     // print something
+// }
 
 int main()
 {
@@ -491,7 +527,8 @@ int main()
     Vector2_40 result40_2 = position40 + speed40 * Multiply40;
     if(result40.x) std::cout << result40_2.x << std::endl;
 
-    std::cout << result40_2 << std::endl;
+    // overload defined but not sure if it'll affect any other code
+    // std::cout << result40_2 << std::endl;
 
 
 
