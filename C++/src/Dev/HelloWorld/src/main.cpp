@@ -551,8 +551,72 @@ class ScopedPointer42
         ~ScopedPointer42() {delete m_Ptr; }
 };
 
+class Entity43
+{
+    public:
+        Entity43()
+        {
+            std::cout << "Created Entity43!" << std::endl;
+        }
+        ~Entity43()
+        {
+            std::cout << "Deleted Entity43!" << std::endl;
+        }
+
+        void Print() {};
+};
+
+
+
+
 int main()
 {
+    // UNIQUE POINTER
+    // Print when we create and destroy it
+    {
+        // needs to call the constructor explicity
+        std::unique_ptr<Entity43> e43(new Entity43());
+        e43->Print(); // we can call functions as normal
+
+        // The preferable way to create something is 
+        // Important based on exception feilures
+        std::unique_ptr<Entity43> e43_2 = std::make_unique<Entity43>();
+
+        // we can't do copies
+        // std::unique_ptr<Entity43> e43_2 = e43;
+
+        std::cout << "End Of Unique Pointer!" << std::endl;
+    }
+
+    // SHARED POINTER
+    {
+        std::shared_ptr<Entity43> e43_shared_2 = std::make_shared<Entity43>();
+        {
+            std::shared_ptr<Entity43> e43_shared = std::make_shared<Entity43>();
+            e43_shared_2 = e43_shared;
+            
+
+            std::cout << "End Of Unique Pointer!" << std::endl;
+        }
+        std::cout << "End Of Unique Pointer!" << std::endl;
+    }
+
+    // WEAK POINTER
+    {
+        std::weak_ptr<Entity43> e43_shared_4;
+        {
+            std::shared_ptr<Entity43> e43_shared_3 = std::make_shared<Entity43>();
+            e43_shared_4 = e43_shared_3;
+            
+            // Get's destroyed leaving the first scope
+            std::cout << "End Of Unique Pointer!" << std::endl;
+        }
+        std::cout << "End Of Unique Pointer!" << std::endl;
+    }
+
+
+    std::cout<< "" << std::endl;
+
     // Scopes -- Out of this scope e42 will be distroyed but e42_2 don't
     {
         Entity42 e42;
