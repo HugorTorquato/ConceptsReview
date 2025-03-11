@@ -567,10 +567,122 @@ class Entity43
 };
 
 
+struct Vector43
+{
+    float x, y;
+};
 
+class String44
+{
+    private:
+        char* m_Buffer;
+        unsigned int m_Size;
+    public:
+        String44(const char* string)
+        {
+            m_Size = strlen(string);
+            m_Buffer = new char[m_Size + 1];
+
+            memcpy(m_Buffer, string, m_Size); // Copy the memory to the const char array
+            m_Buffer[m_Size] = 0;
+            
+        }
+
+        // C++ supply this copy constructor to you
+        // String(const String44& other) delete; // remove the copy constructor
+        String44(const String44& other) : m_Size(other.m_Size)
+        {
+            std::cout << "Copying..." << std::endl;
+            m_Buffer = new char[m_Size + 1];
+            // The idea is to allocate another memory adress to that constructor
+            memcpy(m_Buffer, other.m_Buffer, m_Size +1);
+        }
+
+        ~String44()
+        {
+            delete[] m_Buffer;
+        }
+
+        const char* getBuffer()
+        {
+            return m_Buffer;
+        }
+        char& operator[](unsigned int index)
+        {
+            return m_Buffer[index];
+        }
+
+        // declare the operator as a frind to have access to the provate members
+        friend std::ostream& operator<<(std::ostream& stream, const String44& string);
+};
+
+std::ostream& operator<<(std::ostream& stream, const String44& string)
+{
+    stream << string.m_Buffer;
+    return stream;
+}
+
+// void PrintString44(String44 string) // Copy the string
+// Every time we copy we allocate memory on the heap and we don't want that.
+// We can do that by reference, since this function will not modify the string we can mark as const 
+void PrintString44(const String44& string) // DON'T copy the string
+{
+    std::cout << string << std::endl;
+}
 
 int main()
 {
+
+    String44 string44 = "Hugo";
+    // String44 string44_2 = string44;
+    std::cout << string44 << std::endl;
+    // std::cout << string44_2 << std::endl;
+    // crashed
+    // free(): double free detected in tcache 2 Aborted
+    // Copyg the values to a new memory adress in memory, a direct copy.
+    // the memory adress of the buffer is the same for the strings, and we are tring to release the same buffer twice and it's a problem
+
+    // we need to allocate a new char aarray to fix the crash
+    // we wANT THE SECOND MEMORY TO HAVE IT'S OWN BLOCK OF MEMORY
+    // WE NEED TO PEORM A DEEP COPY, copy the whole object and not just a shallow copy
+    // Write a copy constructor, which is called when coying the object. when assignng to a variable of the same type
+    // Adter defining the copying constructor, no crash anymore
+    String44 string44_3 = "Hugo";
+    // Copy
+    String44 string44_4 = string44;
+    string44_4[2] = 'a';
+    PrintString44(string44_3);
+    std::cout << string44_3 << std::endl;
+    std::cout << string44_4 << std::endl;
+
+
+    // This is diferent, they are pointers and we are not copyng the vector itself
+    // we are copyng the ointer, ending up with 2 pointers to the same variable
+    // If accessing the pointer and change the vlue ther, both variables are affected
+    // Vector43* a43_3 = new Vector43();
+    // Vector43* b43_3 = a43_3;
+
+    Vector43 a43_2 = {2, 3};
+    Vector43 b43_2 = a43_2; // a copy of a43_2, bcause they are 2 variables that ocupy 2 diferent locations in memory
+
+    b43_2.x = 5;
+
+    int a43 = 2;
+
+    int b43 = a43; // Creating a copy of a43, they are 2 diferent variables
+
+    b43 = 3;
+
+    // std::cout << a43_3 << std::endl;
+    // std::cout << b43_3 << std::endl;
+    std::cout << a43_2.x << std::endl;
+    std::cout << b43_2.x << std::endl;
+    std::cout << a43 << std::endl;
+    std::cout << b43 << std::endl;
+
+
+    std::cout<< "" << std::endl;
+
     // UNIQUE POINTER
     // Print when we create and destroy it
     {
