@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <stdlib.h>
+#include <vector>
 
 #include "Log.h"
 // #include "Log.h" // Without this definition the compiler desn't know we have the Logr and InitLog functions
@@ -666,9 +667,64 @@ struct Vector45
 
 };
 
+
+struct vertex46
+{
+    float x, y, z;
+};
+
+std::ostream& operator<<(std::ostream& stream, const vertex46& vertex)
+{
+    stream << vertex.x << ", " << vertex.y << ", " << vertex.z;
+    return stream;
+}
+
+void Function46(const std::vector<vertex46>& vertice)
+{
+    std::cout << "Always pass vectors by referece!!!!!!!! Const reference if not going to change it" << std::endl;
+}
+
 int main()
 {
 
+    // vertex46 vertices46 = new vertex46[5];
+    // we can access array 0 to 4, and if we try hier, we get an error
+    // vertex46[0] ~ vertex46[4]
+    // vertex46[5] // error
+
+    // Include a vector
+    std::vector<vertex46> vertex46_2;
+    // Is more optimal to store objects than memory
+        // to peform operations i mean
+    // If store ponters, it's cheper to resize, because t coies only integers and not objects
+    vertex46_2.push_back({1, 2, 3});
+    vertex46_2.push_back({4, 5, 6});
+
+    // get the size
+    for (int i = 0; i < (int)vertex46_2.size(); i++)
+    {
+        std::cout << vertex46_2[i] << std::endl;
+    }
+
+    // avoid copy at any cost, so lets convert to const reference
+    for (const vertex46& v : vertex46_2)
+    {
+        std::cout << v << std::endl;
+    }
+
+    // clear the element
+    // vertex46_2.clear();
+    // To erase an element
+    vertex46_2.erase(vertex46_2.begin() + 1);
+
+    for (const vertex46& v : vertex46_2)
+    {
+        std::cout << v << std::endl;
+    }
+
+    Function46(vertex46_2);
+
+    
     
     std::cout<< "" << std::endl;
 
