@@ -664,7 +664,6 @@ class Scoedtr45
 struct Vector45
 {
     float x, y, z;
-
 };
 
 
@@ -684,8 +683,68 @@ void Function46(const std::vector<vertex46>& vertice)
     std::cout << "Always pass vectors by referece!!!!!!!! Const reference if not going to change it" << std::endl;
 }
 
+struct Vertex47
+{
+    float x, y, z;
+
+    Vertex47(float x, float y, float z) : x(x), y(y), z(z) {};
+
+    // Create a copy constructor to display when it is used
+    Vertex47(const Vertex47& vectex) : x(vectex.x), y(vectex.y), z(vectex.z)
+    {
+        std::cout << "Copied!" << std::endl;
+    }
+};
+
 int main()
 {
+    std::vector<Vertex47> vertex47; // 0 COPIES
+    vertex47.push_back({1, 2, 3}); 
+    // 1 COPY - when constructing it, it's done in main. We need to get 
+    // from main function into the actual vector ( the memory where vetor 
+    // is allocated ) -- can we do it in place?
+    vertex47.push_back({4, 5, 6});
+    // 3 copies -> 1 is the same as before, but the vetor. But the size
+    // of the vector reached it's limit and has to resize
+    // 1 by defaut, moved to 2
+    vertex47.push_back(Vertex47(7, 8, 9));
+    // 6 copies -> 1 is the same as the first, but the vetor. But the size
+    // of the vector reached it's limit and has to resize
+    // 2 by defaut, moved to 3... and copy everything
+
+    // 6 COPIES USING THE DEFAULT CONFIGURATION
+    std::cout<< "" << std::endl;
+    
+    // First optimizaton, already define a size for the vertex if we already know it
+    std::vector<Vertex47> vertex47_2; // 0 COPIES
+    vertex47_2.reserve(3); // save a great deal of copies here
+    vertex47_2.push_back({1, 2, 3}); 
+    // 1 COPY - when constructing it, it's done in main. We need to get 
+    // from main function into the actual vector ( the memory where vetor 
+    // is allocated ) -- can we do it in place?
+    vertex47_2.push_back({4, 5, 6});
+    // 2 copies -> 1 is the same as before, but the vetor. But the size
+    // did not reached the limit, so no resize.
+    vertex47_2.push_back(Vertex47(7, 8, 9));
+    // 3 copies -> 1 is the same as the first, but the vetor. But the size
+    // did not reached the limit, so no resize.
+
+    std::cout<< "" << std::endl;
+
+    // Second optimizaton, already define a size for the vertex if we already know it
+    // The idea is to construct direct in the actual vertice
+    std::vector<Vertex47> vertex47_3; // 0 COPIES
+    vertex47_3.reserve(3); // save a great deal of copies here
+    vertex47_3.emplace_back(7, 8, 9); 
+    // 0 copies, constructor is inline now and no need to copy from main to vecto stack
+    vertex47_3.emplace_back(7, 8, 9);
+    // 0 copies, constructor is inline now and no need to copy from main to vecto stack
+    vertex47_3.emplace_back(7, 8, 9);
+    // 0 copies, constructor is inline now and no need to copy from main to vecto stack
+
+    std::cout<< "No copies" << std::endl;
+
+    std::cout<< "" << std::endl;
 
     // vertex46 vertices46 = new vertex46[5];
     // we can access array 0 to 4, and if we try hier, we get an error
