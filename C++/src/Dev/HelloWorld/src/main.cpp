@@ -696,8 +696,63 @@ struct Vertex47
     }
 };
 
+// wE COULD ALSO DEFINE THE VARIABL HERE AS GLOBAL VARIABEL
+    //But in this case, we can access i everywhere.
+    // And static in the local scope limit it only to the local scope access but don't lose the variable
+// int i=0;
+void Function48()
+{
+    static int i48 = 0;
+    i48++;
+    std::cout << i48 << std::endl;
+}
+
+class Singleton48
+{
+    private:
+        static Singleton48* s_Instance;
+    public:
+        static Singleton48& Get() { return *s_Instance; }
+
+        void Hello();
+
+};
+
+// Exaclity the same behavior but using the static instance instead of the privat definition
+// Due to the static instance definition, the object doesn't get destroed and every time we call the 
+// Singleton instance, we get the same one. Ensuring the singleton properties
+class Singleton48_2
+{
+    public:
+        static Singleton48& Get() 
+        { 
+            static Singleton48_2 instance;
+            return instance; 
+        }
+
+        void Hello();
+
+};
+
+Singleton48* Singleton48::s_Instance = nullptr;
+
 int main()
 {
+    // The same, one with privet constructor and another with static instance
+    Singleton48::Get.Hello()
+    Singleton48_2::Get.Hello()
+
+    // When i cal Function48 for the first time, this variable (i48) will be initialized to zero
+    // And in subsequential calls to this function, this variable will not be initialized again
+    // The lifetime of that variable will last the hole program but only inside that scope
+    Function48();
+    Function48();
+    Function48();
+    Function48();
+    Function48();
+
+    std::cout<< "" << std::endl;
+
     std::vector<Vertex47> vertex47; // 0 COPIES
     vertex47.push_back({1, 2, 3}); 
     // 1 COPY - when constructing it, it's done in main. We need to get 
