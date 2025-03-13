@@ -1,17 +1,16 @@
 #pragma once
 
-#include <Point.h>
-#include <Shape.h>
+#include "Point.h"
+#include "Shape.h"
 
-// #inherits from Shape
 class Circle : public Shape
 {
     public:
-        explicit Circle(double radius)
-            : Shape( ShapeType::circle ), radius_(radius){}
+        explicit Circle(double radius);
 
-       double radius() const {return radius_;} 
-       Point center() const {return center_;} 
+        // This const means that the methods CANNOT modify any member variables
+       double radius() const;
+       Point center() const;
        
 
     private:

@@ -2,13 +2,16 @@
 
 enum ShapeType
 {
-    circle,
-    square
+    circle
 };
 
 class Shape
 {
-    // Protected constructor says that Shae is a base class
+    // - Protected constructor says that this is a base class
+    // - The explicit keyword prevents implicit conversions.
+        //Preventing accidental conversions from a ShapeType to a Shape object.
+    // - Derived classes must call the base class constructor in their
+    // initialization lists. If they don't, the compiler will generate an error.
     protected:
         explicit Shape(ShapeType type)
             : type_(type) {}
@@ -19,8 +22,5 @@ class Shape
         ShapeType getType() const { return type_; }
 
     private:
-    // Data member of type ShapeType initialized by the constructor
-    // can be queried via getType() member function
-    // Store the it's type in the form of the enumerations
         ShapeType type_;
 };
