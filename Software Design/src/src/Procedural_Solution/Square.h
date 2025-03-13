@@ -9,8 +9,6 @@ class Square : public Shape
         explicit Square(double side) 
             : Shape(ShapeType::square), side_(side) {};
 
-        ~Square() {};
-
         double getSide() const;
         Point center() const;
 
