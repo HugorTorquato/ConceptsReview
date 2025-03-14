@@ -1,3 +1,0 @@
-/src/Dev/HelloWorld/CMakeFiles/HelloWorld.dir
-/src/Dev/HelloWorld/CMakeFiles/edit_cache.dir
-/src/Dev/HelloWorld/CMakeFiles/rebuild_cache.dir

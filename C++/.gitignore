@@ -1,6 +1,7 @@
 src/Dev/HelloWorld/include/*
 src/Dev/HelloWorld/out/*
 src/Dev/HelloWorld/CMakeFiles/*
+src/.vscode/*
 
 # Prerequisites
 *.d
