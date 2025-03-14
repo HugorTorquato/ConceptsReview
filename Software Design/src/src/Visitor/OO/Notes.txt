@@ -1,0 +1,31 @@
+-> This solution is great to add types. Just need to implement the associated classes
+    and that is done. Not even in the draw all shapes function we need to touch... because
+    it'll handle the diferent types.
+
+    We don’t have to modify or recompile any exiasting code (with the exception of the main() 
+    function).
+
+
+-> However, there are disventages:
+
+    - We cannot easily add operatons anymore. Need to define a new virtual function which needs
+        to be implemented for every inhered class. A lot.... and some of them may not even use
+        this override method
+    - In the procedural approach, adding a new operation was actually very simple. New operations
+        could be added in the form of free functions or separate classes, for instance.
+
+
+
+
+
+
+
+
+-> wowwwww, first solution was easy to add new operationss, but hard to add new types 
+    ( requires to recompile everything, update in a lot of places )
+
+    Second approach relies on OO and a virtual function, but we need to implement everything
+    for everyone if we want to add new operations here. In the other hand, the types are easy... 
+    just need to implement the new class deriving from the base one.
+
+    But if decided to add a new operation, we need to change all base class

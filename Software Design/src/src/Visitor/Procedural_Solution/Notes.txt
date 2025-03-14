@@ -1,0 +1,34 @@
+-> Note that this addition would have an impact not only on the switch
+    statement in the
+    drawAllShapes() function (it is now truly incomplete),
+    but also on all classes derived from
+    Shape (Circle and Square). These
+    classes depend on the enumeration since they
+    depend on the Shape base
+    class and also use the enumeration directly. Therefore, changing
+    the
+    enumeration would result in a recompilation of all your source files.
+
+    That should strike you as a serious issue. And it is indeed. The heart of the
+    problem is
+    the direct dependency of all shape classes and functions on the
+    enumeration. Any change to
+    the enumeration results in a ripple effect that
+    requires the dependent files to be
+    recompiled.
+
+    I would
+    assume that
+    in a larger codebase, this is not the only
+    statement. On
+    switch
+    the contrary, there will be
+    others that need to be updated as well
+
+-> This kind of type-based programming has a long history in C, and one of
+    the things we know
+    about it is that it yields programs that are essentially
+    unmaintainable.
+
+-> Addition of operations is essy
+   Addition of (polymorphic) types is hard ( requires to compile everything )
