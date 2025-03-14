@@ -1,14 +1,31 @@
 cmake_minimum_required(VERSION 3.0)
-project(MyProject LANGUAGES CXX)
+project(AddTypesOrOperators LANGUAGES CXX)
 
 
 # Set the C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# add_executable(hello_world main.cpp)
+# Defining executable targets for each element.
+# The main function is diferent for all of them, and in this case we need to initializ in diferent ways
+# better to separate all approaches
+add_executable(proc_solution
+     src/Visitor/Procedural_Solution/proc_main.cpp
+     src/Visitor/Procedural_Solution/Circle.cpp
+     src/Visitor/Procedural_Solution/Square.cpp
+     src/Visitor/Procedural_Solution/DrawCircle.cpp
+     src/Visitor/Procedural_Solution/DrawSquare.cpp
+     src/Visitor/Procedural_Solution/DrawAllShapes.cpp
+)
+add_executable(oo_solution 
+     src/Visitor/OO/oo_main.cpp
+     src/Visitor/OO/Circle.cpp
+     src/Visitor/OO/Square.cpp
+     src/Visitor/OO/DrawAllShapes.cpp
+)
 
-add_subdirectory(Procedural_Solution)
+add_executable(visitor_solution src/Visitor/Visitor_Solution/visitor_main.cpp)
+
 
 # # Add the source and test subdirectories
 # add_subdirectory(src)   # Main project source
@@ -16,4 +33,4 @@ add_subdirectory(Procedural_Solution)
 
 
 # Enable testing
-enable_testing()
+# enable_testing()

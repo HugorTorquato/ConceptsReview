@@ -1,7 +1,0 @@
-
-if(NOT TARGET Procedural_SolutionLib)
-    add_library(Procedural_SolutionLib /src/Procedural_Solution/Point.cpp)
-endif()
-
-# Include directory for headers
-target_include_directories(Procedural_SolutionLib PUBLIC ${CMAKE_SOURCE_DIR}/src/Procedural_Solution/include)
