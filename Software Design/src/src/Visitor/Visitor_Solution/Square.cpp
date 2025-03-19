@@ -10,8 +10,7 @@ Point Square::getCenter() const{
     return center_;
 }
 
-
-void Square::draw() const 
-{
-    std::cout << "Draw Square OO" << std::endl;
-}
+void Square::accept( ShapeVisitor const& v )
+{ 
+    v.visit( *this ); 
+};

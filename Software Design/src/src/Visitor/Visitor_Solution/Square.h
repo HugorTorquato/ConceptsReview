@@ -3,17 +3,17 @@
 #include "Point.h"
 #include "Shape.h"
 
+class ShapeVisitor;
+
 class Square : public Shape
 {
     public:
         explicit Square( double side ) : side_(side) {} ;
 
-    double getSide() const;
-    Point getCenter() const;
+        double getSide() const;
+        Point getCenter() const;
 
-    // Implement the virtual override function
-    void draw() const override;
-
+        void accept(ShapeVisitor const& v) override;
 
     private:
         double side_;

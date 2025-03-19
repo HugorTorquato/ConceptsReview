@@ -1,4 +1,5 @@
 #pragma once
+#include "ShapeVisitor.h"
 
 // The point here is not to have the enum, since the solution is based in OO
 // The enum would be used in the switch case in draw all Shapes method, but no need anymore
@@ -10,7 +11,6 @@ class Shape
         Shape() = default;
         virtual ~Shape() = default;
 
-        // Defining the draw function now as a virtual, so it MUST be implemented in
-        // all inhered classes
-        virtual void draw() const = 0;
+        // Add one last method to the shpe hierarchy, the accept
+        virtual void accept( ShapeVisitor const& v ) = 0;
 };

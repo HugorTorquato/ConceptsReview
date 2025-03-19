@@ -1,0 +1,28 @@
+-> Visitor is a workaround for an intrinsic OOP weakness, instead of building on OOP strengths
+    -> Solution to allow for the easy extension of operations instead of types
+->  There are some disaventages
+    -> The first disadvantage is a low implementation flexibility. ( Need to duplicate functions
+        when they are similar because there is no reuse of them) similar implementation
+        inflexibility is the return type of the visit() ( The decision on
+        what the visitor returns is made in the ShapeVisitor class and the derived clas cannot 
+        change it)
+    -> The second disadvantage is that with the Visitor design pattern in place, it becomes
+        difficult to add new types. ( Adding a new type requires the entire ShapeVisitor 
+        hierarchy to be updated. Add a new pure virtual function in shapevisitor base calss,
+        and this virtual function would have to be implemented by all derived classes)
+        the Visitor design pattern requires a closed set of types and in exchange provides 
+        an open set of operations. The reason is a cyclic dependency
+    -> The third disadvantage is the intrusive nature of a visitor. ( Need to add a virtual0
+        accept() to the base class)
+    -> A fourth, albeit admittedly more obscure, disadvantage is that the accept() function
+        is inherited by deriving classes. If someone later adds another layer of derived
+        classes (and that someone might be you) and forgets to override the
+        accept() function, the visitor will be applied to the wrong type. And unfortunately,
+        you would not get any warning about this. This is just more
+    -> The fifth disadvantage is obvious when we consider that for every operation,
+        we’re now required to call two virtual functions  (accept() and visit())
+        This so-called double dispatch is unfortunately not free. On the contrary, 
+        performance-wise, you should consider the Visitor design pattern as rather slow
+    -> The last disadvantage of the Visitor design pattern is that experience has proven this
+        design pattern to be rather hard to fully understand and maintain.
+    

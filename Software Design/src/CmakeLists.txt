@@ -24,7 +24,15 @@ add_executable(oo_solution
      src/Visitor/OO/DrawAllShapes.cpp
 )
 
-add_executable(visitor_solution src/Visitor/Visitor_Solution/visitor_main.cpp)
+add_executable(visitor_solution
+     src/Visitor/Visitor_Solution/visitor_main.cpp
+     src/Visitor/Visitor_Solution/Circle.cpp
+     src/Visitor/Visitor_Solution/Square.cpp
+     src/Visitor/Visitor_Solution/DrawAllShapes.cpp
+     src/Visitor/Visitor_Solution/ShapeVisitor.cpp
+     src/Visitor/Visitor_Solution/Draw.cpp
+
+)
 
 
 # # Add the source and test subdirectories

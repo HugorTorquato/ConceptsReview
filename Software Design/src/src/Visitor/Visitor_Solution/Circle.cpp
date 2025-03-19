@@ -12,7 +12,7 @@ Point Circle::getCenter() const
     return center_;
 }
 
-void Circle::draw() const
-{
-    std::cout << "Draw Circle OO" << std::endl;
-}
+void Circle::accept( ShapeVisitor const& v )
+{ 
+    v.visit( *this ); 
+};
