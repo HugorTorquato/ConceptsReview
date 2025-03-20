@@ -1,0 +1,35 @@
+
+-> Note that Circle and Square doesn't have an shape base class anymore. The focus here
+    is in a procedural approach. No more need to implement any virtual function
+        -> In particullar, the accept virtual function. Maing this visitor approach non intrusive
+            which mean that can be easily add to existing types
+-> Instead of a base class …Shape that abstracts from the actual type of shape,
+    now acquires std::variant this task
+-> Better approach in terms of performance....
+    -> 
+-> The end result of this value-based solution is stunningly fascinating: no base classes
+    anywhere. No virtual functions, no Pointers, no manual memory allocation.... simple
+-> the architectural properties are identical: everyone is able to add new operations without
+    the need to modify existing code
+-> The most obvious takeaway from the benchmark results is that the variant solution is far
+    more efficient than the classic Visitor solution.
+
+
+-> Disaventages
+    -> This should not come as a surprise: due to the double dispatch, the classic Visitor
+        implementation contains a lot of indirection and therefore is also hard to optimize.
+    -> A second potential problem that you should keep in mind is that you should avoid
+        putting types of very different sizes inside a variant ( may wast a lot of space)
+        (Store them behind pointers... clever but affects performance)
+    -> you should always be aware of the fact that a variant can reveal a lot of information.
+        (the contained types are plainly visible) ( when changng one onf the alternatives it may
+        be req  uired to recompile the dependency)
+
+
+
+-> Despite these shortcomings, in summary, proves to be a std::variant wonderful
+replacement for the OOP-based Visitor design pattern. It simplifies the code a lot, 
+removes almost all boilerplate code and encapsulates the ugly and maintenance-intensive
+parts, and comes with superior performance. In addition, proves to be another std::variant
+great example of the fact that a design pattern is about an intent, not
+about implementation details.

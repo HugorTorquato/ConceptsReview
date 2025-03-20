@@ -4,7 +4,7 @@ FROM ubuntu:22.04
 
 # Install what i need to compile and build things in linux. So far:
 RUN apt-get update && \
-    apt-get install -y build-essential vim cmake tar gcc g++ git ca-certificates && \
+    apt-get install -y build-essential vim cmake tar gcc g++ git ca-certificates libwayland-dev libxkbcommon-dev xorg-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

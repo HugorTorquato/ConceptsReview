@@ -57,5 +57,6 @@
 /Graphs/Graphs/Debug\*
 /Graphs/Graphs/.vs/*
 Software Design/src/build/*
+Software Design/src/.cache/*
 
 /Cmake/lib/*
