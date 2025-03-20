@@ -5,7 +5,7 @@
 #include <iostream>
 #include <variant>
 
-void drawAllShapes(Shapes const& shapes)
+void drawAllShapesVisitor(Shapes const& shapes)
 {
     for (auto const& shape : shapes) 
     {
@@ -19,10 +19,11 @@ void drawAllShapes(Shapes const& shapes)
 
         std::visit( Draw{}, shape);
     }
+}
 
-    std::cout << std::endl;
-
-     // Or we canimplement things here
+void drawAllShapesGetIf(Shapes const& shapes)
+{
+     // Or we canimplement things with get_if and implement without using visitors
     for (auto const& shape : shapes) 
     {
         // get_if is a good way to retrieve types from the variant, if not found returns a nullptr

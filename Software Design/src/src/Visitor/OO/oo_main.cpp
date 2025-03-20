@@ -1,10 +1,13 @@
+#include <chrono>
 #include <iostream>
 #include <memory>
 #include <vector>
 
+
 #include "Circle.h"
 #include "Square.h"
 #include "DrawAllShapes.h"
+
 
 int main(int argc, char** argv){
 
@@ -12,6 +15,7 @@ int main(int argc, char** argv){
 	std::cout << "OO Solution starting" << std::endl;
 	std::cout << "---------------------------------------------------------------------" << std::endl;
 	
+    auto start = std::chrono::high_resolution_clock::now();
     using Shapes = std::vector< std::unique_ptr<Shape>>;
 
     // Creating some shapes
@@ -22,6 +26,13 @@ int main(int argc, char** argv){
 
     // Drawing all shapes
     drawAllShapes( shapes );
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    // Calculate duration in milliseconds
+    std::chrono::duration<double, std::milli> duration = end - start;
+
+    std::cout << "Execution time: " << duration.count() << " ms\n";
 
     return EXIT_SUCCESS;
 

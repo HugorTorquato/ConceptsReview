@@ -2,4 +2,5 @@
 
 #include "Shapes.h"
 
-void drawAllShapes(Shapes const& shapes);
+void drawAllShapesVisitor(Shapes const& shapes);
+void drawAllShapesGetIf(Shapes const& shapes);
