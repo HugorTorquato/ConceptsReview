@@ -4,6 +4,8 @@
 #include <string>
 #include <stdlib.h>
 #include <vector>
+// #include "../include/GLFW/include/GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 #include "Log.h"
 // #include "Log.h" // Without this definition the compiler desn't know we have the Logr and InitLog functions
@@ -714,7 +716,7 @@ class Singleton48
     public:
         static Singleton48& Get() { return *s_Instance; }
 
-        void Hello();
+        // void Hello();
 
 };
 
@@ -724,23 +726,41 @@ class Singleton48
 class Singleton48_2
 {
     public:
-        static Singleton48& Get() 
+        static Singleton48_2& Get() 
         { 
             static Singleton48_2 instance;
             return instance; 
         }
 
-        void Hello();
+        // void Hello();
 
 };
 
 Singleton48* Singleton48::s_Instance = nullptr;
 
+
+
+
+
+
+
+
+
+
+
 int main()
 {
+
+    int a49 = glfwInit();
+
+    if (a49) std::cout << "glfwInit" << std::endl;
+
+
+    std::cout<< "" << std::endl;
+
     // The same, one with privet constructor and another with static instance
-    Singleton48::Get.Hello()
-    Singleton48_2::Get.Hello()
+    // Singleton48::Get.Hello()
+    // Singleton48_2::Get.Hello()
 
     // When i cal Function48 for the first time, this variable (i48) will be initialized to zero
     // And in subsequential calls to this function, this variable will not be initialized again
