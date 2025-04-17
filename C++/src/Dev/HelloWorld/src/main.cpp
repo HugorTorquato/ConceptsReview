@@ -739,17 +739,65 @@ class Singleton48_2
 Singleton48* Singleton48::s_Instance = nullptr;
 
 
+class Base_1
+{
+    public:
+        void printMember(const int member)
+        {
+            std::cout << "Member 1: " << member << std::endl;
+        }
+};
 
+class Base_2
+{
+    protected:
+        int member_1;
+    public:
+        void printMember2()
+        {
+           std::cout << "Member 2: " << member_1 << std::endl;
+        }
 
+        virtual void setMember(const int member) =0;
+};
 
+class Polym1 : public Base_1, public Base_2
+{
 
+    public:
+        int getMember() {return  member_1;}
 
+        void setMember(const int member) override {
+            member_1 = member;  
+        }
+};
 
+class Polym2 : public Base_1, public Base_2
+{
+    public:
+        int getMember() {return  member_1;}
 
+        void setMember(const int member) override {
+            member_1 = member;  
+        }
+};
 
 
 int main()
 {
+    Polym1 h1;
+    Polym2 h2;
+
+    h1.setMember(1);
+    h2.setMember(2);
+
+    h1.printMember(h1.getMember());
+    h2.printMember(h2.getMember());
+
+    h1.printMember2();
+    h2.printMember2();
+
+    std::cout << " " << std::endl;
 
     int a49 = glfwInit();
 
